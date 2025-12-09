@@ -3,68 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人主页</title>
-    <style>
-        body {
-            background-color: #1e1e1e;
-            color: #d4d4d4;
-            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            text-align: center;
-            max-width: 600px;
-            padding: 20px;
-        }
-        h1 {
-            color: #569cd6;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: #ce9178;
-            margin: 10px 0;
-        }
-        .nav-links {
-            margin-top: 40px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            border: 2px solid #4ec9b0;
-            color: #4ec9b0;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border-radius: 4px;
-            font-size: 1.1rem;
-        }
-        .btn:hover {
-            background-color: #4ec9b0;
-            color: #1e1e1e;
-        }
-        .comment {
-            color: #6a9955;
-            font-style: italic;
-        }
-    </style>
+    <title>nuo534202</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
     <div class="container">
-        <h1>Hello, World!</h1>
-        <p class="comment">&lt;!-- 欢迎来到我的个人主页 --&gt;</p>
-        <p>我是一名热爱技术的程序员。</p>
-        <p>这里是我的数字花园，记录学习与生活。</p>
-        
-        <div class="nav-links">
-            <a href="blog.html" class="btn">cd ./my-blog</a>
+        <div class="avatar">👨‍💻</div>
+        <h1>nuo534202</h1>
+        <p class="subtitle">&lt;Developer /&gt;</p>
+        <div class="decorative-line"></div>
+        <p class="bio">
+            欢迎来到我的个人主页！<br>
+            我是一名热爱技术的程序员，<br>
+            这里是我的数字花园，记录学习与生活。
+        </p>
+        <div class="tech-tags">
+            <span class="tag">编程</span>
+            <span class="tag">技术</span>
+            <span class="tag">生活</span>
+            <span class="tag">学习</span>
         </div>
+        <div class="nav-links">
+            <a href="blog/index.html" class="btn">
+                <span class="btn-icon">📝</span>
+                进入我的博客
+            </a>
+        </div>
+        <p class="footer">Made with <code>❤️</code> and <code>代码</code></p>
     </div>
 </body>
 </html>

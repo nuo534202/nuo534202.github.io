@@ -4,31 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的博客</title>
-    <style>
-        body {
-            background-color: #1e1e1e;
-            color: #d4d4d4;
-            font-family: 'Consolas', monospace;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-        h1 { color: #569cd6; }
-        a { 
-            color: #4ec9b0; 
-            text-decoration: none;
-            margin-top: 20px;
-            border-bottom: 1px solid transparent;
-        }
-        a:hover { border-bottom: 1px solid #4ec9b0; }
-    </style>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <h1>// TODO: 博客页面建设中...</h1>
-    <p>System.out.println("Coming Soon");</p>
-    <a href="index.html">cd .. (返回主页)</a>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <div class="avatar">📝</div>
+        <h1>我的博客</h1>
+        <p class="subtitle">// Coding Life</p>
+        <div class="decorative-line"></div>
+        
+        <div class="bio">
+            <p><strong>// TODO: 博客页面建设中...</strong></p>
+            <br>
+            <p style="font-family: 'Consolas', monospace; color: #005bea;">System.out.println("Coming Soon");</p>
+        </div>
+
+        <div class="nav-links">
+            <a href="../index.html" class="btn">
+                <span class="btn-icon">↩️</span>
+                返回主页
+            </a>
+        </div>
+        
+        <p class="footer">Stay tuned for updates</p>
+    </div>
 </body>
 </html>
