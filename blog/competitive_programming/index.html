@@ -20,9 +20,40 @@
         <p class="subtitle">Algorithms & Data Structures</p>
         <div class="decorative-line"></div>
         
-        <div class="bio">
-            <p style="color: #a0aec0;">Coming Soon</p>
+        <div class="tech-tags" id="tag-filter" style="margin-bottom: 24px;">
+            <span class="tag tag-active" data-tag="all" onclick="filterByTag('all')">All</span>
+            <span class="tag" data-tag="蓝桥杯" onclick="filterByTag('蓝桥杯')">蓝桥杯</span>
         </div>
+
+        <div class="repo-list" id="post-list">
+            <a href="lanqiao2025_provincial_cpp.md" class="link-card post-card" data-tags="蓝桥杯">
+                <div class="card-icon">📄</div>
+                <div class="card-content">
+                    <h3>2025 蓝桥杯省赛 C++ 题解</h3>
+                    <div style="margin: 6px 0 8px 0;">
+                        <span class="tag">蓝桥杯</span>
+                    </div>
+                    <p>题目分析、思路与代码全收录</p>
+                </div>
+                <div class="card-arrow">↗</div>
+            </a>
+        </div>
+
+        <script>
+        function filterByTag(tag) {
+            const cards = document.querySelectorAll('.post-card');
+            cards.forEach(card => {
+                const tags = card.getAttribute('data-tags');
+                if (tag === 'all' || (tags && tags.includes(tag))) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            document.querySelectorAll('#tag-filter .tag').forEach(t => t.classList.remove('tag-active'));
+            document.querySelector(`#tag-filter .tag[data-tag="${tag}"]`).classList.add('tag-active');
+        }
+        </script>
 
         <div class="nav-links" style="margin-top: 30px;">
             <a href="../index.html" class="btn">

@@ -1,0 +1,12 @@
+title: Nuo's Blog        # 站点标题（会显示在页面头部）
+# email: your-email@example.com  # 可选，你的邮箱
+# description: 用 Jekyll 搭建的极简博客  # 站点描述
+baseurl: ""                    # 固定为空（仓库名是 xxx.github.io 时）
+url: "https://nuo534202.github.io"  # 你的 Pages 访问地址
+
+# 主题配置（GitHub Pages 官方支持的主题，选其一即可）
+theme: minima  # 官方极简主题（最常用，新手首选）
+# 其他可选官方主题：jekyll-theme-primer、jekyll-theme-cayman、jekyll-theme-midnight
+
+markdown: kramdown  # Jekyll 默认的 MD 解析器（无需修改）
+permalink: /:year/:month/:day/:title.html  # 博客文章的 URL 格式（可选）
