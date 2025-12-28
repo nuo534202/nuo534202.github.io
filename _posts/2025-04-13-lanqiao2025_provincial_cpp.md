@@ -2,7 +2,7 @@
 layout: post
 title: "2025 蓝桥杯省赛 C/C++ 大学B组"
 date: 2025-04-13 00:05:41
-tags: [GitHub, Jekyll, Markdown]  # 标签（可选）
+tags: [蓝桥杯]
 ---
 
 # 2025 蓝桥杯省赛 C/C++ 大学B组
