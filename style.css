@@ -67,6 +67,30 @@ body {
     text-align: left;
 }
 
+/* Post page specific container - wider than default blog-container */
+.post-page-container {
+    max-width: 95%;
+    width: 1400px; /* Wider than default blog-container */
+    padding: 40px 60px; /* Slightly more padding for larger container */
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* Responsive adjustments for post page */
+@media (max-width: 1400px) {
+    .post-page-container {
+        max-width: 95%;
+        width: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .post-page-container {
+        max-width: 95%;
+        padding: 30px 20px;
+    }
+}
+
 /* Responsive blog container */
 @media (max-width: 1200px) {
     .blog-container {
