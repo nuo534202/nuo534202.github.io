@@ -15,14 +15,23 @@
             tex2jax: {
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
                 displayMath: [['$$', '$$'], ['\\[', '\\]']],
-                processEscapes: true
+                processEscapes: true,
+                processEnvironments: true
             },
             "HTML-CSS": {
-                linebreaks: { automatic: true }
+                linebreaks: { automatic: true },
+                scale: 100
             },
             SVG: {
                 linebreaks: { automatic: true }
-            }
+            },
+            showProcessingMessages: false,
+            messageStyle: "none"
+        });
+        
+        // 等待MathJax加载完成
+        MathJax.Hub.Queue(function() {
+            console.log("MathJax loaded successfully");
         });
     </script>
 </head>

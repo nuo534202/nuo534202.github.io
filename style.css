@@ -298,6 +298,7 @@ h1 {
 /* Repository Page Styles */
 .repo-container {
     max-width: 800px;
+    text-align: left; /* 重写容器的居中对齐，恢复正常布局 */
 }
 
 .repo-section {
