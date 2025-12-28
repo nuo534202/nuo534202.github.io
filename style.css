@@ -8,7 +8,7 @@ body {
     background-image: url('img/background.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: scroll; /* 修改为scroll以提高移动设备性能 */
     background-repeat: no-repeat;
     min-height: 100vh;
     font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
@@ -33,6 +33,21 @@ body {
     transition: max-width 0.3s ease;
 }
 
+/* 响应式背景图片优化 */
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll; /* 在移动设备上使用scroll而不是fixed */
+        background-size: cover;
+        background-position: center;
+    }
+    
+    /* 移动设备上的博客容器调整 */
+    .blog-container {
+        max-width: 90%; /* 缩小移动设备上的宽度 */
+        padding: 30px 20px;
+    }
+}
+
 /* Home Page Specific Layout */
 .home-container {
     max-width: 950px; /* Wider for home page */
@@ -41,6 +56,14 @@ body {
     text-align: left;
     gap: 60px;
     padding: 60px;
+}
+
+/* Blog Container for wide article display */
+.blog-container {
+    max-width: 800px; /* Wider for blog posts */
+    padding: 50px;
+    margin: 0 auto;
+    text-align: left;
 }
 
 /* Profile Section (Left) */
@@ -301,6 +324,14 @@ h1 {
     width: 90%;
     margin: 0 auto;
     text-align: left; /* 重写容器的居中对齐，恢复正常布局 */
+}
+
+/* Blog Container for wide article display */
+.blog-container {
+    max-width: 800px; /* Wider for blog posts */
+    padding: 50px;
+    margin: 0 auto;
+    text-align: left;
 }
 
 .repo-section {
