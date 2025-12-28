@@ -10,3 +10,28 @@ theme: minima  # 官方极简主题（最常用，新手首选）
 
 markdown: kramdown  # Jekyll 默认的 MD 解析器（无需修改）
 permalink: /:year/:month/:day/:title.html  # 博客文章的 URL 格式（可选）
+
+# Kramdown 配置 - 支持数学公式
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+  
+  math_engine: mathjax
+  math_engine_opts:
+    preview: true
+    
+# 默认Front Matter
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "nuo534202"

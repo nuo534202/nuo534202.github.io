@@ -365,3 +365,227 @@ h1 {
     color: #005bea;
     transform: translateY(-2px);
 }
+
+/* Markdown Content Styles */
+.post-content {
+    text-align: left;
+    line-height: 1.8;
+    color: #2d3748;
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+    color: #1a202c;
+    font-weight: 700;
+    margin: 2rem 0 1rem 0;
+    line-height: 1.4;
+}
+
+.post-content h1 {
+    font-size: 2rem;
+    border-bottom: 3px solid #005bea;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.post-content h2 {
+    font-size: 1.6rem;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1.2rem;
+}
+
+.post-content h3 {
+    font-size: 1.3rem;
+    color: #005bea;
+}
+
+.post-content h4 {
+    font-size: 1.1rem;
+    color: #4a5568;
+}
+
+.post-content p {
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+}
+
+.post-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Code blocks and inline code */
+.post-content pre {
+    background: #1a202c;
+    color: #e2e8f0;
+    padding: 1.5rem;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border: 1px solid #2d3748;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.post-content code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    background: #f7fafc;
+    color: #e53e3e;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+    border: 1px solid #e2e8f0;
+}
+
+.post-content pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    font-size: 0.95em;
+}
+
+/* Lists */
+.post-content ul,
+.post-content ol {
+    margin: 1rem 0 1.5rem 2rem;
+}
+
+.post-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.post-content ul li {
+    list-style-type: disc;
+}
+
+.post-content ol li {
+    list-style-type: decimal;
+}
+
+/* Blockquotes */
+.post-content blockquote {
+    background: #f7fafc;
+    border-left: 4px solid #005bea;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+    color: #4a5568;
+    font-style: italic;
+}
+
+/* Links */
+.post-content a {
+    color: #005bea;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom-color 0.3s ease;
+}
+
+.post-content a:hover {
+    border-bottom-color: #005bea;
+    color: #004494;
+}
+
+/* Images */
+.post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 1rem auto;
+    display: block;
+}
+
+/* Tables */
+.post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-content th,
+.post-content td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.post-content th {
+    background: #f7fafc;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.post-content tr:hover {
+    background: #f7fafc;
+}
+
+/* Horizontal rules */
+.post-content hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, #005bea, #66a6ff);
+    margin: 2rem 0;
+    border-radius: 1px;
+}
+
+/* Mathematical expressions */
+.post-content .katex {
+    font-size: 1.1em;
+}
+
+.post-content .katex-display {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+/* Emphasis */
+.post-content strong {
+    font-weight: 700;
+    color: #1a202c;
+}
+
+.post-content em {
+    font-style: italic;
+    color: #4a5568;
+}
+
+/* Strikethrough */
+.post-content del {
+    text-decoration: line-through;
+    color: #a0aec0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .post-content {
+        font-size: 0.95rem;
+    }
+    
+    .post-content h1 {
+        font-size: 1.7rem;
+    }
+    
+    .post-content h2 {
+        font-size: 1.4rem;
+    }
+    
+    .post-content pre {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .post-content ul,
+    .post-content ol {
+        margin-left: 1.5rem;
+    }
+}
