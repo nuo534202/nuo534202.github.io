@@ -60,10 +60,26 @@ body {
 
 /* Blog Container for wide article display */
 .blog-container {
-    max-width: 800px; /* Wider for blog posts */
-    padding: 50px;
+    max-width: 95%; /* 增加宽度至95%，最大化可用空间 */
+    width: 1200px; /* 设置固定的最大宽度 */
+    padding: 40px 50px; /* 调整内边距以保持适当的左右间距 */
     margin: 0 auto;
     text-align: left;
+}
+
+/* 响应式博客容器 */
+@media (max-width: 1200px) {
+    .blog-container {
+        max-width: 95%; /* 在中等屏幕上保持95%宽度 */
+        width: auto; /* 允许宽度自适应 */
+    }
+}
+
+@media (max-width: 768px) {
+    .blog-container {
+        max-width: 100%; /* 移动设备上使用100%宽度 */
+        padding: 30px 20px; /* 减少移动设备上的内边距 */
+    }
 }
 
 /* Profile Section (Left) */
@@ -124,6 +140,39 @@ h1 {
     font-size: 2rem;
     margin-bottom: 8px;
     font-weight: 700;
+    text-align: center;
+}
+
+/* 博客页面标题区域文本居中对齐 */
+.blog-index-container h1,
+.blog-index-container .subtitle,
+h1,
+.subtitle {
+    text-align: center;
+}
+
+/* 卡片链接内的标题保持左对齐 */
+.card-content h1,
+.card-content h2,
+.card-content h3,
+.card-content h4,
+.card-content h5,
+.card-content h6 {
+    text-align: left;
+}
+
+/* 页脚文字居中对齐 */
+.footer {
+    text-align: center;
+}
+
+/* 博客其他页面的内容居中对齐 */
+.bio {
+    text-align: center;
+}
+
+.bio p {
+    text-align: center;
 }
 
 .subtitle {
@@ -322,12 +371,34 @@ h1 {
     50% { transform: translateY(-20px) rotate(180deg); }
 }
 
+/* Blog index page specific styles */
+.blog-index-container {
+    max-width: 950px; /* 与主页一致 */
+    width: 90%;
+    margin: 0 auto;
+    text-align: center; /* 标题区域居中对齐 */
+}
+
+.blog-index-container .card-content {
+    text-align: left; /* 卡片链接内的文本保持左对齐 */
+}
+
 /* Repository Page Styles */
 .repo-container {
     max-width: 950px; /* 与主页一致 */
     width: 90%;
     margin: 0 auto;
-    text-align: left; /* 重写容器的居中对齐，恢复正常布局 */
+    text-align: left; /* 标题区域左对齐 */
+}
+
+.repo-container .card-content {
+    text-align: left; /* 卡片链接内的文本保持左对齐 */
+}
+
+/* 仓库页面的标题区域保持居中对齐 */
+.repo-container h1,
+.repo-container .subtitle {
+    text-align: center;
 }
 
 /* Blog Container for wide article display */
@@ -340,7 +411,7 @@ h1 {
 
 .repo-section {
     margin-bottom: 30px;
-    text-align: left;
+    text-align: center; /* 仓库页面的内容居中对齐 */
 }
 
 .section-title {
