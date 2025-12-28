@@ -8,7 +8,7 @@ body {
     background-image: url('img/background.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: scroll; /* 修改为scroll以提高移动设备性能 */
+    background-attachment: scroll; /* Changed to scroll to improve mobile device performance */
     background-repeat: no-repeat;
     min-height: 100vh;
     font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
@@ -33,17 +33,17 @@ body {
     transition: max-width 0.3s ease;
 }
 
-/* 响应式背景图片优化 */
+/* Responsive background image optimization */
 @media (max-width: 768px) {
     body {
-        background-attachment: scroll; /* 在移动设备上使用scroll而不是fixed */
+        background-attachment: scroll; /* Use scroll instead of fixed on mobile devices */
         background-size: cover;
         background-position: center;
     }
     
-    /* 移动设备上的博客容器调整 */
+    /* Blog container adjustments on mobile devices */
     .blog-container {
-        max-width: 90%; /* 缩小移动设备上的宽度 */
+        max-width: 90%; /* Reduce width on mobile devices */
         padding: 30px 20px;
     }
 }
@@ -60,25 +60,25 @@ body {
 
 /* Blog Container for wide article display */
 .blog-container {
-    max-width: 95%; /* 增加宽度至95%，最大化可用空间 */
-    width: 1200px; /* 设置固定的最大宽度 */
-    padding: 40px 50px; /* 调整内边距以保持适当的左右间距 */
+    max-width: 95%; /* Increase width to 95%, maximize available space */
+    width: 1200px; /* Set fixed maximum width */
+    padding: 40px 50px; /* Adjust padding to maintain proper left and right spacing */
     margin: 0 auto;
     text-align: left;
 }
 
-/* 响应式博客容器 */
+/* Responsive blog container */
 @media (max-width: 1200px) {
     .blog-container {
-        max-width: 95%; /* 在中等屏幕上保持95%宽度 */
-        width: auto; /* 允许宽度自适应 */
+        max-width: 95%; /* Keep 95% width on medium screens */
+        width: auto; /* Allow width to adapt automatically */
     }
 }
 
 @media (max-width: 768px) {
     .blog-container {
-        max-width: 100%; /* 移动设备上使用100%宽度 */
-        padding: 30px 20px; /* 减少移动设备上的内边距 */
+        max-width: 100%; /* Use 100% width on mobile devices */
+        padding: 30px 20px; /* Reduce padding on mobile devices */
     }
 }
 
@@ -143,7 +143,7 @@ h1 {
     text-align: center;
 }
 
-/* 博客页面标题区域文本居中对齐 */
+/* Center-aligned text in blog page title areas */
 .blog-index-container h1,
 .blog-index-container .subtitle,
 h1,
@@ -151,7 +151,7 @@ h1,
     text-align: center;
 }
 
-/* 卡片链接内的标题保持左对齐 */
+/* Keep titles inside card links left-aligned */
 .card-content h1,
 .card-content h2,
 .card-content h3,
@@ -161,12 +161,12 @@ h1,
     text-align: left;
 }
 
-/* 页脚文字居中对齐 */
+/* Center-aligned footer text */
 .footer {
     text-align: center;
 }
 
-/* 博客其他页面的内容居中对齐 */
+/* Center-aligned content on other blog pages */
 .bio {
     text-align: center;
 }
@@ -341,7 +341,7 @@ h1,
     color: #005bea;
 }
 
-/* 装饰性浮动元素 */
+/* Decorative floating elements */
 .floating-shapes {
     position: fixed;
     top: 0;
@@ -373,29 +373,29 @@ h1,
 
 /* Blog index page specific styles */
 .blog-index-container {
-    max-width: 950px; /* 与主页一致 */
+    max-width: 950px; /* Consistent with home page */
     width: 90%;
     margin: 0 auto;
-    text-align: center; /* 标题区域居中对齐 */
+    text-align: center; /* Center-aligned title area */
 }
 
 .blog-index-container .card-content {
-    text-align: left; /* 卡片链接内的文本保持左对齐 */
+    text-align: left; /* Keep text inside card links left-aligned */
 }
 
 /* Repository Page Styles */
 .repo-container {
-    max-width: 950px; /* 与主页一致 */
+    max-width: 950px; /* Consistent with home page */
     width: 90%;
     margin: 0 auto;
-    text-align: left; /* 标题区域左对齐 */
+    text-align: left; /* Left-aligned title area */
 }
 
 .repo-container .card-content {
-    text-align: left; /* 卡片链接内的文本保持左对齐 */
+    text-align: left; /* Keep text inside card links left-aligned */
 }
 
-/* 仓库页面的标题区域保持居中对齐 */
+/* Keep repository page title area center-aligned */
 .repo-container h1,
 .repo-container .subtitle {
     text-align: center;
@@ -411,7 +411,7 @@ h1,
 
 .repo-section {
     margin-bottom: 30px;
-    text-align: center; /* 仓库页面的内容居中对齐 */
+    text-align: center; /* Center-aligned content on repository page */
 }
 
 .section-title {
@@ -611,7 +611,7 @@ h1,
     display: block;
 }
 
-/* 支持Markdown中 #center 标签的图片居中 */
+/* Center images with #center tag in Markdown */
 .post-content img[src*="#center"] {
     text-align: center;
     margin: 1rem auto;
@@ -706,7 +706,7 @@ h1,
     }
 }
 
-/* 文章页面的响应式设计 */
+/* Responsive design for article pages */
 @media (max-width: 1200px) {
     .repo-container {
         max-width: 95%;
