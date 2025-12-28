@@ -297,7 +297,9 @@ h1 {
 
 /* Repository Page Styles */
 .repo-container {
-    max-width: 800px;
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
     text-align: left; /* 重写容器的居中对齐，恢复正常布局 */
 }
 
@@ -503,6 +505,13 @@ h1 {
     display: block;
 }
 
+/* 支持Markdown中 #center 标签的图片居中 */
+.post-content img[src*="#center"] {
+    text-align: center;
+    margin: 1rem auto;
+    display: block;
+}
+
 /* Tables */
 .post-content table {
     width: 100%;
@@ -588,5 +597,108 @@ h1 {
     .post-content ul,
     .post-content ol {
         margin-left: 1.5rem;
+    }
+}
+
+/* 文章页面的响应式设计 */
+@media (max-width: 1200px) {
+    .repo-container {
+        max-width: 95%;
+        width: 95%;
+    }
+}
+
+@media (max-width: 768px) {
+    .repo-container {
+        max-width: 98%;
+        width: 98%;
+        padding: 30px 20px;
+        margin: 10px auto;
+    }
+    
+    .post-content {
+        padding: 0;
+    }
+    
+    .post-content h1 {
+        font-size: 1.6rem;
+    }
+    
+    .post-content h2 {
+        font-size: 1.3rem;
+    }
+    
+    .post-content h3 {
+        font-size: 1.1rem;
+    }
+    
+    .post-content pre {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+        overflow-x: auto;
+    }
+    
+    .post-content blockquote {
+        padding: 0.8rem 1rem;
+    }
+    
+    .post-content table {
+        font-size: 0.9rem;
+    }
+    
+    .post-content img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .repo-container {
+        padding: 20px 15px;
+        border-radius: 15px;
+    }
+    
+    .post-content {
+        font-size: 0.9rem;
+    }
+    
+    .post-content h1 {
+        font-size: 1.4rem;
+        margin: 1.5rem 0 1rem 0;
+    }
+    
+    .post-content h2 {
+        font-size: 1.2rem;
+        margin: 1.3rem 0 0.8rem 0;
+    }
+    
+    .post-content h3 {
+        font-size: 1.05rem;
+        margin: 1.1rem 0 0.7rem 0;
+    }
+    
+    .post-content pre {
+        padding: 0.6rem;
+        font-size: 0.8rem;
+        margin: 1rem 0;
+    }
+    
+    .post-content ul,
+    .post-content ol {
+        margin-left: 1.2rem;
+    }
+    
+    .post-content blockquote {
+        padding: 0.6rem 0.8rem;
+        margin: 1rem 0;
+    }
+    
+    .post-content table {
+        font-size: 0.8rem;
+    }
+    
+    .post-content td,
+    .post-content th {
+        padding: 0.4rem;
     }
 }
