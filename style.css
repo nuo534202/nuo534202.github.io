@@ -86,9 +86,13 @@ body {
 @media (max-width: 850px) {
     .home-container {
         flex-direction: column;
-        max-width: 500px;
+        max-width: 700px;
         gap: 40px;
         padding: 40px 30px;
+    }
+    
+    .repo-container {
+        max-width: 700px;
     }
     
     .links-section {
@@ -320,7 +324,7 @@ h1 {
 
 /* Repository Page Styles */
 .repo-container {
-    max-width: 1200px;
+    max-width: 950px; /* 与主页一致 */
     width: 90%;
     margin: 0 auto;
     text-align: left; /* 重写容器的居中对齐，恢复正常布局 */
