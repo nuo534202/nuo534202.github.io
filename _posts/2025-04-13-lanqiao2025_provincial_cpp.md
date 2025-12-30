@@ -399,8 +399,8 @@ signed main() {
 设 $dp_{0/1, i}$ 表示考虑从左往右到第 $0/1$ 行、第 $i$ 列且第 $0/1$ 行、第 $i$ 列为 `#` 最少需要铺设的检测器数量。
 
 - $dp_{0, i}$ / $dp_{1, i}$ 可以直接从 $dp_{0, i - 1}$ / $dp_{1, i - 1}$ 转移而来。
-- $dp_{0, i}$ 可以从 $dp_{1, i - 1} + (s_{0, i - 1} \neq \#)$ 转移而来。
-- $dp_{1, i}$ 可以从 $dp_{0, i - 1} + (s_{1, i - 1} \neq \#)$ 转移而来。
+- $dp_{0, i}$ 可以从 $dp_{1, i - 1} + (s_{0, i - 1} \neq $ # $)$ 转移而来。
+- $dp_{1, i}$ 可以从 $dp_{0, i - 1} + (s_{1, i - 1} \neq $ # $)$ 转移而来。
 
 两种转移方法取最小值，具体状态转移方程看代码。
 
@@ -645,9 +645,7 @@ signed main() {
 
 接下来以输出 $a + b$ 的程序来说明。
 
-<div style="text-align: center">
 ![img1](/_posts/img/lanqiao2025_provincial_cpp_img1.png)
-</div>
 
 ### bf.cpp
 
@@ -728,12 +726,12 @@ int main() {
 
 下图是 `pai.cpp` 运行后的输出结果，会显示输出不一样的地方。
 
-<div style="text-align: center">
+
 ![img2](/_posts/img/lanqiao2025_provincial_cpp_img2.png)
-</div>
+
 如果输出样例一样的话，会一直显示找不到差异。
 
-<div style="text-align: center">
+
 ![img3](/_posts/img/lanqiao2025_provincial_cpp_img3.png)
-</div>
+
 这个时候接着写下一道题就好了，让它在后台接着运行，有可能后面会出现不一样的地方。
