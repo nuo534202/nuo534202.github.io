@@ -26,6 +26,9 @@ kramdown:
   math_engine_opts:
     preview: true
     
+include:
+  - _posts/img
+
 # 默认Front Matter
 defaults:
   -

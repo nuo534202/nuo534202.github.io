@@ -645,7 +645,7 @@ signed main() {
 
 接下来以输出 $a + b$ 的程序来说明。
 
-![img1](/img/post-assets/lanqiao2025_provincial_cpp_img1.png)
+![img1](/_posts/img/lanqiao2025_provincial_cpp_img1.png)
 
 ### bf.cpp
 
@@ -727,11 +727,11 @@ int main() {
 下图是 `pai.cpp` 运行后的输出结果，会显示输出不一样的地方。
 
 
-![img2](/img/post-assets/lanqiao2025_provincial_cpp_img2.png)
+![img2](/_posts/img/lanqiao2025_provincial_cpp_img2.png)
 
 如果输出样例一样的话，会一直显示找不到差异。
 
 
-![img3](/img/post-assets/lanqiao2025_provincial_cpp_img3.png)
+![img3](/_posts/img/lanqiao2025_provincial_cpp_img3.png)
 
 这个时候接着写下一道题就好了，让它在后台接着运行，有可能后面会出现不一样的地方。
