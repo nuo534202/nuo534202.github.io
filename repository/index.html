@@ -8,6 +8,28 @@
     <link rel="preload" href="../img/background.jpg" as="image">
 </head>
 <body>
+    <!-- Optimized Background Image -->
+    <div id="bg-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden;">
+        <picture>
+            <source srcset="/img/background.avif" type="image/avif">
+            <source srcset="/img/background.webp" type="image/webp">
+            <img src="/img/background.jpg" id="bg-image" alt="Background" width="1920" height="1080" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s ease-in-out;">
+        </picture>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const bgImage = document.getElementById('bg-image');
+            if (bgImage) {
+                bgImage.onload = function() {
+                    this.style.opacity = 1;
+                }
+                if (bgImage.complete) {
+                    bgImage.style.opacity = 1;
+                }
+            }
+        });
+    </script>
+
     <div class="floating-shapes">
         <div class="shape"></div>
         <div class="shape"></div>
@@ -50,14 +72,6 @@
                     </div>
                     <div class="card-arrow">↗</div>
                 </a>
-                <a href="https://gitee.com/nuo534202/nuo-math-compiler/" target="_blank" class="link-card repo-card">
-                    <div class="card-icon">🔢</div>
-                    <div class="card-content">
-                        <h3>Nuo Math Compiler</h3>
-                        <p>A compiler of self-defined mathematical expression language</p>
-                    </div>
-                    <div class="card-arrow">↗</div>
-                </a>
             </div>
         </div>
 
@@ -70,6 +84,14 @@
                     <div class="card-content">
                         <h3>Pro Chat Internet</h3>
                         <p>A cross-platform network chatroom based on C++</p>
+                    </div>
+                    <div class="card-arrow">↗</div>
+                </a>
+                                <a href="https://gitee.com/nuo534202/nuo-math-compiler/" target="_blank" class="link-card repo-card">
+                    <div class="card-icon">🔢</div>
+                    <div class="card-content">
+                        <h3>Nuo Math Compiler</h3>
+                        <p>A compiler of self-defined mathematical expression language</p>
                     </div>
                     <div class="card-arrow">↗</div>
                 </a>

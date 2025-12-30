@@ -7,38 +7,117 @@
     <link rel="stylesheet" href="/style.css">
     <link rel="preload" href="/img/background.jpg" as="image">
     
-    <!-- MathJax for LaTeX math rendering -->
-    <script type="text/javascript" async
-            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-    </script>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-            tex2jax: {
+    <script>
+        MathJax = {
+            tex: {
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
                 displayMath: [['$$', '$$'], ['\\[', '\\]']],
                 processEscapes: true,
-                processEnvironments: true
+                tags: 'ams'
             },
-            "HTML-CSS": {
-                linebreaks: { automatic: true },
-                scale: 95,
-                minScaleAdjust: 80,
-                fontSize: "100%"
+            svg: {
+                fontCache: 'global'
             },
-            SVG: {
-                linebreaks: { automatic: true }
-            },
-            showProcessingMessages: false,
-            messageStyle: "none"
-        });
-        
-        // 等待MathJax加载完成
-        MathJax.Hub.Queue(function() {
-            console.log("MathJax loaded successfully");
+            startup: {
+                ready: () => {
+                    console.log('MathJax 3 loaded and initialized');
+                    MathJax.startup.defaultReady();
+                }
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const images = document.querySelectorAll('.post-content img');
+            images.forEach(img => {
+                img.loading = 'lazy';
+                
+                img.classList.add('fade-in-image');
+                img.onload = () => img.classList.add('loaded');
+
+                img.onerror = function() {
+                    console.warn('Image failed to load:', img.src);
+                    
+                    if (this.dataset.triedFallback === 'true') {
+                        this.alt = 'Image not found: ' + (this.src.split('/').pop());
+                        this.style.display = 'none';
+                        const errorMsg = document.createElement('span');
+                        errorMsg.style.color = 'red';
+                        errorMsg.style.fontSize = '0.8em';
+                        errorMsg.innerText = '[Image Load Failed]';
+                        this.parentNode.insertBefore(errorMsg, this.nextSibling);
+                        return;
+                    }
+                    this.dataset.triedFallback = 'true';
+                    const filename = this.src.split('/').pop();
+                    if (filename) {
+                        const newSrc = '/img/' + filename;
+                        console.log('Attempting fallback to:', newSrc);
+                        this.src = newSrc;
+                    }
+                };
+            });
+
+            const bgImage = new Image();
+            bgImage.src = '/img/background.jpg'; 
+            bgImage.onload = function() {
+                document.body.classList.add('bg-loaded');
+            };
+
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/sw.js').then(registration => {
+                        console.log('SW registered: ', registration);
+                    }).catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+                });
+            }
+
+            // Performance Monitoring
+            if ('PerformanceObserver' in window) {
+                try {
+                    new PerformanceObserver((entryList) => {
+                        for (const entry of entryList.getEntries()) {
+                            console.log('LCP:', entry.startTime, entry);
+                        }
+                    }).observe({type: 'largest-contentful-paint', buffered: true});
+
+                    new PerformanceObserver((entryList) => {
+                        for (const entry of entryList.getEntries()) {
+                            if (!entry.hadRecentInput) {
+                                console.log('CLS Shift:', entry.value, entry);
+                            }
+                        }
+                    }).observe({type: 'layout-shift', buffered: true});
+                } catch (e) {
+                    console.warn('PerformanceObserver not supported.');
+                }
+            }
         });
     </script>
+    <style>
+        .fade-in-image {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .fade-in-image.loaded {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
+    <!-- Optimized Background Image -->
+    <div id="bg-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden;">
+        <picture>
+            <source srcset="/img/background.avif" type="image/avif">
+            <source srcset="/img/background.webp" type="image/webp">
+            <img src="/img/background.jpg" id="bg-image" alt="Background" width="1920" height="1080" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s ease-in-out;">
+        </picture>
+    </div>
+
     <div class="floating-shapes">
         <div class="shape"></div>
         <div class="shape"></div>

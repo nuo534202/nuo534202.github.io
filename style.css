@@ -4,12 +4,7 @@
     box-sizing: border-box;
 }
 body {
-    /* Background Image */
-    background-image: url('/img/background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: scroll; /* Changed to scroll to improve mobile device performance */
-    background-repeat: no-repeat;
+    /* Background managed by HTML structure for better performance */
     min-height: 100vh;
     font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
     display: flex;
@@ -35,12 +30,6 @@ body {
 
 /* Responsive background image optimization */
 @media (max-width: 768px) {
-    body {
-        background-attachment: scroll; /* Use scroll instead of fixed on mobile devices */
-        background-size: cover;
-        background-position: center;
-    }
-    
     /* Blog container adjustments on mobile devices */
     .blog-container {
         max-width: 90%; /* Reduce width on mobile devices */
