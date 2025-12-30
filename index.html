@@ -5,52 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>nuo534202</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preload" href="img/background.jpg" as="image">
 </head>
 <body>
-    <!-- Optimized Background Image -->
-    <div id="bg-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; overflow: hidden;">
-        <picture>
-            <source srcset="/img/background.avif" type="image/avif">
-            <source srcset="/img/background.webp" type="image/webp">
-            <img src="/img/background.jpg" id="bg-image" alt="Background" width="1920" height="1080" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s ease-in-out;">
-        </picture>
-    </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const bgImage = document.getElementById('bg-image');
-            if (bgImage) {
-                bgImage.onload = function() {
-                    this.style.opacity = 1;
-                }
-                if (bgImage.complete) {
-                    bgImage.style.opacity = 1;
-                }
-            }
-        });
-
-        // Performance Monitoring
-        if ('PerformanceObserver' in window) {
-            try {
-                new PerformanceObserver((entryList) => {
-                    for (const entry of entryList.getEntries()) {
-                        console.log('LCP:', entry.startTime, entry);
-                    }
-                }).observe({type: 'largest-contentful-paint', buffered: true});
-
-                new PerformanceObserver((entryList) => {
-                    for (const entry of entryList.getEntries()) {
-                        if (!entry.hadRecentInput) {
-                            console.log('CLS Shift:', entry.value, entry);
-                        }
-                    }
-                }).observe({type: 'layout-shift', buffered: true});
-            } catch (e) {
-                console.warn('PerformanceObserver not supported.');
-            }
-        }
-    </script>
-
     <div class="floating-shapes">
         <div class="shape"></div>
         <div class="shape"></div>
@@ -61,7 +17,7 @@
     <div class="container home-container">
         <div class="profile-section">
             <img src="img/nuo534202.jpg" class="avatar" alt="nuo534202">
-            <h1>nuo534202</h1>
+            <h1><a href="https://github.com/nuo534202/nuo534202.github.io" target="_blank" class="title-link">nuo534202</a></h1>
             <p class="subtitle">Developer</p>
             <div class="decorative-line"></div>
             <p class="bio">

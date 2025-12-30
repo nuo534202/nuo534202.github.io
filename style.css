@@ -12,6 +12,17 @@ body {
     align-items: center;
     padding: 20px;
     color: #2d3748;
+    background-color: #E6F2FF;
+}
+
+.title-link {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+.title-link:hover {
+    color: #005bea;
 }
 
 /* Container Styles */
