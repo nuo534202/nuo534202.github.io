@@ -1,7 +1,6 @@
 const CACHE_NAME = 'nuo-blog-cache-v1';
 const ASSETS_TO_CACHE = [
     '/style.css',
-    '/img/background.jpg',
     '/img/nuo534202.jpg'
 ];
 
