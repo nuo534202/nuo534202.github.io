@@ -1,7 +1,7 @@
-const CACHE_NAME = 'nuo-blog-cache-v1';
+const CACHE_NAME = 'nuo-blog-cache-v2';
 const ASSETS_TO_CACHE = [
     '/style.css',
-    '/img/nuo534202.jpg'
+    '/assets/nuo534202.jpg'
 ];
 
 // Install event - cache core assets

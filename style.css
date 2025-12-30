@@ -168,16 +168,16 @@ body {
 
 /* Component Styles */
 .avatar {
-    width: 120px;
-    height: 120px;
+    width: clamp(84px, 14vw, 120px);
+    height: clamp(84px, 14vw, 120px);
     border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
     background: linear-gradient(135deg, #66a6ff, #005bea);
+    border: 3px solid rgba(255, 255, 255, 0.85);
     margin: 0 auto 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 3rem;
-    box-shadow: 0 10px 30px rgba(102, 166, 255, 0.4);
+    display: block;
+    box-shadow: 0 10px 30px rgba(102, 166, 255, 0.32), 0 2px 10px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease;
 }
 
