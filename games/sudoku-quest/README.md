@@ -17,7 +17,7 @@ Sudoku Quest is a classic number logic puzzle game. Players need to fill a 9×9 
 
 ### Online Play
 
-Visit the deployed version: `https://www.nuo534202/games/sudoku-quest/`
+Visit the deployed version: `https://www.nuo534202.cn/games/sudoku-quest/`
 
 ### Run Locally
 
