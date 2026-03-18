@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏 - 数独闯关</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">🔢</span>
+                <span class="logo-text">数独闯关</span>
+            </a>
+            <nav class="nav">
+                <button class="nav-btn" onclick="showGameHelp()">帮助</button>
+            </nav>
+        </header>
+
+        <main class="main page-container">
+            <div class="game-container">
+                <div class="game-info">
+                    <div class="info-card">
+                        <div class="info-label">关卡</div>
+                        <div id="level-name" class="info-value">第1关 - 入门</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">难度</div>
+                        <div id="difficulty-stars" class="info-value">★☆☆</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">题目</div>
+                        <div id="puzzle-index" class="info-value">1/10</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">错误</div>
+                        <div id="error-count" class="info-value error-value">0</div>
+                    </div>
+                    <div class="info-card timer-card">
+                        <div class="info-label">时间</div>
+                        <div id="timer-display" class="info-value timer-value">00:00</div>
+                    </div>
+                </div>
+
+                <div class="board-container">
+                    <div id="sudoku-board" class="sudoku-board">
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <div class="number-pad">
+                        <button class="num-btn" data-num="1">1</button>
+                        <button class="num-btn" data-num="2">2</button>
+                        <button class="num-btn" data-num="3">3</button>
+                        <button class="num-btn" data-num="4">4</button>
+                        <button class="num-btn" data-num="5">5</button>
+                        <button class="num-btn" data-num="6">6</button>
+                        <button class="num-btn" data-num="7">7</button>
+                        <button class="num-btn" data-num="8">8</button>
+                        <button class="num-btn" data-num="9">9</button>
+                    </div>
+                    <div class="action-buttons">
+                        <button id="note-mode-btn" class="btn-action" title="笔记模式 (N)">
+                            <span class="btn-icon">📝</span>
+                            <span>笔记</span>
+                        </button>
+                        <button id="clear-btn" class="btn-action" title="清除 (Del)">
+                            <span class="btn-icon">⌫</span>
+                            <span>清除</span>
+                        </button>
+                        <button id="reset-btn" class="btn-action" title="重置">
+                            <span class="btn-icon">🔄</span>
+                            <span>重置</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-back" onclick="confirmReturnToLevels()">← 返回关卡</button>
+                </div>
+            </div>
+        </main></div>
+
+        <!-- Help Modal -->
+        <div id="help-modal" class="modal">
+            <div class="modal-content">
+                <h3>游戏帮助</h3>
+                
+                <div class="help-section">
+                    <h4>🎯 游戏目标</h4>
+                    <p>在9×9的网格中填入数字1-9，使得每一行、每一列以及每一个3×3的宫格中都包含1-9所有数字，且不重复。</p>
+                </div>
+
+                <div class="help-section">
+                    <h4>📖 基本操作</h4>
+                    <ul>
+                        <li>点击或触摸选择一个空格</li>
+                        <li>点击底部数字按钮填入数字</li>
+                        <li>灰色数字为题目预设，不可修改</li>
+                        <li>带边框的单元格为当前选中</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h4>📝 笔记功能</h4>
+                    <p>点击"笔记"按钮进入笔记模式，在此模式下填入的数字会作为候选笔记显示。</p>
+                </div>
+
+                <div class="help-section">
+                    <h4>⌨️ 键盘快捷键</h4>
+                    <div class="keyboard-shortcuts">
+                        <div class="shortcut"><span>数字 1-9</span><kbd>填入数字</kbd></div>
+                        <div class="shortcut"><span>Delete</span><kbd>清除</kbd></div>
+                        <div class="shortcut"><span>N</span><kbd>笔记模式</kbd></div>
+                        <div class="shortcut"><span>方向键</span><kbd>移动选择</kbd></div>
+                    </div>
+                </div>
+
+                <div class="help-section">
+                    <h4>🏆 关卡说明</h4>
+                    <ul>
+                        <li><strong>第1关 入门</strong> - 简单难度</li>
+                        <li><strong>第2-3关 进阶/熟练</strong> - 中等难度</li>
+                        <li><strong>第4-5关 大师/传奇</strong> - 困难难度</li>
+                        <li>每个关卡包含10道题目</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h4>💾 进度保存</h4>
+                    <p>无法保存内容，退出游戏时进度将被清空。</p>
+                </div>
+
+                <div class="modal-buttons">
+                    <button class="btn-primary" onclick="hideGameHelp()">关闭按钮</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exit Confirmation Modal -->
+        <div id="exit-confirm-modal" class="modal">
+            <div class="modal-content confirm-modal">
+                <div class="confirm-icon">⚠️</div>
+                <h3 id="exit-confirm-title">退出确认</h3>
+                <p id="exit-confirm-message" class="confirm-message">退出游戏将清空所有游戏记录，是否确认退出？</p>
+                <div class="confirm-buttons">
+                    <button id="exit-confirm-btn" class="btn-confirm" onclick="doExit()">确认退出</button>
+                    <button class="btn-cancel" onclick="cancelExit()">取消</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="complete-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-icon">✓</div>
+                <h3>题目完成!</h3>
+                <p class="modal-time-label">用时</p>
+                <p id="modal-time" class="modal-time">00:00</p>
+                <div class="modal-buttons">
+                    <button id="next-puzzle-btn" class="btn-primary">下一题</button>
+                    <button id="back-to-levels-btn" class="btn-secondary">返回关卡</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="victory-modal" class="modal">
+            <div class="modal-content">
+                <div class="victory-icon">🏆</div>
+                <h3 class="victory-title">恭喜过关!</h3>
+                <div class="victory-details">
+                    <div class="victory-level">
+                        <span class="label">关卡</span>
+                        <span id="victory-level" class="value">入门</span>
+                    </div>
+                    <div class="victory-time">
+                        <span class="label">用时</span>
+                        <span id="victory-time" class="value">00:00</span>
+                    </div>
+                </div>
+                <div class="victory-stats">
+                    <div class="stat">
+                        <span id="total-levels" class="stat-num">1</span>
+                        <span class="stat-text">已完成关卡</span>
+                    </div>
+                    <div class="stat">
+                        <span id="total-puzzles" class="stat-num">10</span>
+                        <span class="stat-text">已完成题目</span>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button id="continue-btn" class="btn-primary">下一关</button>
+                    <button class="btn-secondary" onclick="confirmExit()">返回首页</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/sudoku.js"></script>
+    <script src="../js/game.js"></script>
+    <script>
+        // Self-contained storage solution
+        var GameStorage = {
+            STORAGE_KEY: 'sudoku_progress',
+            
+            save: function(data) {
+                try {
+                    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+                    return true;
+                } catch (e) {
+                    console.error('Save error:', e);
+                    return false;
+                }
+            },
+            
+            load: function() {
+                try {
+                    var data = localStorage.getItem(this.STORAGE_KEY);
+                    return data ? JSON.parse(data) : null;
+                } catch (e) {
+                    console.error('Load error:', e);
+                    return null;
+                }
+            },
+            
+            savePuzzleState: function(level, puzzleIndex, state) {
+                try {
+                    var existing = this.load() || {};
+                    if (!existing.puzzleStates) existing.puzzleStates = {};
+                    
+                    var key = level + '-' + puzzleIndex;
+                    existing.puzzleStates[key] = state;
+                    
+                    console.log('Saving:', key, state);
+                    return this.save(existing);
+                } catch (e) {
+                    console.error('Save puzzle error:', e);
+                    return false;
+                }
+            },
+            
+            loadPuzzleState: function(level, puzzleIndex) {
+                try {
+                    var existing = this.load();
+                    if (!existing || !existing.puzzleStates) {
+                        console.log('No saved data found');
+                        return null;
+                    }
+                    
+                    var key = level + '-' + puzzleIndex;
+                    var state = existing.puzzleStates[key];
+                    
+                    console.log('Loading:', key, state);
+                    if (state && state.grid && state.grid.length === 9) {
+                        return state;
+                    }
+                    return null;
+                } catch (e) {
+                    console.error('Load puzzle error:', e);
+                    return null;
+                }
+            },
+            
+            clear: function() {
+                try {
+                    localStorage.removeItem(this.STORAGE_KEY);
+                    return true;
+                } catch (e) {
+                    console.error('Clear error:', e);
+                    return false;
+                }
+            },
+            
+            clearPuzzleState: function(level, puzzleIndex) {
+                try {
+                    var existing = this.load() || {};
+                    if (existing.puzzleStates) {
+                        var key = level + '-' + puzzleIndex;
+                        delete existing.puzzleStates[key];
+                        this.save(existing);
+                    }
+                    return true;
+                } catch (e) {
+                    console.error('Clear puzzle error:', e);
+                    return false;
+                }
+            }
+        };
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var generator = new SudokuGenerator();
+            var game = new SudokuGame(generator);
+            var storage = GameStorage;
+            
+            var params = new URLSearchParams(window.location.search);
+            var currentLevel = parseInt(params.get('level')) || 1;
+            var currentPuzzleIndex = parseInt(params.get('puzzle')) || 0;
+            var isTimerRunning = false;
+            
+            function getDifficultyStars(difficulty) {
+                switch (difficulty) {
+                    case 'easy': return 1;
+                    case 'medium': return 2;
+                    case 'hard': return 3;
+                    default: return 1;
+                }
+            }
+            
+            function initGame() {
+                console.log('Initializing game for level:', currentLevel, 'puzzle:', currentPuzzleIndex);
+                
+                // Always start fresh - ignore any saved state for new level entry
+                console.log('Starting fresh game - clearing any previous progress');
+                
+                var config = game.getLevelConfig(currentLevel);
+                var result = generator.generate(config.difficulty);
+                
+                game.currentPuzzle = result.puzzle;
+                game.currentSolution = result.solution;
+                game.playerGrid = Array(9).fill(null).map(function() { return Array(9).fill(0); });
+                game.notes = Array(9).fill(null).map(function() { return Array(9).fill(null).map(function() { return []; }); });
+                game.errors = 0;
+                game.startTime = Date.now();
+                game.isNoteMode = false;
+                game.selectedCell = null;
+                
+                console.log('Fresh game initialized with puzzle:', game.currentPuzzle);
+                
+                renderBoard();
+                updateInfoPanel();
+                
+                game.startTimer(updateTimer);
+                isTimerRunning = true;
+            }
+            
+            function renderBoard() {
+                var board = document.getElementById('sudoku-board');
+                board.innerHTML = '';
+                
+                if (!game.currentPuzzle || !game.playerGrid) {
+                    return;
+                }
+                
+                for (var row = 0; row < 9; row++) {
+                    for (var col = 0; col < 9; col++) {
+                        var cell = document.createElement('div');
+                        cell.className = 'cell';
+                        cell.dataset.row = row;
+                        cell.dataset.col = col;
+                        
+                        var state = game.getCellState(row, col);
+                        
+                        if (state.isFixed) {
+                            cell.classList.add('fixed');
+                            cell.textContent = state.puzzleValue;
+                        } else if (state.playerValue !== 0) {
+                            cell.textContent = state.playerValue;
+                            if (state.hasConflict) {
+                                cell.classList.add('error');
+                            }
+                        } else if (state.cellNotes && state.cellNotes.length > 0) {
+                            renderNotes(cell, state.cellNotes);
+                        }
+                        
+                        if (state.isSelected) cell.classList.add('selected');
+                        if (state.isRelated) cell.classList.add('related');
+                        if (state.isSameNumber) cell.classList.add('same-number');
+                        
+                        cell.onclick = (function(r, c) {
+                            return function() {
+                                selectCell(r, c);
+                            };
+                        })(row, col);
+                        
+                        board.appendChild(cell);
+                    }
+                }
+                
+                updateNoteModeButton();
+            }
+            
+            function renderNotes(cell, notes) {
+                cell.classList.add('has-notes');
+                cell.innerHTML = '';
+                
+                var noteGrid = document.createElement('div');
+                noteGrid.className = 'note-cell';
+                
+                for (var i = 1; i <= 9; i++) {
+                    var noteSpan = document.createElement('span');
+                    if (notes.indexOf(i) > -1) {
+                        noteSpan.textContent = i;
+                    }
+                    noteGrid.appendChild(noteSpan);
+                }
+                
+                cell.appendChild(noteGrid);
+            }
+            
+            function selectCell(row, col) {
+                game.selectCell(row, col);
+                renderBoard();
+            }
+            
+            function inputNumber(num) {
+                game.inputNumber(num);
+                renderBoard();
+                saveCurrentState();
+                
+                if (game.checkComplete()) {
+                    handlePuzzleComplete();
+                }
+            }
+            
+            function updateTimer(seconds) {
+                var minutes = Math.floor(seconds / 60);
+                var secs = seconds % 60;
+                var timeStr = String(minutes).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+                document.getElementById('timer-display').textContent = timeStr;
+            }
+            
+            function updateInfoPanel() {
+                var config = game.getLevelConfig(currentLevel);
+                document.getElementById('level-name').textContent = '第' + currentLevel + '关 - ' + config.name;
+                document.getElementById('puzzle-index').textContent = (currentPuzzleIndex + 1) + '/' + config.puzzles;
+                document.getElementById('error-count').textContent = game.errors;
+                
+                var difficultyStars = '★'.repeat(getDifficultyStars(config.difficulty)) + 
+                                    '☆'.repeat(3 - getDifficultyStars(config.difficulty));
+                document.getElementById('difficulty-stars').textContent = difficultyStars;
+            }
+            
+            function updateNoteModeButton() {
+                var btn = document.getElementById('note-mode-btn');
+                if (game.isNoteMode) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            }
+            
+            function toggleNoteMode() {
+                game.toggleNoteMode();
+                updateNoteModeButton();
+            }
+            
+            function clearCell() {
+                inputNumber(0);
+            }
+            
+            function saveCurrentState() {
+                if (!game || !game.playerGrid || !game.currentPuzzle) {
+                    console.warn('Cannot save: game or grids not initialized');
+                    return;
+                }
+                
+                try {
+                    var state = {
+                        grid: JSON.parse(JSON.stringify(game.playerGrid)),
+                        notes: game.notes ? JSON.parse(JSON.stringify(game.notes)) : [],
+                        time: game.getElapsedTime ? game.getElapsedTime() : 0,
+                        errors: game.errors || 0
+                    };
+                    
+                    // Validate state before saving
+                    if (!state.grid || state.grid.length !== 9) {
+                        console.error('Invalid grid data:', state.grid);
+                        return;
+                    }
+                    
+                    var result = storage.savePuzzleState(currentLevel, currentPuzzleIndex, state);
+                    if (result) {
+                        console.log('State saved successfully:', currentLevel + '-' + currentPuzzleIndex);
+                    } else {
+                        console.error('Failed to save state');
+                    }
+                } catch (e) {
+                    console.error('Error saving state:', e);
+                }
+            }
+            
+            function handlePuzzleComplete() {
+                game.stopTimer();
+                isTimerRunning = false;
+                
+                var time = game.getElapsedTime();
+                storage.saveBestTime(currentLevel, currentPuzzleIndex, time);
+                
+                var config = game.getLevelConfig(currentLevel);
+                
+                if (currentPuzzleIndex < config.puzzles - 1) {
+                    showCompleteModal(time);
+                } else {
+                    storage.saveLevelProgress(currentLevel, true);
+                    
+                    if (currentLevel < 5) {
+                        storage.saveLevelProgress(currentLevel + 1, false);
+                    }
+                    
+                    showVictoryModal(time, config.name);
+                }
+            }
+            
+            function showCompleteModal(time) {
+                var modal = document.getElementById('complete-modal');
+                var minutes = Math.floor(time / 60);
+                var secs = time % 60;
+                document.getElementById('modal-time').textContent = minutes + ':' + String(secs).padStart(2, '0');
+                
+                modal.classList.add('active');
+                
+                document.getElementById('next-puzzle-btn').onclick = function() {
+                    modal.classList.remove('active');
+                    storage.clearPuzzleState(currentLevel, currentPuzzleIndex);
+                    currentPuzzleIndex++;
+                    window.location.href = 'game.html?level=' + currentLevel + '&puzzle=' + currentPuzzleIndex;
+                };
+                
+                document.getElementById('back-to-levels-btn').onclick = function() {
+                    modal.classList.remove('active');
+                    confirmReturnToLevels();
+                };
+            }
+            
+            function showVictoryModal(time, levelName) {
+                var modal = document.getElementById('victory-modal');
+                document.getElementById('victory-level').textContent = levelName;
+                
+                var minutes = Math.floor(time / 60);
+                var secs = time % 60;
+                document.getElementById('victory-time').textContent = minutes + ':' + String(secs).padStart(2, '0');
+                
+                var stats = storage.getTotalStats();
+                document.getElementById('total-levels').textContent = stats.completedLevels;
+                document.getElementById('total-puzzles').textContent = stats.totalPuzzles;
+                
+                var continueBtn = document.getElementById('continue-btn');
+                if (currentLevel >= 5) {
+                    continueBtn.textContent = '返回关卡';
+                    continueBtn.onclick = function() {
+                        window.location.href = 'levels.html';
+                    };
+                } else {
+                    continueBtn.textContent = '下一关';
+                    continueBtn.onclick = function() {
+                        window.location.href = 'game.html?level=' + (currentLevel + 1) + '&puzzle=0';
+                    };
+                }
+                
+                modal.classList.add('active');
+            }
+            
+            function resetPuzzle() {
+                if (confirm('确定要重置当前题目吗？')) {
+                    game.resetCurrentPuzzle();
+                    storage.clearPuzzleState(currentLevel, currentPuzzleIndex);
+                    renderBoard();
+                    updateInfoPanel();
+                }
+            }
+            
+            document.getElementById('note-mode-btn').onclick = toggleNoteMode;
+            document.getElementById('clear-btn').onclick = clearCell;
+            document.getElementById('reset-btn').onclick = resetPuzzle;
+            
+            var numBtns = document.querySelectorAll('.num-btn');
+            for (var i = 0; i < numBtns.length; i++) {
+                numBtns[i].onclick = (function(btn) {
+                    return function() {
+                        var num = parseInt(btn.dataset.num);
+                        inputNumber(num);
+                    };
+                })(numBtns[i]);
+            }
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key >= '1' && e.key <= '9') {
+                    e.preventDefault();
+                    inputNumber(parseInt(e.key));
+                } else if (e.key === 'Delete' || e.key === 'Backspace') {
+                    e.preventDefault();
+                    clearCell();
+                } else if (e.key === 'n' || e.key === 'N') {
+                    e.preventDefault();
+                    toggleNoteMode();
+                } else if (e.key >= 'ArrowUp' && e.key <= 'ArrowRight') {
+                    e.preventDefault();
+                    handleArrowKey(e.key);
+                }
+            });
+            
+            function handleArrowKey(key) {
+                if (!game.selectedCell) {
+                    selectCell(4, 4);
+                    return;
+                }
+                
+                var row = game.selectedCell.row;
+                var col = game.selectedCell.col;
+                
+                switch (key) {
+                    case 'ArrowUp': row = Math.max(0, row - 1); break;
+                    case 'ArrowDown': row = Math.min(8, row + 1); break;
+                    case 'ArrowLeft': col = Math.max(0, col - 1); break;
+                    case 'ArrowRight': col = Math.min(8, col + 1); break;
+                }
+                
+                selectCell(row, col);
+            }
+            
+            window.addEventListener('beforeunload', function() {
+                if (isTimerRunning) {
+                    console.log('Saving state on beforeunload');
+                    saveCurrentState();
+                }
+            });
+            
+            // Save when user switches tabs or minimizes browser
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden && isTimerRunning) {
+                    console.log('Saving state on visibility change (tab switch)');
+                    saveCurrentState();
+                }
+            });
+            
+            // Save every 10 seconds as backup
+            setInterval(function() {
+                if (isTimerRunning && game && game.playerGrid) {
+                    console.log('Auto-saving state every 10 seconds');
+                    saveCurrentState();
+                }
+            }, 10000);
+            
+            // Help dialog functions
+            function showGameHelp() {
+                var modal = document.getElementById('help-modal');
+                if (modal) modal.classList.add('active');
+            }
+            
+            function hideGameHelp() {
+                var modal = document.getElementById('help-modal');
+                if (modal) modal.classList.remove('active');
+            }
+            
+            // Exit confirmation dialog functions
+            function confirmExit() {
+                var title = document.getElementById('exit-confirm-title');
+                var message = document.getElementById('exit-confirm-message');
+                var btn = document.getElementById('exit-confirm-btn');
+                
+                if (title) title.textContent = '退出确认';
+                if (message) message.textContent = '退出游戏将清空所有游戏记录，是否确认退出？';
+                if (btn) btn.onclick = function() { doExit(); };
+                
+                var modal = document.getElementById('exit-confirm-modal');
+                if (modal) modal.classList.add('active');
+            }
+            
+            function confirmReturnToLevels() {
+                var title = document.getElementById('exit-confirm-title');
+                var message = document.getElementById('exit-confirm-message');
+                var btn = document.getElementById('exit-confirm-btn');
+                
+                if (title) title.textContent = '返回关卡';
+                if (message) message.textContent = '游戏内容要被删除，是否确认返回？';
+                if (btn) btn.onclick = function() { doReturnToLevels(); };
+                
+                var modal = document.getElementById('exit-confirm-modal');
+                if (modal) modal.classList.add('active');
+            }
+            
+            function cancelExit() {
+                var modal = document.getElementById('exit-confirm-modal');
+                if (modal) modal.classList.remove('active');
+            }
+            
+            function doExit() {
+                var storage = GameStorage;
+                storage.clear();
+                window.location.href = '../index.html';
+            }
+            
+            function doReturnToLevels() {
+                var modal = document.getElementById('exit-confirm-modal');
+                if (modal) modal.classList.remove('active');
+                window.location.href = 'levels.html';
+            }
+            
+            // Make functions globally accessible
+            window.showGameHelp = showGameHelp;
+            window.hideGameHelp = hideGameHelp;
+            window.confirmExit = confirmExit;
+            window.confirmReturnToLevels = confirmReturnToLevels;
+            window.cancelExit = cancelExit;
+            window.doExit = doExit;
+            
+            // Add exit modal click outside to close
+            var exitModal = document.getElementById('exit-confirm-modal');
+            if (exitModal) {
+                exitModal.addEventListener('click', function(e) {
+                    if (e.target === exitModal) {
+                        cancelExit();
+                    }
+                });
+            }
+            
+            // Add help modal click outside to close
+            var helpModal = document.getElementById('help-modal');
+            if (helpModal) {
+                helpModal.addEventListener('click', function(e) {
+                    if (e.target === helpModal) {
+                        hideGameHelp();
+                    }
+                });
+            }
+            
+            initGame();
+        });
+    </script>
+</body>
+</html>

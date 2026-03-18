@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数独闯关 - Sudoku Quest</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🔢</span>
+                <span class="logo-text">数独闯关</span>
+            </div>
+            <nav class="nav">
+            </nav>
+        </header>
+
+        <main class="main page-container">
+            <div class="welcome-content">
+                <h1 class="welcome-title">
+                    <span class="title-main">数独闯关</span>
+                    <span class="title-sub">Sudoku Quest</span>
+                </h1>
+                <div class="welcome-animation">
+                    <div class="sudoku-icon">
+                        <div class="grid-preview">
+                            <div class="row"><span>5</span><span>3</span><span class="empty"></span><span>7</span></div>
+                            <div class="row"><span class="empty"></span><span>7</span><span class="empty"></span><span>1</span></div>
+                            <div class="row"><span>6</span><span class="empty"></span><span class="empty"></span><span>4</span></div>
+                            <div class="row"><span class="empty"></span><span>8</span><span>5</span><span class="empty"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="welcome-desc">挑战5个难度递增的关卡<br>每关10题，成为数独大师</p>
+                <div class="welcome-buttons">
+                    <a href="pages/levels.html" class="btn-primary">开始游戏</a>
+                    <button id="help-btn" class="btn-secondary" onclick="showHelp()">帮助说明</button>
+                </div>
+                <div class="stats-preview">
+                    <div class="stat-item">
+                        <span class="stat-value" id="stat-levels">0</span>
+                        <span class="stat-label">已完成关卡</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="stat-puzzles">0</span>
+                        <span class="stat-label">已完成题目</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div id="help-modal" class="modal">
+            <div class="modal-content">
+                <h3>游戏帮助</h3>
+                
+                <div class="help-section">
+                    <h4>🎯 游戏目标</h4>
+                    <p>在9×9的网格中填入数字1-9，使得每一行、每一列以及每一个3×3的宫格中都包含1-9所有数字，且不重复。</p>
+                </div>
+
+                <div class="help-section">
+                    <h4>📖 基本操作</h4>
+                    <ul>
+                        <li>点击或触摸选择一个空格</li>
+                        <li>点击底部数字按钮填入数字</li>
+                        <li>灰色数字为题目预设，不可修改</li>
+                        <li>带边框的单元格为当前选中</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h4>📝 笔记功能</h4>
+                    <p>点击"笔记"按钮进入笔记模式，在此模式下填入的数字会作为候选笔记显示，不会影响答案检查。</p>
+                </div>
+
+                <div class="help-section">
+                    <h4>⌨️ 键盘快捷键</h4>
+                    <div class="keyboard-shortcuts">
+                        <div class="shortcut"><span>数字 1-9</span><kbd>填入数字</kbd></div>
+                        <div class="shortcut"><span>Delete</span><kbd>清除</kbd></div>
+                        <div class="shortcut"><span>N</span><kbd>笔记模式</kbd></div>
+                        <div class="shortcut"><span>方向键</span><kbd>移动选择</kbd></div>
+                    </div>
+                </div>
+
+                <div class="help-section">
+                    <h4>🏆 关卡说明</h4>
+                    <ul>
+                        <li><strong>第1关 入门</strong> - 简单难度，38-42个空格</li>
+                        <li><strong>第2-3关 进阶/熟练</strong> - 中等难度，45-50个空格</li>
+                        <li><strong>第4-5关 大师/传奇</strong> - 困难难度，53-58个空格</li>
+                        <li>每个关卡包含10道题目</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h4>💾 进度保存</h4>
+                    <p>无法保存内容，退出游戏时进度将被清空。</p>
+                </div>
+
+                <div class="modal-buttons">
+                    <button id="close-help-btn" class="btn-primary" onclick="hideHelp()">关闭按钮</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Self-contained storage solution
+        var GameStorage = {
+            STORAGE_KEY: 'sudoku_progress',
+            
+            save: function(data) {
+                try {
+                    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+                    return true;
+                } catch (e) {
+                    console.error('Save error:', e);
+                    return false;
+                }
+            },
+            
+            load: function() {
+                try {
+                    var data = localStorage.getItem(this.STORAGE_KEY);
+                    return data ? JSON.parse(data) : null;
+                } catch (e) {
+                    console.error('Load error:', e);
+                    return null;
+                }
+            },
+            
+            getTotalStats: function() {
+                try {
+                    var data = this.load();
+                    var completed = data && data.completedLevels ? data.completedLevels : [];
+                    
+                    var totalTime = 0;
+                    var puzzlesCompleted = 0;
+                    
+                    if (data && data.bestTimes) {
+                        for (var key in data.bestTimes) {
+                            if (data.bestTimes.hasOwnProperty(key)) {
+                                totalTime += data.bestTimes[key] || 0;
+                                puzzlesCompleted++;
+                            }
+                        }
+                    }
+                    
+                    return {
+                        completedLevels: completed.length,
+                        totalPuzzles: puzzlesCompleted,
+                        totalTime: totalTime
+                    };
+                } catch (e) {
+                    console.error('Error getting stats:', e);
+                    return { completedLevels: 0, totalPuzzles: 0, totalTime: 0 };
+                }
+            }
+        };
+    </script>
+    <script>
+        function showHelp() {
+            document.getElementById('help-modal').classList.add('active');
+        }
+        
+        function hideHelp() {
+            document.getElementById('help-modal').classList.remove('active');
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            var stats = GameStorage.getTotalStats();
+            document.getElementById('stat-levels').textContent = stats.completedLevels;
+            document.getElementById('stat-puzzles').textContent = stats.totalPuzzles;
+            
+            var helpModal = document.getElementById('help-modal');
+            if (helpModal) {
+                helpModal.addEventListener('click', function(e) {
+                    if (e.target === helpModal) hideHelp();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

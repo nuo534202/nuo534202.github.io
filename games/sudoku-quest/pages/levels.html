@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择关卡 - 数独闯关</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        window.onerror = function(msg, url, line, col, error) {
+            console.error('Global error:', msg, 'line:', line);
+            alert('Error: ' + msg + '\nLine: ' + line);
+            return true;
+        };
+    </script>
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🔢</span>
+                <span class="logo-text">数独闯关</span>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn" onclick="showHelp()">帮助</button>
+            </nav>
+        </header>
+
+        <main class="main page-container">
+            <div class="level-select-header">
+                <h2>选择关卡</h2>
+                <p class="level-hint">完成当前关卡所有题目解锁下一关</p>
+            </div>
+            <div id="level-cards" class="level-cards">
+                <div class="loading-placeholder">
+                    <p>正在加载关卡...</p>
+                </div>
+            </div>
+            <a href="../index.html" class="btn-back">← 返回首页</a>
+        </main>
+
+        <div id="puzzle-select-modal" class="modal">
+            <div class="modal-content">
+                <h3 id="puzzle-select-title">第1关 - 入门</h3>
+                <div id="puzzle-grid" class="puzzle-grid">
+                </div>
+                <button id="close-puzzle-modal" class="btn-close" aria-label="关闭">×</button>
+            </div>
+        </div>
+
+        <!-- Help Modal -->
+        <div id="help-modal" class="modal">
+            <div class="modal-content">
+                <h3>游戏帮助</h3>
+                
+                <div class="help-section">
+                    <h4>🎯 游戏目标</h4>
+                    <p>在9×9的网格中填入数字1-9，使得每一行、每一列以及每一个3×3的宫格中都包含1-9所有数字，且不重复。</p>
+                </div>
+
+                <div class="help-section">
+                    <h4>📖 基本操作</h4>
+                    <ul>
+                        <li>点击或触摸选择一个空格</li>
+                        <li>点击底部数字按钮填入数字</li>
+                        <li>灰色数字为题目预设，不可修改</li>
+                        <li>带边框的单元格为当前选中</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h4>📝 笔记功能</h4>
+                    <p>点击"笔记"按钮进入笔记模式，在此模式下填入的数字会作为候选笔记显示。</p>
+                </div>
+
+                <div class="help-section">
+                    <h4>⌨️ 键盘快捷键</h4>
+                    <div class="keyboard-shortcuts">
+                        <div class="shortcut"><span>数字 1-9</span><kbd>填入数字</kbd></div>
+                        <div class="shortcut"><span>Delete</span><kbd>清除</kbd></div>
+                        <div class="shortcut"><span>N</span><kbd>笔记模式</kbd></div>
+                        <div class="shortcut"><span>方向键</span><kbd>移动选择</kbd></div>
+                    </div>
+                </div>
+
+                <div class="help-section">
+                    <h4>🏆 关卡说明</h4>
+                    <ul>
+                        <li><strong>第1关 入门</strong> - 简单难度</li>
+                        <li><strong>第2-3关 进阶/熟练</strong> - 中等难度</li>
+                        <li><strong>第4-5关 大师/传奇</strong> - 困难难度</li>
+                        <li>每个关卡包含10道题目</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h4>💾 进度保存</h4>
+                    <p>无法保存内容，退出游戏时进度将被清空。</p>
+                </div>
+
+                <div class="modal-buttons">
+                    <button class="btn-primary" onclick="hideHelp()">关闭按钮</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/sudoku.js"></script>
+    <script>
+        // Self-contained storage solution
+        var GameStorage = {
+            STORAGE_KEY: 'sudoku_progress',
+            
+            save: function(data) {
+                try {
+                    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+                    return true;
+                } catch (e) {
+                    console.error('Save error:', e);
+                    return false;
+                }
+            },
+            
+            load: function() {
+                try {
+                    var data = localStorage.getItem(this.STORAGE_KEY);
+                    return data ? JSON.parse(data) : null;
+                } catch (e) {
+                    console.error('Load error:', e);
+                    return null;
+                }
+            },
+            
+            getCompletedLevels: function() {
+                try {
+                    var data = this.load();
+                    return data && data.completedLevels ? data.completedLevels : [];
+                } catch (e) {
+                    console.error('Error getting completed levels:', e);
+                    return [];
+                }
+            },
+            
+            isLevelUnlocked: function(level) {
+                var completed = this.getCompletedLevels();
+                if (level === 1) return true;
+                return completed.indexOf(level - 1) > -1;
+            },
+            
+            getBestTime: function(level, puzzleIndex) {
+                try {
+                    var data = this.load();
+                    if (!data || !data.bestTimes) return null;
+                    var key = level + '-' + puzzleIndex;
+                    return data.bestTimes[key] || null;
+                } catch (e) {
+                    console.error('Error getting best time:', e);
+                    return null;
+                }
+            }
+        };
+    </script>
+    <script src="../js/game.js"></script>
+    <script>
+        console.log('Script 2 loaded, SudokuGame:', typeof SudokuGame);
+    </script>
+    <script>
+        console.log('All scripts loaded, starting init...');
+        
+        function init() {
+            console.log('init() called');
+            
+            var generator, game, storage;
+            
+            try {
+                generator = new SudokuGenerator();
+                console.log('Generator created');
+            } catch(e) {
+                console.error('Error creating generator:', e);
+                document.getElementById('level-cards').innerHTML = '<p class="error-msg">Error: ' + e.message + '</p>';
+                return;
+            }
+            
+            try {
+                game = new SudokuGame(generator);
+                console.log('Game created, levels:', game.getAllLevels());
+            } catch(e) {
+                console.error('Error creating game:', e);
+                document.getElementById('level-cards').innerHTML = '<p class="error-msg">Error: ' + e.message + '</p>';
+                return;
+            }
+            
+            try {
+                storage = GameStorage;
+                console.log('Storage ready');
+            } catch(e) {
+                console.error('Error creating storage:', e);
+                document.getElementById('level-cards').innerHTML = '<p class="error-msg">Error: ' + e.message + '</p>';
+                return;
+            }
+            
+            var currentLevel = 1;
+            
+            function getDifficultyStars(difficulty) {
+                switch (difficulty) {
+                    case 'easy': return 1;
+                    case 'medium': return 2;
+                    case 'hard': return 3;
+                    default: return 1;
+                }
+            }
+            
+            function renderLevelCards() {
+                console.log('renderLevelCards() called');
+                
+                var container = document.getElementById('level-cards');
+                if (!container) {
+                    console.error('Container not found');
+                    return;
+                }
+                
+                var levels = game.getAllLevels();
+                console.log('Levels loaded:', levels);
+                
+                if (!levels) {
+                    container.innerHTML = '<p class="error-msg">无法加载关卡数据</p>';
+                    return;
+                }
+                
+                container.innerHTML = '';
+                
+                var completedLevels = storage.getCompletedLevels();
+                console.log('Completed levels:', completedLevels);
+                
+                for (var i = 1; i <= 5; i++) {
+                    var config = levels[i];
+                    console.log('Creating card for level', i, config);
+                    
+                    var isUnlocked = storage.isLevelUnlocked(i);
+                    var isCompleted = completedLevels.indexOf(i) > -1;
+                    
+                    var card = document.createElement('div');
+                    card.className = 'level-card';
+                    if (!isUnlocked) card.classList.add('locked');
+                    if (isCompleted) card.classList.add('completed');
+                    
+                    var stars = '';
+                    var diffStars = getDifficultyStars(config.difficulty);
+                    for (var s = 0; s < 3; s++) {
+                        stars += s < diffStars ? '★' : '☆';
+                    }
+                    
+                    card.innerHTML = 
+                        '<div class="level-number">' + i + '</div>' +
+                        '<div class="level-name">' + config.name + '</div>' +
+                        '<div class="level-stars">' + stars + '</div>' +
+                        '<div class="level-puzzles">' + config.puzzles + '题</div>' +
+                        (!isUnlocked ? '<div class="lock-icon">🔒</div>' : '') +
+                        (isCompleted ? '<div class="check-icon">✓</div>' : '');
+                    
+                    if (isUnlocked) {
+                        card.style.cursor = 'pointer';
+                        card.onclick = (function(level, cfg) {
+                            return function() {
+                                showPuzzleSelect(level, cfg);
+                            };
+                        })(i, config);
+                    }
+                    
+                    container.appendChild(card);
+                }
+                
+                console.log('Rendered', container.children.length, 'cards');
+            }
+            
+            function showPuzzleSelect(level, config) {
+                console.log('showPuzzleSelect:', level, config);
+                currentLevel = level;
+                var modal = document.getElementById('puzzle-select-modal');
+                var title = document.getElementById('puzzle-select-title');
+                title.textContent = '第' + level + '关 - ' + config.name;
+                
+                var grid = document.getElementById('puzzle-grid');
+                grid.innerHTML = '';
+                
+                for (var i = 0; i < config.puzzles; i++) {
+                    var btn = document.createElement('div');
+                    btn.className = 'puzzle-btn';
+                    
+                    var bestTime = storage.getBestTime(level, i);
+                    if (bestTime) {
+                        var mins = Math.floor(bestTime / 60);
+                        var secs = bestTime % 60;
+                        btn.innerHTML = '<span>' + (i + 1) + '</span><small>' + mins + ':' + String(secs).padStart(2, '0') + '</small>';
+                    } else {
+                        btn.textContent = i + 1;
+                    }
+                    
+                    btn.onclick = (function(puzzleIndex) {
+                        return function() {
+                            window.location.href = 'game.html?level=' + currentLevel + '&puzzle=' + puzzleIndex;
+                        };
+                    })(i);
+                    
+                    grid.appendChild(btn);
+                }
+                
+                modal.classList.add('active');
+            }
+            
+            document.getElementById('close-puzzle-modal').onclick = function() {
+                document.getElementById('puzzle-select-modal').classList.remove('active');
+            };
+            
+            document.getElementById('puzzle-select-modal').onclick = function(e) {
+                if (e.target.id === 'puzzle-select-modal') {
+                    this.classList.remove('active');
+                }
+            };
+            
+            console.log('Calling renderLevelCards...');
+            renderLevelCards();
+            console.log('Done!');
+        }
+        
+        function showHelp() {
+            document.getElementById('help-modal').classList.add('active');
+        }
+        
+        function hideHelp() {
+            document.getElementById('help-modal').classList.remove('active');
+        }
+        
+        // Help modal click outside to close
+        var helpModal = document.getElementById('help-modal');
+        if (helpModal) {
+            helpModal.addEventListener('click', function(e) {
+                if (e.target === helpModal) hideHelp();
+            });
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>
