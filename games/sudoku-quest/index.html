@@ -4,114 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数独闯关 - Sudoku Quest</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../style.css">
+    <script src="../../bubbles.js"></script>
+    <link rel="icon" href="../../nuo534202.jpg" type="image/jpeg">
 </head>
 <body>
-    <div class="app">
-        <header class="header">
-            <div class="logo">
-                <span class="logo-icon">🔢</span>
-                <span class="logo-text">数独闯关</span>
-            </div>
-            <nav class="nav">
-            </nav>
-        </header>
 
-        <main class="main page-container">
-            <div class="welcome-content">
-                <h1 class="welcome-title">
-                    <span class="title-main">数独闯关</span>
-                    <span class="title-sub">Sudoku Quest</span>
-                </h1>
-                <div class="welcome-animation">
-                    <div class="sudoku-icon">
-                        <div class="grid-preview">
-                            <div class="row"><span>5</span><span>3</span><span class="empty"></span><span>7</span></div>
-                            <div class="row"><span class="empty"></span><span>7</span><span class="empty"></span><span>1</span></div>
-                            <div class="row"><span>6</span><span class="empty"></span><span class="empty"></span><span>4</span></div>
-                            <div class="row"><span class="empty"></span><span>8</span><span>5</span><span class="empty"></span></div>
-                        </div>
+    <div class="container repo-container">
+        <img src="../../nuo534202.jpg" class="avatar" alt="nuo534202">
+        <h1>数独闯关</h1>
+        <p class="subtitle">Sudoku Quest</p>
+        <div class="decorative-line"></div>
+        
+        <p style="color: #4a5568; margin-bottom: 30px; font-size: 1rem; text-align: center; line-height: 1.8;">
+            挑战5个难度递增的关卡，每关10题，成为数独大师！
+        </p>
+
+        <div class="welcome-animation" style="margin: 30px 0; display: flex; justify-content: center; align-items: center;">
+            <div class="sudoku-icon" style="display: inline-block; transition: transform 0.3s ease;">
+                <div class="grid-preview" style="display: grid; grid-template-columns: repeat(4, 40px); grid-template-rows: repeat(4, 40px); gap: 3px; background: #adb5bd; padding: 4px; border-radius: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <div class="row" style="display: contents;">
+                        <span style="display: flex; align-items: center; justify-content: center; font-family: 'Consolas', monospace; font-size: 16px; font-weight: 700; color: #005bea; background: white; border-radius: 3px;">5</span>
+                        <span style="display: flex; align-items: center; justify-content: center; font-family: 'Consolas', monospace; font-size: 16px; font-weight: 700; color: #005bea; background: white; border-radius: 3px;">3</span>
+                        <span style="display: flex; align-items: center; justify-content: center; font-family: 'Consolas', monospace; font-size: 16px; font-weight: 700; color: #005bea; background: transparent; border-radius: 3px;"></span>
+                        <span style="display: flex; align-items: center; justify-content: center; font-family: 'Consolas', monospace; font-size: 16px; font-weight: 700; color: #005bea; background: white; border-radius: 3px;">7</span>
                     </div>
-                </div>
-                <p class="welcome-desc">挑战5个难度递增的关卡<br>每关10题，成为数独大师</p>
-                <div class="welcome-buttons">
-                    <a href="pages/levels.html" class="btn-primary">开始游戏</a>
-                    <button id="help-btn" class="btn-secondary" onclick="showHelp()">帮助说明</button>
-                </div>
-                <div class="stats-preview">
-                    <div class="stat-item">
-                        <span class="stat-value" id="stat-levels">0</span>
-                        <span class="stat-label">已完成关卡</span>
+                    <div class="row" style="display: contents;">
+                        <span style="display: flex; align-items: center; justify-content: center; font-family: 'Consolas', monospace; font-size: 16px; font-weight: 700; color: #005bea; background: transparent; border-radius: 3px;"></span>
+                        <span style="display: flex; align-items: center; justify-content: center; font-family: 'Consolas', monospace; font-size: 16px; font-weight: 700; color: #005bea; background: white; border-radius: 3px;">7</span>
+                        <span style="display: flex; align-items: center; justify-content: center; font-family: 'Consolas', monospace; font-size: 16px; font-weight: 700; color: #005bea; background: transparent; border-radius: 3px;"></span>
+                        <span style="display: flex; align-items: center; justify-content: center; font-family: 'Consolas', monospace; font-size: 16px; font-weight: 700; color: #005bea; background: white; border-radius: 3px;">1</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-value" id="stat-puzzles">0</span>
-                        <span class="stat-label">已完成题目</span>
+                    <div class="row" style="display: contents;">
+                        <span style="display: flex; align-items: center; justify-content: center; font-family: 'Consolas', monospace; font-size: 16px; font-weight: 700; color: #005bea; background: white; border-radius: 3px;">6</span>
+                        <span style="display: flex; align-items: center; justify-content: center; font-family: 'Consolas', monospace; font-size: 16px; font-weight: 700; color: #005bea; background: transparent; border-radius: 3px;"></span>
+                        <span style="display: flex; align-items: center; justify-content: center; font-family: 'Consolas', monospace; font-size: 16px; font-weight: 700; color: #005bea; background: transparent; border-radius: 3px;"></span>
+                        <span style="display: flex; align-items: center; justify-content: center; font-family: 'Consolas', monospace; font-size: 16px; font-weight: 700; color: #005bea; background: white; border-radius: 3px;">4</span>
+                    </div>
+                    <div class="row" style="display: contents;">
+                        <span style="display: flex; align-items: center; justify-content: center; font-family: 'Consolas', monospace; font-size: 16px; font-weight: 700; color: #005bea; background: transparent; border-radius: 3px;"></span>
+                        <span style="display: flex; align-items: center; justify-content: center; font-family: 'Consolas', monospace; font-size: 16px; font-weight: 700; color: #005bea; background: white; border-radius: 3px;">8</span>
+                        <span style="display: flex; align-items: center; justify-content: center; font-family: 'Consolas', monospace; font-size: 16px; font-weight: 700; color: #005bea; background: white; border-radius: 3px;">5</span>
+                        <span style="display: flex; align-items: center; justify-content: center; font-family: 'Consolas', monospace; font-size: 16px; font-weight: 700; color: #005bea; background: transparent; border-radius: 3px;"></span>
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
 
-        <div id="help-modal" class="modal">
-            <div class="modal-content">
-                <h3>游戏帮助</h3>
-                
-                <div class="help-section">
-                    <h4>🎯 游戏目标</h4>
-                    <p>在9×9的网格中填入数字1-9，使得每一行、每一列以及每一个3×3的宫格中都包含1-9所有数字，且不重复。</p>
-                </div>
+        <div class="stats-preview" style="display: flex; justify-content: center; gap: 48px; margin-top: 20px; padding: 20px; background: white; border-radius: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+            <div class="stat-item" style="display: flex; flex-direction: column; align-items: center;">
+                <span class="stat-value" id="stat-levels" style="font-family: 'Consolas', monospace; font-size: 32px; font-weight: 700; color: #005bea;">0</span>
+                <span class="stat-label" style="font-size: 12px; color: #495057; margin-top: 4px;">已完成关卡</span>
+            </div>
+            <div class="stat-item" style="display: flex; flex-direction: column; align-items: center;">
+                <span class="stat-value" id="stat-puzzles" style="font-family: 'Consolas', monospace; font-size: 32px; font-weight: 700; color: #005bea;">0</span>
+                <span class="stat-label" style="font-size: 12px; color: #495057; margin-top: 4px;">已完成题目</span>
+            </div>
+        </div>
 
-                <div class="help-section">
-                    <h4>📖 基本操作</h4>
-                    <ul>
-                        <li>点击或触摸选择一个空格</li>
-                        <li>点击底部数字按钮填入数字</li>
-                        <li>灰色数字为题目预设，不可修改</li>
-                        <li>带边框的单元格为当前选中</li>
-                    </ul>
-                </div>
+        <div class="nav-links" style="margin-top: 30px; gap: 12px;">
+            <a href="pages/levels.html" class="btn">
+                <span class="btn-icon">🎮</span>
+                开始游戏
+            </a>
+            <a href="../index.html" class="btn" style="background: white; color: #2d3748; border: 1px solid #ced4da;">
+                <span class="btn-icon">↩️</span>
+                返回游戏列表
+            </a>
+            <button id="help-btn" class="btn" style="background: white; color: #2d3748; border: 1px solid #ced4da;" onclick="showHelp()">
+                <span class="btn-icon">❓</span>
+                帮助说明
+            </button>
+        </div>
+        
+        <p class="footer">祝你玩得愉快！</p>
+    </div>
 
-                <div class="help-section">
-                    <h4>📝 笔记功能</h4>
-                    <p>点击"笔记"按钮进入笔记模式，在此模式下填入的数字会作为候选笔记显示，不会影响答案检查。</p>
-                </div>
+    <div id="help-modal" class="modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000; animation: fadeIn 0.2s ease;">
+        <div class="modal-content" style="background: white; border: 2px solid #ced4da; border-radius: 16px; padding: 32px; text-align: left; position: relative; max-width: 600px; width: 90%; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <button class="btn-close" onclick="hideHelp()" style="position: absolute; top: 12px; right: 12px; width: 32px; height: 32px; background: transparent; border: none; color: #6c757d; font-size: 24px; cursor: pointer; transition: color 0.2s ease; border-radius: 50%;">×</button>
+            <h3 style="text-align: center; margin-bottom: 20px; font-size: 24px;">游戏帮助</h3>
+            
+            <div class="help-section" style="margin-bottom: 20px;">
+                <h4 style="font-size: 16px; color: #005bea; margin-bottom: 8px;">🎯 游戏目标</h4>
+                <p style="font-size: 14px; color: #495057; line-height: 1.6;">在9×9的网格中填入数字1-9，使得每一行、每一列以及每一个3×3的宫格中都包含1-9所有数字，且不重复。</p>
+            </div>
 
-                <div class="help-section">
-                    <h4>⌨️ 键盘快捷键</h4>
-                    <div class="keyboard-shortcuts">
-                        <div class="shortcut"><span>数字 1-9</span><kbd>填入数字</kbd></div>
-                        <div class="shortcut"><span>Delete</span><kbd>清除</kbd></div>
-                        <div class="shortcut"><span>N</span><kbd>笔记模式</kbd></div>
-                        <div class="shortcut"><span>方向键</span><kbd>移动选择</kbd></div>
+            <div class="help-section" style="margin-bottom: 20px;">
+                <h4 style="font-size: 16px; color: #005bea; margin-bottom: 8px;">📖 基本操作</h4>
+                <ul style="font-size: 14px; color: #495057; line-height: 1.6; padding-left: 20px;">
+                    <li style="margin-bottom: 4px;">点击或触摸选择一个空格</li>
+                    <li style="margin-bottom: 4px;">点击底部数字按钮填入数字</li>
+                    <li style="margin-bottom: 4px;">灰色数字为题目预设，不可修改</li>
+                    <li style="margin-bottom: 4px;">带边框的单元格为当前选中</li>
+                </ul>
+            </div>
+
+            <div class="help-section" style="margin-bottom: 20px;">
+                <h4 style="font-size: 16px; color: #005bea; margin-bottom: 8px;">📝 笔记功能</h4>
+                <p style="font-size: 14px; color: #495057; line-height: 1.6;">点击"笔记"按钮进入笔记模式，在此模式下填入的数字会作为候选笔记显示，不会影响答案检查。</p>
+            </div>
+
+            <div class="help-section" style="margin-bottom: 20px;">
+                <h4 style="font-size: 16px; color: #005bea; margin-bottom: 8px;">⌨️ 键盘快捷键</h4>
+                <div class="keyboard-shortcuts" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 12px;">
+                    <div class="shortcut" style="display: flex; justify-content: space-between; padding: 6px 12px; background: #e9ecef; border-radius: 4px; font-size: 13px;">
+                        <span>数字 1-9</span><kbd style="background: white; padding: 2px 6px; border-radius: 4px; font-family: 'Consolas', monospace; font-size: 12px; border: 1px solid #ced4da;">填入数字</kbd>
+                    </div>
+                    <div class="shortcut" style="display: flex; justify-content: space-between; padding: 6px 12px; background: #e9ecef; border-radius: 4px; font-size: 13px;">
+                        <span>Delete</span><kbd style="background: white; padding: 2px 6px; border-radius: 4px; font-family: 'Consolas', monospace; font-size: 12px; border: 1px solid #ced4da;">清除</kbd>
+                    </div>
+                    <div class="shortcut" style="display: flex; justify-content: space-between; padding: 6px 12px; background: #e9ecef; border-radius: 4px; font-size: 13px;">
+                        <span>N</span><kbd style="background: white; padding: 2px 6px; border-radius: 4px; font-family: 'Consolas', monospace; font-size: 12px; border: 1px solid #ced4da;">笔记模式</kbd>
+                    </div>
+                    <div class="shortcut" style="display: flex; justify-content: space-between; padding: 6px 12px; background: #e9ecef; border-radius: 4px; font-size: 13px;">
+                        <span>方向键</span><kbd style="background: white; padding: 2px 6px; border-radius: 4px; font-family: 'Consolas', monospace; font-size: 12px; border: 1px solid #ced4da;">移动选择</kbd>
                     </div>
                 </div>
+            </div>
 
-                <div class="help-section">
-                    <h4>🏆 关卡说明</h4>
-                    <ul>
-                        <li><strong>第1关 入门</strong> - 简单难度，38-42个空格</li>
-                        <li><strong>第2-3关 进阶/熟练</strong> - 中等难度，45-50个空格</li>
-                        <li><strong>第4-5关 大师/传奇</strong> - 困难难度，53-58个空格</li>
-                        <li>每个关卡包含10道题目</li>
-                    </ul>
-                </div>
+            <div class="help-section" style="margin-bottom: 20px;">
+                <h4 style="font-size: 16px; color: #005bea; margin-bottom: 8px;">🏆 关卡说明</h4>
+                <ul style="font-size: 14px; color: #495057; line-height: 1.6; padding-left: 20px;">
+                    <li style="margin-bottom: 4px;"><strong>第1关 入门</strong> - 简单难度，38-42个空格</li>
+                    <li style="margin-bottom: 4px;"><strong>第2-3关 进阶/熟练</strong> - 中等难度，45-50个空格</li>
+                    <li style="margin-bottom: 4px;"><strong>第4-5关 大师/传奇</strong> - 困难难度，53-58个空格</li>
+                    <li style="margin-bottom: 4px;">每个关卡包含10道题目</li>
+                </ul>
+            </div>
 
-                <div class="help-section">
-                    <h4>💾 进度保存</h4>
-                    <p>无法保存内容，退出游戏时进度将被清空。</p>
-                </div>
-
-                <div class="modal-buttons">
-                    <button id="close-help-btn" class="btn-primary" onclick="hideHelp()">关闭按钮</button>
-                </div>
+            <div class="help-section" style="margin-bottom: 20px;">
+                <h4 style="font-size: 16px; color: #005bea; margin-bottom: 8px;">💾 进度保存</h4>
+                <p style="font-size: 14px; color: #495057; line-height: 1.6;">无法保存内容，退出游戏时进度将被清空。</p>
             </div>
         </div>
     </div>
 
     <script>
-        // Self-contained storage solution
         var GameStorage = {
             STORAGE_KEY: 'sudoku_progress',
             
@@ -166,11 +195,11 @@
     </script>
     <script>
         function showHelp() {
-            document.getElementById('help-modal').classList.add('active');
+            document.getElementById('help-modal').style.display = 'flex';
         }
         
         function hideHelp() {
-            document.getElementById('help-modal').classList.remove('active');
+            document.getElementById('help-modal').style.display = 'none';
         }
         
         document.addEventListener('DOMContentLoaded', function() {

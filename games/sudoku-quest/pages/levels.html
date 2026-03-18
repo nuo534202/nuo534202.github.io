@@ -28,7 +28,7 @@
             </nav>
         </header>
 
-        <main class="main page-container">
+        <main class="main page-container" style="max-width: 650px; width: 100%; margin: 0 auto;">
             <div class="level-select-header">
                 <h2>选择关卡</h2>
                 <p class="level-hint">完成当前关卡所有题目解锁下一关</p>
@@ -38,7 +38,12 @@
                     <p>正在加载关卡...</p>
                 </div>
             </div>
-            <a href="../index.html" class="btn-back">← 返回首页</a>
+            <div class="nav-links" style="margin-top: 50px; display: flex; flex-direction: column; gap: 12px;">
+                <a href="../index.html" class="btn-secondary" style="width: 100%; min-height: 60px; font-size: 1.1rem; padding: 16px 32px;">
+                    <span class="btn-icon">🏠</span>
+                    返回数独主页
+                </a>
+            </div>
         </main>
 
         <div id="puzzle-select-modal" class="modal">
