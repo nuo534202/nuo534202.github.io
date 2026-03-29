@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美食推荐</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="bubbles.js"></script>
+    <link rel="icon" href="nuo534202.jpg" type="image/jpeg">
+</head>
+<body>
+
+    <div class="container food-container">
+        <img src="nuo534202.jpg" class="avatar" alt="nuo534202">
+        <h1>美食推荐</h1>
+        <p class="subtitle">Food Recommendations</p>
+        <div class="decorative-line"></div>
+
+        <div class="food-section">
+            <div class="city-header" onclick="toggleCity('zhuhai')">
+                <h2 class="section-title">
+                    <span class="city-icon">🏙️</span>
+                    珠海市
+                    <span class="toggle-icon" id="toggle-zhuhai">▼</span>
+                </h2>
+            </div>
+            <div class="city-content" id="content-zhuhai">
+                <div class="food-list">
+                    <div class="food-card">
+                        <div class="food-icon">🍜</div>
+                        <div class="food-content">
+                            <h3 class="restaurant-name">渔记茶餐厅（渔村店）</h3>
+                            <div class="restaurant-info">
+                                <p class="info-item">
+                                    <span class="info-label">📍 地址：</span>
+                                    <span class="info-value">珠海市香洲区唐家湾镇唐家湾后环渔村三街4号</span>
+                                </p>
+                                <p class="info-item">
+                                    <span class="info-label">⭐ 评价：</span>
+                                    <span class="info-value">店铺的感觉有点像比较老旧的港式茶餐厅风格，味道很不错，但用餐环境相对一般，不买团购价格偏贵，停车不方便</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-links" style="margin-top: 30px;">
+            <a href="index.html" class="btn">
+                <span class="btn-icon">↩️</span>
+                返回首页
+            </a>
+        </div>
+        
+        <p class="footer">Made with <code>❤️</code> and <code>Delicious Food</code></p>
+    </div>
+
+    <script>
+        function toggleCity(cityId) {
+            const content = document.getElementById('content-' + cityId);
+            const toggleIcon = document.getElementById('toggle-' + cityId);
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                toggleIcon.textContent = '▼';
+            } else {
+                content.style.display = 'none';
+                toggleIcon.textContent = '▶';
+            }
+        }
+    </script>
+</body>
+</html>
