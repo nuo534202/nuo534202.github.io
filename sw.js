@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nuo-blog-cache-v2';
+const CACHE_NAME = 'nuo-blog-cache-v3';
 const ASSETS_TO_CACHE = [
     '/style.css',
     'nuo534202.jpg'
