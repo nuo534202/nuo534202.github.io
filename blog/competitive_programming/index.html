@@ -1,41 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Competitive Programming</title>
+    <title>Competitive Programming - nuo534202</title>
     <link rel="stylesheet" href="../../style.css">
-    <script src="../../bubbles.js"></script>
     <link rel="icon" href="../../nuo534202.jpg" type="image/jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    
-    <div class="container repo-container">
-        <img src="../../nuo534202.jpg" class="avatar" alt="nuo534202">
-        <h1>Competitive Programming</h1>
-        <p class="subtitle">Algorithms & Data Structures</p>
-        <div class="decorative-line"></div>
-        
-        <div class="tech-tags" id="tag-filter" style="margin-bottom: 24px;">
-            <span class="tag tag-active" data-tag="all" onclick="filterByTag('all')">All</span>
-            <span class="tag" data-tag="蓝桥杯" onclick="filterByTag('蓝桥杯')">蓝桥杯</span>
+    <!-- Navigation -->
+    <nav class="nav-bar" id="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo">
+                <img src="../../nuo534202.jpg" alt="" class="nav-avatar">
+                <span class="nav-logo-text">nuo534202</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-menu" id="navMenu">
+                <a href="../../blog/index.html" class="nav-link active">博客</a>
+                <a href="../../repository/index.html" class="nav-link">代码仓库</a>
+                <a href="../../games/index.html" class="nav-link">游戏合集</a>
+                <a href="../../food.html" class="nav-link">美食推荐</a>
+            </div>
         </div>
+    </nav>
 
-        <div class="repo-list" id="post-list">
-            <a href="/2025/04/13/lanqiao2025_provincial_cpp.html" class="link-card post-card" data-tags="蓝桥杯">
-                <div class="card-icon">📄</div>
-                <div class="card-content">
-                    <h3>2025 蓝桥杯省赛 C++ 题解</h3>
-                    <div style="margin: 6px 0 8px 0;">
-                        <span class="tag">蓝桥杯</span>
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="section-container">
+            <div class="page-header-content">
+                <span class="page-eyebrow">Blog / Competitive Programming</span>
+                <h1 class="page-title">算法竞赛</h1>
+                <p class="page-subtitle">Algorithms & Data Structures</p>
+                <div class="page-header-line"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tag Filter -->
+    <section class="categories-section" style="padding-bottom: 0;">
+        <div class="section-container">
+            <div class="tech-tags" id="tag-filter" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 24px;">
+                <span class="tag tag-active" data-tag="all" onclick="filterByTag('all')" style="cursor: pointer;">All</span>
+                <span class="tag" data-tag="蓝桥杯" onclick="filterByTag('蓝桥杯')" style="cursor: pointer;">蓝桥杯</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Post List -->
+    <section class="featured-section">
+        <div class="section-container">
+            <div class="repos-list" id="post-list">
+                <a href="/2025/04/13/lanqiao2025_provincial_cpp.html" class="repo-card post-card" data-tags="蓝桥杯">
+                    <div class="repo-card-header">
+                        <div class="repo-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                <polyline points="10 9 9 9 8 9"/>
+                            </svg>
+                        </div>
+                        <span class="repo-card-lang">蓝桥杯</span>
                     </div>
-                    <p>题目分析、思路与代码全收录</p>
-                </div>
-                <div class="card-arrow">↗</div>
+                    <div class="repo-card-content">
+                        <h3>2025 蓝桥杯省赛 C++ 题解</h3>
+                        <p>题目分析、思路与代码全收录</p>
+                    </div>
+                    <div class="repo-card-footer">
+                        <span class="repo-card-link">
+                            <span>阅读全文</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Blog -->
+    <section class="back-section">
+        <div class="section-container">
+            <a href="../index.html" class="btn-secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"/>
+                    <polyline points="12 19 5 12 12 5"/>
+                </svg>
+                <span>返回博客</span>
             </a>
         </div>
+    </section>
 
-        <script>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="section-container">
+            <div class="footer-content">
+                <p class="footer-desc">Made with <code class="inline-code">❤️</code> and <code class="inline-code">Logic</code></p>
+                <p class="footer-copy">nuo534202 &copy; <span id="year"></span> All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
         function filterByTag(tag) {
             const cards = document.querySelectorAll('.post-card');
             cards.forEach(card => {
@@ -49,16 +144,18 @@
             document.querySelectorAll('#tag-filter .tag').forEach(t => t.classList.remove('tag-active'));
             document.querySelector(`#tag-filter .tag[data-tag="${tag}"]`).classList.add('tag-active');
         }
-        </script>
 
-        <div class="nav-links" style="margin-top: 30px;">
-            <a href="../index.html" class="btn">
-                <span class="btn-icon">↩️</span>
-                Back to Blog
-            </a>
-        </div>
-        
-        <p class="footer">Code is poetry</p>
-    </div>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.post-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>

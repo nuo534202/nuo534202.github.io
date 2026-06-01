@@ -3,122 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>美食推荐</title>
+    <title>美食推荐 - nuo534202</title>
     <link rel="stylesheet" href="style.css">
-    <script src="bubbles.js"></script>
     <link rel="icon" href="nuo534202.jpg" type="image/jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <div class="container food-container">
-        <img src="nuo534202.jpg" class="avatar" alt="nuo534202">
-        <h1>美食推荐</h1>
-        <p class="subtitle">Food Recommendations</p>
-        <div class="decorative-line"></div>
-
-        <div class="food-section">
-            <div class="city-header" onclick="toggleCity('foshan')">
-                <h2 class="section-title">
-                    <span class="city-icon">🏙️</span>
-                    佛山市
-                    <span class="toggle-icon" id="toggle-foshan">▼</span>
-                </h2>
+    <!-- Navigation -->
+    <nav class="nav-bar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="nuo534202.jpg" alt="" class="nav-avatar">
+                <span class="nav-logo-text">nuo534202</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-menu" id="navMenu">
+                <a href="blog/index.html" class="nav-link">博客</a>
+                <a href="repository/index.html" class="nav-link">代码仓库</a>
+                <a href="games/index.html" class="nav-link">游戏合集</a>
+                <a href="food.html" class="nav-link active">美食推荐</a>
             </div>
-            <div class="city-content" id="content-foshan">
-                <div class="food-list">
-                    <div class="food-card">
-                        <div class="food-icon">🍜</div>
-                        <div class="food-content">
-                            <h3 class="restaurant-name">兴华里茶记（禅城祖庙店）</h3>
-                            <div class="restaurant-info">
-                                <p class="info-item">
-                                    <span class="info-label">📍 地址：</span>
-                                    <span class="info-value">禅城区祖庙街道福宁路102号5号铺</span>
-                                </p>
-                                <p class="info-item">
-                                    <span class="info-label">⭐ 评价：</span>
-                                    <span class="info-value">餐厅在老旧城区里面，排队的人比较多，茶餐厅常见菜品做的都还挺不错。</span>
-                                </p>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="section-container">
+            <div class="page-header-content">
+                <h1 class="page-title">美食推荐</h1>
+                <p class="page-subtitle">Food Recommendations</p>
+                <div class="page-header-line"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Content -->
+    <section class="food-section" style="padding: var(--space-3xl) 0; background: var(--canvas-soft);">
+        <div class="section-container">
+            <div class="food-section">
+                <div class="city-header" onclick="toggleCity('foshan')">
+                    <h2 class="section-title">
+                        <span class="city-icon">🏙️</span>
+                        佛山市
+                        <span class="toggle-icon" id="toggle-foshan">▼</span>
+                    </h2>
+                </div>
+                <div class="city-content" id="content-foshan">
+                    <div class="food-list">
+                        <div class="food-card">
+                            <div class="food-icon">🍜</div>
+                            <div class="food-content">
+                                <h3 class="restaurant-name">兴华里茶记（禅城祖庙店）</h3>
+                                <div class="restaurant-info">
+                                    <p class="info-item">
+                                        <span class="info-label">📍 地址：</span>
+                                        <span class="info-value">禅城区祖庙街道福宁路 102 号 5 号铺</span>
+                                    </p>
+                                    <p class="info-item">
+                                        <span class="info-label">⭐ 评价：</span>
+                                        <span class="info-value">餐厅在老旧城区里面，排队的人比较多，茶餐厅常见菜品做的都还挺不错。</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="food-section">
+                <div class="city-header" onclick="toggleCity('shenzhen')">
+                    <h2 class="section-title">
+                        <span class="city-icon">🏙️</span>
+                        深圳市
+                        <span class="toggle-icon" id="toggle-shenzhen">▼</span>
+                    </h2>
+                </div>
+                <div class="city-content" id="content-shenzhen">
+                    <div class="food-list">
+                        <div class="food-card">
+                            <div class="food-icon">🥟</div>
+                            <div class="food-content">
+                                <h3 class="restaurant-name">山水肠粉</h3>
+                                <div class="restaurant-info">
+                                    <p class="info-item">
+                                        <span class="info-label">📍 地址：</span>
+                                        <span class="info-value">深圳市盐田区海景二路沙头角保税区 31 栋</span>
+                                    </p>
+                                    <p class="info-item">
+                                        <span class="info-label">⭐ 评价：</span>
+                                        <span class="info-value">肠粉皮很薄，口感不错，份量略小，一个人可能要大概吃 3 - 4 份</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="food-section">
+                <div class="city-header" onclick="toggleCity('zhuhai')">
+                    <h2 class="section-title">
+                        <span class="city-icon">🏙️</span>
+                        珠海市
+                        <span class="toggle-icon" id="toggle-zhuhai">▼</span>
+                    </h2>
+                </div>
+                <div class="city-content" id="content-zhuhai">
+                    <div class="food-list">
+                        <div class="food-card">
+                            <div class="food-icon">🍜</div>
+                            <div class="food-content">
+                                <h3 class="restaurant-name">渔记茶餐厅（渔村店）</h3>
+                                <div class="restaurant-info">
+                                    <p class="info-item">
+                                        <span class="info-label">📍 地址：</span>
+                                        <span class="info-value">珠海市香洲区唐家湾镇唐家湾后环渔村三街 4 号</span>
+                                    </p>
+                                    <p class="info-item">
+                                        <span class="info-label">⭐ 评价：</span>
+                                        <span class="info-value">店铺的感觉有点像比较老旧的港式茶餐厅风格，味道很不错，但用餐环境相对一般，不买团购价格偏贵，停车不方便</span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="food-section">
-            <div class="city-header" onclick="toggleCity('shenzhen')">
-                <h2 class="section-title">
-                    <span class="city-icon">🏙️</span>
-                    深圳市
-                    <span class="toggle-icon" id="toggle-shenzhen">▼</span>
-                </h2>
-            </div>
-            <div class="city-content" id="content-shenzhen">
-                <div class="food-list">
-                    <div class="food-card">
-                        <div class="food-icon">🥟</div>
-                        <div class="food-content">
-                            <h3 class="restaurant-name">山水肠粉</h3>
-                            <div class="restaurant-info">
-                                <p class="info-item">
-                                    <span class="info-label">📍 地址：</span>
-                                    <span class="info-value">深圳市盐田区海景二路沙头角保税区31栋</span>
-                                </p>
-                                <p class="info-item">
-                                    <span class="info-label">⭐ 评价：</span>
-                                    <span class="info-value">肠粉皮很薄，口感不错，份量略小，一个人可能要大概吃3-4份</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="food-section">
-            <div class="city-header" onclick="toggleCity('zhuhai')">
-                <h2 class="section-title">
-                    <span class="city-icon">🏙️</span>
-                    珠海市
-                    <span class="toggle-icon" id="toggle-zhuhai">▼</span>
-                </h2>
-            </div>
-            <div class="city-content" id="content-zhuhai">
-                <div class="food-list">
-                    <div class="food-card">
-                        <div class="food-icon">🍜</div>
-                        <div class="food-content">
-                            <h3 class="restaurant-name">渔记茶餐厅（渔村店）</h3>
-                            <div class="restaurant-info">
-                                <p class="info-item">
-                                    <span class="info-label">📍 地址：</span>
-                                    <span class="info-value">珠海市香洲区唐家湾镇唐家湾后环渔村三街4号</span>
-                                </p>
-                                <p class="info-item">
-                                    <span class="info-label">⭐ 评价：</span>
-                                    <span class="info-value">店铺的感觉有点像比较老旧的港式茶餐厅风格，味道很不错，但用餐环境相对一般，不买团购价格偏贵，停车不方便</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="nav-links" style="margin-top: 30px;">
-            <a href="index.html" class="btn">
-                <span class="btn-icon">↩️</span>
-                返回首页
+    <!-- Back to Home -->
+    <section class="back-section">
+        <div class="section-container">
+            <a href="index.html" class="btn-secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"/>
+                    <polyline points="12 19 5 12 12 5"/>
+                </svg>
+                <span>返回首页</span>
             </a>
         </div>
+        <p class="disclaimer" style="text-align: center; color: var(--mute); font-size: 0.9rem; margin-top: 20px; font-style: italic;">所有餐厅推荐仅根据个人喜好</p>
+    </section>
 
-        <p class="disclaimer" style="text-align: center; color: #718096; font-size: 0.9rem; margin-top: 20px; font-style: italic;">所有餐厅推荐仅根据个人喜好</p>
-        
-        <p class="footer">Made with <code>❤️</code> and <code>Delicious Food</code></p>
-    </div>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="section-container">
+            <div class="footer-content">
+                <p class="footer-desc">Made with <code class="inline-code">❤️</code> and <code class="inline-code">Food</code></p>
+                <p class="footer-copy">nuo534202 &copy; <span id="year"></span> All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
         function toggleCity(cityId) {
             const content = document.getElementById('content-' + cityId);
             const toggleIcon = document.getElementById('toggle-' + cityId);

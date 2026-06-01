@@ -3,45 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>游戏合集</title>
+    <title>Games - nuo534202</title>
     <link rel="stylesheet" href="../style.css">
-    <script src="../bubbles.js"></script>
     <link rel="icon" href="../nuo534202.jpg" type="image/jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="nav-bar" id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <img src="../nuo534202.jpg" alt="" class="nav-avatar">
+                <span class="nav-logo-text">nuo534202</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-menu" id="navMenu">
+                <a href="../blog/index.html" class="nav-link">博客</a>
+                <a href="../repository/index.html" class="nav-link">代码仓库</a>
+                <a href="../games/index.html" class="nav-link active">游戏合集</a>
+                <a href="../food.html" class="nav-link">美食推荐</a>
+            </div>
+        </div>
+    </nav>
 
-    <div class="container repo-container">
-        <img src="../nuo534202.jpg" class="avatar" alt="nuo534202">
-        <h1>游戏合集</h1>
-        <p class="subtitle">Games</p>
-        <div class="decorative-line"></div>
-        
-        <p style="color: #4a5568; margin-bottom: 30px; font-size: 1rem; text-align: center; line-height: 1.8;">
-            欢迎来到游戏世界！这里有各种有趣和富有挑战性的游戏，等你来体验。
-        </p>
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="section-container">
+            <div class="page-header-content">
+                <h1 class="page-title">游戏合集</h1>
+                <p class="page-subtitle">Fun & Challenging Games</p>
+                <div class="page-header-line"></div>
+            </div>
+        </div>
+    </section>
 
-        <div class="repo-section">
-            <h2 class="section-title">精选游戏</h2>
-            <div class="repo-list">
-                <a href="sudoku-quest/index.html" class="link-card repo-card">
-                    <div class="card-icon">🔢</div>
-                    <div class="card-content">
+    <!-- Games List -->
+    <section class="games-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">精选游戏</h2>
+                <p class="section-desc">挑战你的思维，享受游戏的乐趣</p>
+            </div>
+            <div class="games-grid">
+                <a href="sudoku-quest/index.html" class="game-card">
+                    <div class="game-card-header">
+                        <div class="game-card-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <path d="M3 9h18"/>
+                                <path d="M3 15h18"/>
+                                <path d="M9 3v18"/>
+                                <path d="M15 3v18"/>
+                            </svg>
+                        </div>
+                        <div class="game-card-level">
+                            <span class="level-tag">5 Levels</span>
+                        </div>
+                    </div>
+                    <div class="game-card-content">
                         <h3>数独闯关</h3>
                         <p>挑战5个难度递增的关卡，每关10题，成为数独大师！</p>
                     </div>
-                    <div class="card-arrow">→</div>
+                    <div class="game-card-footer">
+                        <span class="game-card-play">
+                            <span>开始游戏</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                        </span>
+                    </div>
                 </a>
             </div>
         </div>
+    </section>
 
-        <div class="nav-links" style="margin-top: 30px;">
-            <a href="../index.html" class="btn">
-                <span class="btn-icon">↩️</span>
-                返回首页
+    <!-- Back to Home -->
+    <section class="back-section">
+        <div class="section-container">
+            <a href="../index.html" class="btn-secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"/>
+                    <polyline points="12 19 5 12 12 5"/>
+                </svg>
+                <span>返回首页</span>
             </a>
         </div>
-        
-        <p class="footer">玩得开心！</p>
-    </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="section-container">
+            <div class="footer-content">
+                <p class="footer-desc">Made with <code class="inline-code">❤️</code> and <code class="inline-code">Games</code></p>
+                <p class="footer-copy">nuo534202 &copy; <span id="year"></span> All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.game-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
