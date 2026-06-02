@@ -1795,7 +1795,7 @@ img {
     max-width: 95% !important;
     width: 1400px !important;
     padding: 40px 60px !important;
-    margin: 0 auto;
+    margin: 0 auto 3rem auto;
     text-align: left;
 }
 
