@@ -1036,12 +1036,17 @@ img {
     background: var(--canvas);
 }
 
+.featured-card + .featured-card {
+    margin-top: var(--space-lg);
+}
+
 .featured-card {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: var(--space-lg);
     max-width: 800px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     padding: var(--space-xl);
     background: var(--canvas-soft);
     border-radius: var(--radius-lg);
@@ -1072,6 +1077,14 @@ img {
     border: 1px solid var(--blue-100);
     border-radius: var(--radius-pill);
     flex-shrink: 0;
+    min-width: 80px;
+    height: 34px;
+    box-sizing: border-box;
+    justify-content: center;
+}
+
+.featured-card-badge[aria-hidden="true"] {
+    visibility: hidden;
 }
 
 .featured-dot {
@@ -1131,6 +1144,7 @@ img {
     color: var(--hairline-strong);
     transition: all var(--transition-base);
     flex-shrink: 0;
+    align-self: center;
 }
 
 .featured-card:hover .featured-card-arrow {
@@ -1949,6 +1963,10 @@ img {
         flex-direction: column;
         align-items: flex-start;
         gap: var(--space-md);
+    }
+
+    .featured-card-badge[aria-hidden="true"] {
+        display: none;
     }
 
     .games-grid {

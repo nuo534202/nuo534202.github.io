@@ -36,6 +36,7 @@
     <section class="page-header">
         <div class="section-container">
             <div class="page-header-content">
+                <span class="page-eyebrow">Notes & Thoughts</span>
                 <h1 class="page-title">其他</h1>
                 <p class="page-subtitle">Notes & Thoughts</p>
                 <div class="page-header-line"></div>
@@ -43,12 +44,47 @@
         </div>
     </section>
 
-    <!-- Empty State -->
+    <!-- Tag Filter -->
+    <section class="categories-section" style="padding-bottom: 0;">
+        <div class="section-container">
+            <div class="tech-tags" id="tag-filter" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 24px;">
+                <span class="tag tag-active" data-tag="all" onclick="filterByTag('all')" style="cursor: pointer;">All</span>
+                <span class="tag" data-tag="期末复习" onclick="filterByTag('期末复习')" style="cursor: pointer;">期末复习</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Post List -->
     <section class="featured-section">
         <div class="section-container">
-            <div class="section-header">
-                <h2 class="section-title">敬请期待</h2>
-                <p class="section-desc">更多内容正在路上...</p>
+            <div class="repos-list" id="post-list">
+                <a href="/se_final_review.html" class="repo-card post-card" data-tags="期末复习" target="_blank" rel="noopener noreferrer">
+                    <div class="repo-card-header">
+                        <div class="repo-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                <polyline points="10 9 9 9 8 9"/>
+                            </svg>
+                        </div>
+                        <span class="repo-card-lang">期末复习</span>
+                    </div>
+                    <div class="repo-card-content">
+                        <h3>软件工程期末复习资料</h3>
+                        <p>覆盖全部 16 个 Lecture 的核心知识点梳理与高频考点精讲</p>
+                    </div>
+                    <div class="repo-card-footer">
+                        <span class="repo-card-link">
+                            <span>阅读全文</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -93,6 +129,32 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
+        });
+
+        function filterByTag(tag) {
+            const cards = document.querySelectorAll('.post-card');
+            cards.forEach(card => {
+                const tags = card.getAttribute('data-tags');
+                if (tag === 'all' || (tags && tags.includes(tag))) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            document.querySelectorAll('#tag-filter .tag').forEach(t => t.classList.remove('tag-active'));
+            document.querySelector(`#tag-filter .tag[data-tag="${tag}"]`).classList.add('tag-active');
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.post-card').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>
