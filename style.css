@@ -1577,6 +1577,10 @@ img {
     line-height: 1.4;
 }
 
+.post-content > *:first-child {
+    margin-top: 0;
+}
+
 .post-content h1 {
     font-size: 2rem;
     border-bottom: 3px solid var(--blue-500);
@@ -1795,7 +1799,7 @@ img {
     max-width: 95% !important;
     width: 1400px !important;
     padding: 40px 60px !important;
-    margin: 0 auto 3rem auto;
+    margin: 3rem auto;
     text-align: left;
 }
 
