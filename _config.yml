@@ -6,7 +6,8 @@ url: "https://nuo534202.github.io"  # 你的 Pages 访问地址
 
 # theme: minima  # 已移除：站点使用完全自定义CSS，不需要Jekyll主题
 
-markdown: kramdown  # Jekyll 默认的 MD 解析器（无需修改）
+markdown: kramdown
+highlighter: rouge
 permalink: /:year/:month/:day/:title.html  # 博客文章的 URL 格式（可选）
 
 # Kramdown 配置 - 支持数学公式
