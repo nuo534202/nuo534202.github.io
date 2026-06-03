@@ -1679,7 +1679,7 @@ img {
     font-size: 12px;
     font-family: var(--font-sans);
     cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.1s ease;
     z-index: 2;
     line-height: 1;
     white-space: nowrap;
@@ -1688,11 +1688,13 @@ img {
 
 .code-copy-btn svg {
     flex-shrink: 0;
+    transition: opacity 0.2s ease;
 }
 
 .code-copy-btn .copy-label {
     font-size: 12px;
     line-height: 1;
+    transition: opacity 0.2s ease;
 }
 
 .code-copy-btn:hover {
@@ -1706,13 +1708,14 @@ img {
 }
 
 .code-copy-btn.copied {
-    background: rgba(46, 204, 113, 0.2);
-    border-color: rgba(46, 204, 113, 0.4);
+    background: rgba(46, 204, 113, 0.15);
+    border-color: rgba(46, 204, 113, 0.35);
     color: #2ecc71;
+    cursor: default;
 }
 
 .code-copy-btn.copied:hover {
-    background: rgba(46, 204, 113, 0.3);
+    background: rgba(46, 204, 113, 0.25);
     border-color: rgba(46, 204, 113, 0.5);
     color: #2ecc71;
 }
