@@ -973,7 +973,7 @@ Text Prompt (A cat in the snow) ────┤               Generation Model (
 |---|---|
 | Forward Process | 逐步加高斯噪声到纯噪声（x_t = √(ᾱ_t)x₀ + √(1-ᾱ_t)ε） |
 | Reverse Process | 逐步去噪（CNN 预测并减去噪声） |
-| Noise Predictor | 输入 (x_t, t)，输出 ε_pred，训练目标 ||ε_pred - ε||² |
+| Noise Predictor | 输入 (x_t, t)，输出 `ε_pred`，训练目标 `||(ε_pred - ε)||²` |
 | Stable Diffusion | Text Encoder + Latent Diffusion + Decoder |
 | FID | 真实图 vs 生成图特征的高斯分布距离（越小越好） |
 
