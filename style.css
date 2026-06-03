@@ -1686,15 +1686,41 @@ img {
     -webkit-tap-highlight-color: transparent;
 }
 
-.code-copy-btn svg {
+.code-copy-btn .copy-icons {
+    position: relative;
+    display: inline-flex;
+    width: 16px;
+    height: 16px;
     flex-shrink: 0;
-    transition: opacity 0.2s ease;
+}
+
+.code-copy-btn .copy-icons svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.25s ease;
+}
+
+.code-copy-btn .copy-icon {
+    opacity: 1;
+}
+
+.code-copy-btn .check-icon {
+    opacity: 0;
+}
+
+.code-copy-btn .copy-icons.show-check .copy-icon {
+    opacity: 0;
+}
+
+.code-copy-btn .copy-icons.show-check .check-icon {
+    opacity: 1;
 }
 
 .code-copy-btn .copy-label {
     font-size: 12px;
     line-height: 1;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.25s ease;
 }
 
 .code-copy-btn:hover {
@@ -1725,7 +1751,11 @@ img {
         padding: 4px 8px;
         gap: 3px;
     }
-    .code-copy-btn svg {
+    .code-copy-btn .copy-icons {
+        width: 14px;
+        height: 14px;
+    }
+    .code-copy-btn .copy-icons svg {
         width: 14px;
         height: 14px;
     }

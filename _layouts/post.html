@@ -127,26 +127,22 @@
         document.getElementById('year').textContent = new Date().getFullYear();
 
         // Add copy button to each code block
-        function createCopyBtn(container) {
-            if (container.querySelector('.code-copy-btn')) return;
+        function createCopyBtn(pre) {
+            if (pre.querySelector('.code-copy-btn')) return;
             var btn = document.createElement('button');
             btn.className = 'code-copy-btn';
             btn.setAttribute('aria-label', '复制代码');
-            btn.innerHTML = '<svg class="copy-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="check-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="20 6 9 17 4 12"/></svg><span class="copy-label">复制</span>';
-            container.appendChild(btn);
+            btn.innerHTML = '<span class="copy-icons"><svg class="copy-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="check-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="copy-label">复制</span>';
+            pre.appendChild(btn);
 
             btn.addEventListener('click', function() {
-                var code = container.querySelector('code');
-                var text = code ? code.textContent : container.textContent;
+                var code = pre.querySelector('code');
+                var text = code ? code.textContent : pre.textContent;
                 copyText(text, btn);
             });
         }
 
-        document.querySelectorAll('.post-content .highlight').forEach(createCopyBtn);
-        document.querySelectorAll('.post-content pre').forEach(function(pre) {
-            if (pre.closest('.highlight')) return;
-            createCopyBtn(pre);
-        });
+        document.querySelectorAll('.post-content pre').forEach(createCopyBtn);
 
         function copyText(text, btn) {
             if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -169,16 +165,13 @@
         function showCopied(btn) {
             btn.classList.add('copied');
             var label = btn.querySelector('.copy-label');
-            var copyIcon = btn.querySelector('.copy-icon');
-            var checkIcon = btn.querySelector('.check-icon');
+            var icons = btn.querySelector('.copy-icons');
             if (label) label.textContent = '已复制';
-            if (copyIcon) copyIcon.style.display = 'none';
-            if (checkIcon) checkIcon.style.display = '';
+            if (icons) icons.classList.add('show-check');
             setTimeout(function() {
                 btn.classList.remove('copied');
                 if (label) label.textContent = '复制';
-                if (copyIcon) copyIcon.style.display = '';
-                if (checkIcon) checkIcon.style.display = 'none';
+                if (icons) icons.classList.remove('show-check');
             }, 2000);
         }
     </script>
