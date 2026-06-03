@@ -200,7 +200,7 @@ head_i = Attention(X × W_Qi, X × W_Ki, X × W_Vi)
 ### GPT-3 详解
 
 - 自回归语言模型：生成下一个词，只能看**前面的词**
-- P(I love eating burgers) = P(I) × P(love|I) × P(eating|I,love) × P(burgers|I,love,eating)
+- `P(I love eating burgers) = P(I) × P(love|I) × P(eating|I,love) × P(burgers|I,love,eating)`
 - 使用 **Masked Self-Attention**：预测第 n 个词时，遮住 n 及之后的所有词
 
 ## 1.8 预训练 Pre-Training（Final Review 第 16-17 页）
@@ -342,7 +342,7 @@ p(x) = ∫ p(z) × p(x|z) dz
 ```
 
 - p(z)：先验分布（简单，如标准正态分布 N(0, I)）
-- p(x|z)：条件分布（复杂，用神经网络 p_θ(x|z) 表示）
+- `p(x|z)`：条件分布（复杂，用神经网络 `p_θ(x|z)` 表示）
 - p(x)：数据的边际分布
 
 ### 如何衡量分布的好坏？
@@ -423,7 +423,7 @@ c_i = exp(σ_i) × e_i + m_i       其中 e_i ~ N(0, 1)
 Loss = 重建误差 + 正则化项
 ```
 
-**1. 重建误差（Reconstruction Loss）**：||x - x'||²，和 Autoencoder 一样，让 decoder 输出接近输入
+**1. 重建误差（Reconstruction Loss）**：`||x - x'||²`，和 Autoencoder 一样，让 decoder 输出接近输入
 
 **2. 正则化项（Regularization Loss）**：
 
@@ -431,13 +431,13 @@ Loss = 重建误差 + 正则化项
 Σ_i (exp(σ_i) - (1 + σ_i) + m_i²)
 ```
 
-让 encoder 输出的分布 q(z|x) 接近先验分布 p(z) = N(0, I)
+让 encoder 输出的分布 `q(z|x)` 接近先验分布 `p(z) = N(0, I)`
 
 ### VAE 的数学推导（ELBO）
 
-**目标**：最大化对数似然 log p(x) = log ∫ p(z) × p(x|z) dz
+**目标**：最大化对数似然 `log p(x) = log ∫ p(z) × p(x|z) dz`
 
-但积分不好算 → 引入辅助分布 q_φ(z|x)（就是 encoder）
+但积分不好算 → 引入辅助分布 `q_φ(z|x)`（就是 encoder）
 
 经过推导得到 **ELBO（Evidence Lower Bound）**：
 ```
@@ -447,8 +447,8 @@ log p(x) ≥ E_{z~q}[log p(x|z)] - KL(q(z|x) || p(z))
 
 最大化 ELBO ⇔ **最小化：重建误差 + KL 散度**
 
-- **重建项**：从 q(z|x) 采样 z，通过 decoder 重建 x 的效果（L2 Loss）
-- **KL 散度项**：让 q(z|x) 接近标准正态先验 p(z)（正则化）
+- **重建项**：从 `q(z|x)` 采样 z，通过 decoder 重建 x 的效果（L2 Loss）
+- **KL 散度项**：让 `q(z|x)` 接近标准正态先验 `p(z)`（正则化）
 
 ### VAE 的问题（Final Review 相关）
 
@@ -563,14 +563,14 @@ Wasserstein 距离能反映 Generator 逐步靠近真实分布的过程，给训
 
 - 把生成的图片送入分类器
 - 好的生成图片 → 分类器能**高置信度**地分到某一类
-- 概率分布 **P(c|y) 越集中** → 视觉质量越高
+- 概率分布 **`P(c|y)`** 越集中 → 视觉质量越高
 
 ### 多样性评估 Diversity（第 36 页）
 
 **方法**：
 
-- 生成 N 张图片，分别用分类器得到每张的分类概率分布 P(c|yₙ)
-- 汇总得到整体分布：P_c = (1/N) × Σ P(c|yₙ)
+- 生成 N 张图片，分别用分类器得到每张的分类概率分布 `P(c|yₙ)`
+- 汇总得到整体分布：`P_c = (1/N) × Σ P(c|yₙ)`
 - P_c **越均匀** → 多样性越好（各类图片都有生成）
 
 ### Inception Score（IS）
