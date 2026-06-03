@@ -749,10 +749,13 @@ img {
     margin: 1.5rem 0;
     border-radius: 12px;
     overflow: hidden;
+    position: relative;
 }
 
 .post-content .highlight pre {
     margin: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .post-content .highlight .c,
@@ -1634,9 +1637,11 @@ img {
     padding: 1.5rem;
     border-radius: 12px;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     margin: 1.5rem 0;
     border: 1px solid #2d3748;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 .post-content code {
@@ -1656,6 +1661,49 @@ img {
     border-radius: 0;
     border: none;
     font-size: 0.95em;
+}
+
+/* Copy button for code blocks */
+.code-copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    color: #abb2bf;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-family: var(--font-sans);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s, background 0.2s, color 0.2s;
+    z-index: 2;
+    line-height: 1.4;
+}
+
+.post-content .highlight:hover .code-copy-btn,
+.code-copy-btn:focus {
+    opacity: 1;
+}
+
+.code-copy-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+}
+
+.code-copy-btn.copied {
+    background: rgba(39, 174, 96, 0.3);
+    border-color: rgba(39, 174, 96, 0.5);
+    color: #2ecc71;
+    opacity: 1;
+}
+
+/* Always show copy button on touch devices */
+@media (hover: none) {
+    .code-copy-btn {
+        opacity: 1;
+    }
 }
 
 .post-content ul,

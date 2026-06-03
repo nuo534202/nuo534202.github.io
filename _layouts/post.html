@@ -125,6 +125,64 @@
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Add copy button to each code block
+        document.querySelectorAll('.post-content .highlight').forEach(function(block) {
+            var btn = document.createElement('button');
+            btn.className = 'code-copy-btn';
+            btn.textContent = 'Copy';
+            btn.setAttribute('aria-label', 'Copy code');
+            block.appendChild(btn);
+
+            btn.addEventListener('click', function() {
+                var code = block.querySelector('code');
+                if (!code) return;
+                copyText(code.textContent, btn);
+            });
+        });
+
+        // Also handle plain <pre> blocks not inside .highlight
+        document.querySelectorAll('.post-content pre:not(.highlight pre)').forEach(function(pre) {
+            if (pre.parentElement.classList.contains('highlight')) return;
+            var btn = document.createElement('button');
+            btn.className = 'code-copy-btn';
+            btn.textContent = 'Copy';
+            btn.setAttribute('aria-label', 'Copy code');
+            pre.appendChild(btn);
+
+            btn.addEventListener('click', function() {
+                var code = pre.querySelector('code');
+                var text = code ? code.textContent : pre.textContent;
+                copyText(text, btn);
+            });
+        });
+
+        function copyText(text, btn) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(function() {
+                    showCopied(btn);
+                });
+            } else {
+                var textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showCopied(btn);
+            }
+        }
+
+        function showCopied(btn) {
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(function() {
+                btn.textContent = 'Copy';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
     </script>
 </body>
 </html>
