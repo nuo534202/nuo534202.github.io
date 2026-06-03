@@ -1,5 +1,8 @@
-# 软件工程 (Software Engineering) 期末复习资料
-
+---
+layout: post
+title: "软件工程 (Software Engineering) 期末复习资料"
+tags: [期末复习]
+---
 > 本资料覆盖全部 16 个 Lecture，包含每讲的核心知识点全面梳理、易错点深度分析和高频考点精讲。
 > **目标是：读完本资料后直接掌握期末考试所需要的全部知识点。**
 
