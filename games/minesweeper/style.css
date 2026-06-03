@@ -1,0 +1,389 @@
+/* ============================================
+   Minesweeper Game Styles
+   Design System Compliant
+   ============================================ */
+
+/* Game Section */
+.ms-game-section {
+    padding: var(--space-lg) 0 var(--space-2xl);
+    background: var(--canvas-soft);
+}
+
+/* Difficulty Bar */
+.ms-difficulty-bar {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+}
+
+.ms-diff-btn {
+    padding: 8px 20px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--mute);
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.ms-diff-btn:hover {
+    border-color: var(--blue-200);
+    color: var(--blue-600);
+    background: var(--blue-50);
+}
+
+.ms-diff-btn.active {
+    background: var(--blue-500);
+    color: white;
+    border-color: var(--blue-500);
+}
+
+/* Status Bar */
+.ms-status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 420px;
+    margin: 0 auto var(--space-md);
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--canvas);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--hairline);
+    box-shadow: var(--shadow-level-2);
+}
+
+.ms-status-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--blue-600);
+}
+
+.ms-status-value {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    min-width: 36px;
+    text-align: center;
+}
+
+.ms-reset-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--blue-50);
+    border: 2px solid var(--blue-200);
+    border-radius: var(--radius-full);
+    font-size: 22px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    line-height: 1;
+}
+
+.ms-reset-btn:hover {
+    background: var(--blue-100);
+    border-color: var(--blue-400);
+    transform: scale(1.1);
+}
+
+.ms-reset-btn:active {
+    transform: scale(0.95);
+}
+
+/* Board Wrap */
+.ms-board-wrap {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    padding: var(--space-xs);
+}
+
+/* Board */
+.ms-board {
+    display: inline-grid;
+    gap: 2px;
+    background: var(--hairline);
+    padding: 3px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-level-3);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Cell */
+.ms-cell {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background var(--transition-fast), transform 0.1s ease;
+    position: relative;
+}
+
+/* Unrevealed cell */
+.ms-cell.hidden {
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    box-shadow: inset 0 -2px 0 rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8);
+}
+
+.ms-cell.hidden:hover {
+    background: var(--blue-50);
+    border-color: var(--blue-200);
+}
+
+.ms-cell.hidden:active {
+    transform: scale(0.92);
+}
+
+/* Revealed cell */
+.ms-cell.revealed {
+    background: var(--canvas-soft-2);
+    border: 1px solid transparent;
+    cursor: default;
+}
+
+/* Number colors */
+.ms-cell.n1 { color: var(--blue-600); }
+.ms-cell.n2 { color: #16a34a; }
+.ms-cell.n3 { color: #dc2626; }
+.ms-cell.n4 { color: var(--blue-800); }
+.ms-cell.n5 { color: #991b1b; }
+.ms-cell.n6 { color: #0d9488; }
+.ms-cell.n7 { color: var(--ink); }
+.ms-cell.n8 { color: var(--mute); }
+
+/* Flag */
+.ms-cell.flagged::after {
+    content: '🚩';
+    font-size: 15px;
+}
+
+/* Mine */
+.ms-cell.mine-exploded {
+    background: #fecaca;
+    border-color: #fca5a5;
+}
+
+.ms-cell.mine-revealed {
+    background: var(--canvas-soft-2);
+}
+
+.ms-cell.mine-content {
+    font-size: 16px;
+    line-height: 1;
+}
+
+/* Wrong flag */
+.ms-cell.wrong-flag {
+    background: #fef3c7;
+    border-color: #fde68a;
+}
+
+/* Controls */
+.ms-controls {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+    flex-wrap: wrap;
+}
+
+.ms-ctrl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 8px 16px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--mute);
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-decoration: none;
+}
+
+.ms-ctrl-btn:hover {
+    border-color: var(--blue-200);
+    color: var(--blue-600);
+    background: var(--blue-50);
+}
+
+.ms-ctrl-btn.active {
+    background: var(--blue-500);
+    color: white;
+    border-color: var(--blue-500);
+}
+
+/* Modal */
+.ms-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+}
+
+.ms-modal.show {
+    display: flex;
+}
+
+.ms-modal-content {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--space-2xl);
+    text-align: left;
+    position: relative;
+    max-width: 480px;
+    width: 90%;
+    box-shadow: var(--shadow-level-5);
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.ms-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    color: var(--mute);
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.ms-modal-close:hover {
+    color: var(--ink);
+    background: var(--canvas-soft);
+}
+
+.ms-modal-title {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    font-size: 24px;
+    color: var(--ink);
+    font-weight: 700;
+}
+
+/* Help sections */
+.ms-help-section {
+    margin-bottom: var(--space-lg);
+}
+
+.ms-help-section h4 {
+    font-size: 16px;
+    color: var(--blue-600);
+    margin-bottom: var(--space-xs);
+}
+
+.ms-help-section p {
+    font-size: 14px;
+    color: var(--body);
+    line-height: 1.6;
+}
+
+.ms-help-section ul {
+    font-size: 14px;
+    color: var(--body);
+    line-height: 1.6;
+    padding-left: 20px;
+}
+
+.ms-help-section li {
+    margin-bottom: 4px;
+}
+
+/* Result modal */
+.ms-modal-result {
+    text-align: center;
+}
+
+.ms-result-icon {
+    font-size: 56px;
+    margin-bottom: var(--space-md);
+    line-height: 1;
+}
+
+.ms-result-text {
+    font-size: 16px;
+    color: var(--mute);
+    margin-bottom: var(--space-lg);
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+    .ms-status-bar {
+        max-width: 100%;
+    }
+
+    .ms-cell {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+
+    .ms-cell.flagged::after {
+        font-size: 13px;
+    }
+
+    .ms-cell.mine-content {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ms-cell {
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
+    }
+
+    .ms-cell.flagged::after {
+        font-size: 11px;
+    }
+
+    .ms-cell.mine-content {
+        font-size: 12px;
+    }
+
+    .ms-diff-btn {
+        padding: 6px 14px;
+        font-size: 13px;
+    }
+
+    .ms-controls {
+        gap: var(--space-xs);
+    }
+
+    .ms-ctrl-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}

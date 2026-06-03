@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扫雷 - Minesweeper</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="../../nuo534202.jpg" type="image/jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="nav-bar" id="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo">
+                <img src="../../nuo534202.jpg" alt="" class="nav-avatar">
+                <span class="nav-logo-text">nuo534202</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-menu" id="navMenu">
+                <a href="../../blog/index.html" class="nav-link">博客</a>
+                <a href="../../repository/index.html" class="nav-link">代码仓库</a>
+                <a href="../../games/index.html" class="nav-link active">游戏合集</a>
+                <a href="../../food.html" class="nav-link">美食推荐</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header" style="padding-bottom: var(--space-lg);">
+        <div class="section-container">
+            <div class="page-header-content">
+                <h1 class="page-title">扫雷</h1>
+                <p class="page-subtitle">Minesweeper</p>
+                <div class="page-header-line"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ms-game-section">
+        <div class="section-container">
+            <!-- Difficulty Selector -->
+            <div class="ms-difficulty-bar">
+                <button class="ms-diff-btn active" data-difficulty="beginner">初级</button>
+                <button class="ms-diff-btn" data-difficulty="intermediate">中级</button>
+                <button class="ms-diff-btn" data-difficulty="expert">高级</button>
+            </div>
+
+            <!-- Status Bar -->
+            <div class="ms-status-bar">
+                <div class="ms-status-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    <span class="ms-status-value" id="ms-timer">000</span>
+                </div>
+                <button class="ms-reset-btn" id="ms-reset" title="新游戏">
+                    <span id="ms-face">😊</span>
+                </button>
+                <div class="ms-status-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/>
+                        <path d="M8.5 2h7"/>
+                    </svg>
+                    <span class="ms-status-value" id="ms-mines">010</span>
+                </div>
+            </div>
+
+            <!-- Game Board -->
+            <div class="ms-board-wrap">
+                <div class="ms-board" id="ms-board"></div>
+            </div>
+
+            <!-- Controls -->
+            <div class="ms-controls">
+                <button class="ms-ctrl-btn" id="ms-flag-toggle" title="切换标旗模式">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+                        <line x1="4" y1="22" x2="4" y2="15"/>
+                    </svg>
+                    <span>标旗模式</span>
+                </button>
+                <a href="../index.html" class="ms-ctrl-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"/>
+                        <polyline points="12 19 5 12 12 5"/>
+                    </svg>
+                    <span>返回游戏列表</span>
+                </a>
+                <button class="ms-ctrl-btn" id="ms-help-btn" title="帮助">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    <span>帮助</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Help Modal -->
+    <div class="ms-modal" id="ms-help-modal">
+        <div class="ms-modal-content">
+            <button class="ms-modal-close" id="ms-help-close">&times;</button>
+            <h3 class="ms-modal-title">游戏帮助</h3>
+
+            <div class="ms-help-section">
+                <h4>🎯 游戏目标</h4>
+                <p>揭开所有不含地雷的方格，同时避免踩到地雷。</p>
+            </div>
+
+            <div class="ms-help-section">
+                <h4>📖 基本操作</h4>
+                <ul>
+                    <li><strong>左键点击</strong> — 揭开方格</li>
+                    <li><strong>右键点击</strong> — 标记/取消地雷旗帜</li>
+                    <li><strong>点击数字</strong> — 若周围旗帜数等于该数字，自动揭开剩余方格</li>
+                    <li>移动端可使用<strong>标旗模式</strong>按钮切换点击行为</li>
+                </ul>
+            </div>
+
+            <div class="ms-help-section">
+                <h4>🔢 数字含义</h4>
+                <p>数字表示周围8个方格中隐藏的地雷数量，利用数字推理地雷位置。</p>
+            </div>
+
+            <div class="ms-help-section">
+                <h4>🏆 难度说明</h4>
+                <ul>
+                    <li><strong>初级</strong> — 9×9 网格，10颗地雷</li>
+                    <li><strong>中级</strong> — 16×16 网格，40颗地雷</li>
+                    <li><strong>高级</strong> — 30×16 网格，99颗地雷</li>
+                </ul>
+            </div>
+
+            <div class="ms-help-section">
+                <h4>💡 提示</h4>
+                <ul>
+                    <li>第一次点击保证安全</li>
+                    <li>空白方格会自动展开相邻空白区域</li>
+                    <li>合理使用旗帜标记可疑位置</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Win/Lose Modal -->
+    <div class="ms-modal" id="ms-result-modal">
+        <div class="ms-modal-content ms-modal-result">
+            <button class="ms-modal-close" id="ms-result-close">&times;</button>
+            <div class="ms-result-icon" id="ms-result-icon">🎉</div>
+            <h3 class="ms-modal-title" id="ms-result-title">恭喜过关！</h3>
+            <p class="ms-result-text" id="ms-result-text">用时：000秒</p>
+            <button class="btn-primary" id="ms-result-retry">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                </svg>
+                <span>再来一局</span>
+            </button>
+        </div>
+    </div>
+
+    <footer class="site-footer" style="padding-top: var(--space-lg);">
+        <div class="section-container">
+            <div class="footer-content">
+                <p class="footer-desc">Made with <code class="inline-code">❤️</code> and <code class="inline-code">Mines</code></p>
+                <p class="footer-copy">nuo534202 &copy; <span id="year"></span> All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
