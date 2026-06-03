@@ -1668,41 +1668,81 @@ img {
     position: absolute;
     top: 8px;
     right: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 6px;
-    color: #abb2bf;
-    padding: 4px 10px;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 5px 10px;
     font-size: 12px;
     font-family: var(--font-sans);
     cursor: pointer;
     opacity: 0;
-    transition: opacity 0.2s, background 0.2s, color 0.2s;
+    transition: opacity 0.25s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
     z-index: 2;
-    line-height: 1.4;
+    line-height: 1;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.code-copy-btn svg {
+    flex-shrink: 0;
+}
+
+.code-copy-btn .copy-label {
+    font-size: 12px;
+    line-height: 1;
 }
 
 .post-content .highlight:hover .code-copy-btn,
+.post-content pre:hover .code-copy-btn,
 .code-copy-btn:focus {
     opacity: 1;
 }
 
 .code-copy-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: #e2e8f0;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.code-copy-btn:active {
+    transform: scale(0.95);
 }
 
 .code-copy-btn.copied {
-    background: rgba(39, 174, 96, 0.3);
-    border-color: rgba(39, 174, 96, 0.5);
+    background: rgba(46, 204, 113, 0.2);
+    border-color: rgba(46, 204, 113, 0.4);
     color: #2ecc71;
     opacity: 1;
+}
+
+.code-copy-btn.copied:hover {
+    background: rgba(46, 204, 113, 0.3);
+    border-color: rgba(46, 204, 113, 0.5);
+    color: #2ecc71;
 }
 
 /* Always show copy button on touch devices */
 @media (hover: none) {
     .code-copy-btn {
-        opacity: 1;
+        opacity: 0.7;
+    }
+}
+
+@media (max-width: 480px) {
+    .code-copy-btn {
+        padding: 4px 8px;
+        gap: 3px;
+    }
+    .code-copy-btn svg {
+        width: 14px;
+        height: 14px;
+    }
+    .code-copy-btn .copy-label {
+        font-size: 11px;
     }
 }
 
