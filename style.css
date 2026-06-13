@@ -937,14 +937,17 @@ img {
 }
 
 .categories-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: var(--space-lg);
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
 .category-card {
+    width: calc((1200px - 4 * var(--space-lg)) / 3);
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     padding: var(--space-xl);
@@ -1325,14 +1328,17 @@ img {
 }
 
 .repos-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: var(--space-lg);
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
 .repo-card {
+    width: calc((1200px - 4 * var(--space-lg)) / 3);
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     padding: var(--space-xl);
@@ -1992,11 +1998,25 @@ img {
 
     .categories-grid,
     .repos-list {
-        grid-template-columns: 1fr;
+        /* 2列布局 */
+    }
+
+    .category-card,
+    .repo-card {
+        width: calc((1200px - var(--space-lg)) / 2);
     }
 }
 
 @media (max-width: 767px) {
+    .categories-grid,
+    .repos-list {
+        /* 1列布局 */
+    }
+
+    .category-card,
+    .repo-card {
+        width: 100%;
+    }
     .nav-toggle {
         display: flex;
     }
