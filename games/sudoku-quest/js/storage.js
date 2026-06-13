@@ -174,9 +174,7 @@ class GameStorage {
     }
 
     isLevelUnlocked(level) {
-        const completed = this.getCompletedLevels();
-        if (level === 1) return true;
-        return completed.includes(level - 1);
+        return true;
     }
 
     isPuzzleCompleted(level, puzzleIndex) {

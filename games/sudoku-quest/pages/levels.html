@@ -30,8 +30,8 @@
 
         <main class="main page-container" style="max-width: 650px; width: 100%; margin: 0 auto;">
             <div class="level-select-header">
-                <h2>选择关卡</h2>
-                <p class="level-hint">完成当前关卡所有题目解锁下一关</p>
+                <h2>选择难度</h2>
+                <p class="level-hint">点击难度卡片直接开始游戏</p>
             </div>
             <div id="level-cards" class="level-cards">
                 <div class="loading-placeholder">
@@ -45,15 +45,6 @@
                 </a>
             </div>
         </main>
-
-        <div id="puzzle-select-modal" class="modal">
-            <div class="modal-content">
-                <h3 id="puzzle-select-title">第1关 - 入门</h3>
-                <div id="puzzle-grid" class="puzzle-grid">
-                </div>
-                <button id="close-puzzle-modal" class="btn-close" aria-label="关闭">×</button>
-            </div>
-        </div>
 
         <!-- Help Modal -->
         <div id="help-modal" class="modal">
@@ -149,9 +140,7 @@
             },
             
             isLevelUnlocked: function(level) {
-                var completed = this.getCompletedLevels();
-                if (level === 1) return true;
-                return completed.indexOf(level - 1) > -1;
+                return true;
             },
             
             getBestTime: function(level, puzzleIndex) {
@@ -217,6 +206,15 @@
                 }
             }
             
+            function getDifficultyLabel(difficulty) {
+                switch (difficulty) {
+                    case 'easy': return '简单';
+                    case 'medium': return '中等';
+                    case 'hard': return '困难';
+                    default: return '未知';
+                }
+            }
+            
             function renderLevelCards() {
                 console.log('renderLevelCards() called');
                 
@@ -261,17 +259,16 @@
                         '<div class="level-number">' + i + '</div>' +
                         '<div class="level-name">' + config.name + '</div>' +
                         '<div class="level-stars">' + stars + '</div>' +
-                        '<div class="level-puzzles">' + config.puzzles + '题</div>' +
-                        (!isUnlocked ? '<div class="lock-icon">🔒</div>' : '') +
+                        '<div class="level-difficulty">' + getDifficultyLabel(config.difficulty) + '</div>' +
                         (isCompleted ? '<div class="check-icon">✓</div>' : '');
                     
                     if (isUnlocked) {
                         card.style.cursor = 'pointer';
-                        card.onclick = (function(level, cfg) {
+                        card.onclick = (function(level) {
                             return function() {
-                                showPuzzleSelect(level, cfg);
+                                window.location.href = 'game.html?level=' + level + '&puzzle=0';
                             };
-                        })(i, config);
+                        })(i);
                     }
                     
                     container.appendChild(card);
@@ -279,51 +276,6 @@
                 
                 console.log('Rendered', container.children.length, 'cards');
             }
-            
-            function showPuzzleSelect(level, config) {
-                console.log('showPuzzleSelect:', level, config);
-                currentLevel = level;
-                var modal = document.getElementById('puzzle-select-modal');
-                var title = document.getElementById('puzzle-select-title');
-                title.textContent = '第' + level + '关 - ' + config.name;
-                
-                var grid = document.getElementById('puzzle-grid');
-                grid.innerHTML = '';
-                
-                for (var i = 0; i < config.puzzles; i++) {
-                    var btn = document.createElement('div');
-                    btn.className = 'puzzle-btn';
-                    
-                    var bestTime = storage.getBestTime(level, i);
-                    if (bestTime) {
-                        var mins = Math.floor(bestTime / 60);
-                        var secs = bestTime % 60;
-                        btn.innerHTML = '<span>' + (i + 1) + '</span><small>' + mins + ':' + String(secs).padStart(2, '0') + '</small>';
-                    } else {
-                        btn.textContent = i + 1;
-                    }
-                    
-                    btn.onclick = (function(puzzleIndex) {
-                        return function() {
-                            window.location.href = 'game.html?level=' + currentLevel + '&puzzle=' + puzzleIndex;
-                        };
-                    })(i);
-                    
-                    grid.appendChild(btn);
-                }
-                
-                modal.classList.add('active');
-            }
-            
-            document.getElementById('close-puzzle-modal').onclick = function() {
-                document.getElementById('puzzle-select-modal').classList.remove('active');
-            };
-            
-            document.getElementById('puzzle-select-modal').onclick = function(e) {
-                if (e.target.id === 'puzzle-select-modal') {
-                    this.classList.remove('active');
-                }
-            };
             
             console.log('Calling renderLevelCards...');
             renderLevelCards();

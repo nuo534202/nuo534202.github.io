@@ -678,6 +678,29 @@ body {
     animation: shake 0.3s ease;
 }
 
+.cell.completed {
+    color: var(--accent-green);
+    background: #f0fdf4;
+    animation: cellCelebrate 0.6s ease;
+}
+
+@keyframes cellCelebrate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); background: #bbf7d0; }
+    100% { transform: scale(1); }
+}
+
+.sudoku-board.celebrating {
+    animation: boardCelebrate 1.2s ease;
+}
+
+@keyframes boardCelebrate {
+    0%, 100% { transform: scale(1); box-shadow: var(--shadow-lg); }
+    25% { transform: scale(1.02); box-shadow: 0 0 0 8px rgba(5, 150, 105, 0.3), var(--shadow-lg); }
+    50% { transform: scale(1.04); box-shadow: 0 0 0 16px rgba(5, 150, 105, 0.2), var(--shadow-lg); }
+    75% { transform: scale(1.02); box-shadow: 0 0 0 8px rgba(5, 150, 105, 0.3), var(--shadow-lg); }
+}
+
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-4px); }
@@ -850,11 +873,17 @@ body {
 .victory-title {
     font-family: 'Segoe UI', sans-serif;
     font-size: 36px;
-    margin: 16px 0;
+    margin: 16px 0 8px;
     background: linear-gradient(135deg, var(--accent-green), #157347);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+.victory-subtitle {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
 }
 
 .victory-details {

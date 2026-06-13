@@ -170,7 +170,8 @@
         <div id="victory-modal" class="modal">
             <div class="modal-content">
                 <div class="victory-icon">🏆</div>
-                <h3 class="victory-title">恭喜过关!</h3>
+                <h3 class="victory-title">恭喜通关！</h3>
+                <p class="victory-subtitle">太棒了！你成功解开了这道数独！</p>
                 <div class="victory-details">
                     <div class="victory-level">
                         <span class="label">关卡</span>
@@ -181,19 +182,9 @@
                         <span id="victory-time" class="value">00:00</span>
                     </div>
                 </div>
-                <div class="victory-stats">
-                    <div class="stat">
-                        <span id="total-levels" class="stat-num">1</span>
-                        <span class="stat-text">已完成关卡</span>
-                    </div>
-                    <div class="stat">
-                        <span id="total-puzzles" class="stat-num">10</span>
-                        <span class="stat-text">已完成题目</span>
-                    </div>
-                </div>
                 <div class="modal-buttons">
-                    <button id="continue-btn" class="btn-primary">下一关</button>
-                    <button class="btn-secondary" onclick="confirmExit()">返回首页</button>
+                    <button id="continue-btn" class="btn-primary">再来一次</button>
+                    <button class="btn-secondary" onclick="confirmExit()">返回关卡</button>
                 </div>
             </div>
         </div>
@@ -287,6 +278,59 @@
                     console.error('Clear puzzle error:', e);
                     return false;
                 }
+            },
+            
+            saveBestTime: function(level, puzzleIndex, time) {
+                try {
+                    var existing = this.load() || {};
+                    if (!existing.bestTimes) existing.bestTimes = {};
+                    var key = level + '-' + puzzleIndex;
+                    if (!existing.bestTimes[key] || time < existing.bestTimes[key]) {
+                        existing.bestTimes[key] = time;
+                        return this.save(existing);
+                    }
+                    return false;
+                } catch (e) {
+                    console.error('Save best time error:', e);
+                    return false;
+                }
+            },
+            
+            getTotalStats: function() {
+                try {
+                    var data = this.load();
+                    var completed = data && data.completedLevels ? data.completedLevels : [];
+                    var puzzlesCompleted = 0;
+                    if (data && data.bestTimes) {
+                        for (var key in data.bestTimes) {
+                            if (data.bestTimes.hasOwnProperty(key)) {
+                                puzzlesCompleted++;
+                            }
+                        }
+                    }
+                    return {
+                        completedLevels: completed.length,
+                        totalPuzzles: puzzlesCompleted
+                    };
+                } catch (e) {
+                    console.error('Get stats error:', e);
+                    return { completedLevels: 0, totalPuzzles: 0 };
+                }
+            },
+            
+            saveLevelProgress: function(level, completed) {
+                try {
+                    var existing = this.load() || {};
+                    if (!existing.completedLevels) existing.completedLevels = [];
+                    if (completed && existing.completedLevels.indexOf(level) === -1) {
+                        existing.completedLevels.push(level);
+                        existing.completedLevels.sort(function(a, b) { return a - b; });
+                    }
+                    return this.save(existing);
+                } catch (e) {
+                    console.error('Save level progress error:', e);
+                    return false;
+                }
             }
         };
     </script>
@@ -318,10 +362,10 @@
                 
                 var config = game.getLevelConfig(currentLevel);
                 var result = generator.generate(config.difficulty);
-                
+
                 game.currentPuzzle = result.puzzle;
                 game.currentSolution = result.solution;
-                game.playerGrid = Array(9).fill(null).map(function() { return Array(9).fill(0); });
+                game.playerGrid = result.puzzle.map(function(row) { return row.slice(); });
                 game.notes = Array(9).fill(null).map(function() { return Array(9).fill(null).map(function() { return []; }); });
                 game.errors = 0;
                 game.startTime = Date.now();
@@ -335,6 +379,10 @@
                 
                 game.startTimer(updateTimer);
                 isTimerRunning = true;
+                
+                // Expose for debugging and testing
+                window.__game = game;
+                window.__inputNumber = inputNumber;
             }
             
             function renderBoard() {
@@ -409,6 +457,8 @@
             function inputNumber(num) {
                 game.inputNumber(num);
                 renderBoard();
+                // 立即刷新信息面板，确保错误计数与 UI 同步
+                updateInfoPanel();
                 saveCurrentState();
                 
                 if (game.checkComplete()) {
@@ -492,16 +542,24 @@
                 
                 var config = game.getLevelConfig(currentLevel);
                 
-                if (currentPuzzleIndex < config.puzzles - 1) {
-                    showCompleteModal(time);
-                } else {
-                    storage.saveLevelProgress(currentLevel, true);
-                    
-                    if (currentLevel < 5) {
-                        storage.saveLevelProgress(currentLevel + 1, false);
+                // Visual celebration before showing modal
+                celebrateCompletion();
+                
+                setTimeout(function() {
+                    if (currentPuzzleIndex < config.puzzles - 1) {
+                        showCompleteModal(time);
+                    } else {
+                        storage.saveLevelProgress(currentLevel, true);
+                        showVictoryModal(time, config.name);
                     }
-                    
-                    showVictoryModal(time, config.name);
+                }, 600);
+            }
+            
+            function celebrateCompletion() {
+                var board = document.getElementById('sudoku-board');
+                if (board) {
+                    board.classList.add('celebrating');
+                    setTimeout(function() { board.classList.remove('celebrating'); }, 1500);
                 }
             }
             
@@ -534,20 +592,12 @@
                 var secs = time % 60;
                 document.getElementById('victory-time').textContent = minutes + ':' + String(secs).padStart(2, '0');
                 
-                var stats = storage.getTotalStats();
-                document.getElementById('total-levels').textContent = stats.completedLevels;
-                document.getElementById('total-puzzles').textContent = stats.totalPuzzles;
-                
                 var continueBtn = document.getElementById('continue-btn');
-                if (currentLevel >= 5) {
-                    continueBtn.textContent = '返回关卡';
+                if (continueBtn) {
                     continueBtn.onclick = function() {
-                        window.location.href = 'levels.html';
-                    };
-                } else {
-                    continueBtn.textContent = '下一关';
-                    continueBtn.onclick = function() {
-                        window.location.href = 'game.html?level=' + (currentLevel + 1) + '&puzzle=0';
+                        modal.classList.remove('active');
+                        storage.clearPuzzleState(currentLevel, currentPuzzleIndex);
+                        window.location.href = 'game.html?level=' + currentLevel + '&puzzle=0';
                     };
                 }
                 

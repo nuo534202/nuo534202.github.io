@@ -134,10 +134,43 @@ class SudokuGenerator {
     }
 
     validate(puzzle, solution) {
+        // First: every non-zero cell must match the known solution
         for (let i = 0; i < 9; i++) {
             for (let j = 0; j < 9; j++) {
                 if (puzzle[i][j] !== 0 && puzzle[i][j] !== solution[i][j]) {
                     return false;
+                }
+            }
+        }
+        // Second: full grid must satisfy sudoku rules (no duplicate digits in any row/col/box)
+        return this.isValidSudoku(puzzle);
+    }
+
+    isValidSudoku(grid) {
+        for (let i = 0; i < 9; i++) {
+            const row = new Set();
+            const col = new Set();
+            for (let j = 0; j < 9; j++) {
+                const r = grid[i][j];
+                const c = grid[j][i];
+                if (r === 0) continue;
+                if (r < 1 || r > 9 || row.has(r)) return false;
+                row.add(r);
+                if (c === 0) continue;
+                if (c < 1 || c > 9 || col.has(c)) return false;
+                col.add(c);
+            }
+        }
+        for (let br = 0; br < 3; br++) {
+            for (let bc = 0; bc < 3; bc++) {
+                const box = new Set();
+                for (let i = 0; i < 3; i++) {
+                    for (let j = 0; j < 3; j++) {
+                        const v = grid[br * 3 + i][bc * 3 + j];
+                        if (v === 0) continue;
+                        if (box.has(v)) return false;
+                        box.add(v);
+                    }
                 }
             }
         }
