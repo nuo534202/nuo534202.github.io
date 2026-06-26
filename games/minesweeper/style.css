@@ -19,6 +19,7 @@
 
 .ms-diff-btn {
     padding: 8px 20px;
+    min-height: 40px;
     font-family: var(--font-sans);
     font-size: 14px;
     font-weight: 500;
@@ -30,16 +31,23 @@
     transition: all var(--transition-fast);
 }
 
+@media (pointer: coarse) {
+    .ms-diff-btn {
+        min-height: 44px;
+        padding: 10px 22px;
+    }
+}
+
 .ms-diff-btn:hover {
-    border-color: var(--blue-200);
-    color: var(--blue-600);
-    background: var(--blue-50);
+    border-color: var(--link);
+    color: var(--link);
+    background: var(--accent-blue-soft);
 }
 
 .ms-diff-btn.active {
-    background: var(--blue-500);
+    background: linear-gradient(135deg, var(--link) 0%, var(--accent-violet-icon) 100%);
     color: white;
-    border-color: var(--blue-500);
+    border-color: transparent;
 }
 
 /* Status Bar */
@@ -60,7 +68,7 @@
     display: flex;
     align-items: center;
     gap: var(--space-xs);
-    color: var(--blue-600);
+    color: var(--link);
 }
 
 .ms-status-value {
@@ -78,8 +86,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--blue-50);
-    border: 2px solid var(--blue-200);
+    background: var(--accent-amber-soft);
+    border: 2px solid var(--warning);
     border-radius: var(--radius-full);
     font-size: 22px;
     cursor: pointer;
@@ -88,8 +96,8 @@
 }
 
 .ms-reset-btn:hover {
-    background: var(--blue-100);
-    border-color: var(--blue-400);
+    background: var(--warning-soft);
+    border-color: var(--accent-amber-icon);
     transform: scale(1.1);
 }
 
@@ -156,13 +164,13 @@
     cursor: default;
 }
 
-/* Number colors */
-.ms-cell.n1 { color: var(--blue-600); }
+/* Number colors — brand palette */
+.ms-cell.n1 { color: var(--link); }
 .ms-cell.n2 { color: #16a34a; }
-.ms-cell.n3 { color: #dc2626; }
-.ms-cell.n4 { color: var(--blue-800); }
-.ms-cell.n5 { color: #991b1b; }
-.ms-cell.n6 { color: #0d9488; }
+.ms-cell.n3 { color: var(--error); }
+.ms-cell.n4 { color: var(--accent-violet-icon); }
+.ms-cell.n5 { color: var(--accent-amber-icon); }
+.ms-cell.n6 { color: var(--accent-cyan-icon); }
 .ms-cell.n7 { color: var(--ink); }
 .ms-cell.n8 { color: var(--mute); }
 
@@ -207,6 +215,7 @@
     align-items: center;
     gap: var(--space-xs);
     padding: 8px 16px;
+    min-height: 40px;
     font-family: var(--font-sans);
     font-size: 13px;
     font-weight: 500;
@@ -219,16 +228,23 @@
     text-decoration: none;
 }
 
+@media (pointer: coarse) {
+    .ms-ctrl-btn {
+        min-height: 44px;
+        padding: 10px 18px;
+    }
+}
+
 .ms-ctrl-btn:hover {
-    border-color: var(--blue-200);
-    color: var(--blue-600);
-    background: var(--blue-50);
+    border-color: var(--link);
+    color: var(--link);
+    background: var(--accent-blue-soft);
 }
 
 .ms-ctrl-btn.active {
-    background: var(--blue-500);
+    background: linear-gradient(135deg, var(--link) 0%, var(--accent-violet-icon) 100%);
     color: white;
-    border-color: var(--blue-500);
+    border-color: transparent;
 }
 
 /* Modal */
@@ -264,8 +280,8 @@
     position: absolute;
     top: 12px;
     right: 12px;
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     background: transparent;
     border: none;
     color: var(--mute);
@@ -277,6 +293,13 @@
     align-items: center;
     justify-content: center;
     line-height: 1;
+}
+
+@media (pointer: coarse) {
+    .ms-modal-close {
+        width: 44px;
+        height: 44px;
+    }
 }
 
 .ms-modal-close:hover {
@@ -299,7 +322,7 @@
 
 .ms-help-section h4 {
     font-size: 16px;
-    color: var(--blue-600);
+    color: var(--link);
     margin-bottom: var(--space-xs);
 }
 
@@ -360,8 +383,8 @@
 
 @media (max-width: 480px) {
     .ms-cell {
-        width: 24px;
-        height: 24px;
+        width: 26px;
+        height: 26px;
         font-size: 11px;
     }
 
@@ -385,5 +408,34 @@
     .ms-ctrl-btn {
         padding: 6px 12px;
         font-size: 12px;
+    }
+}
+
+@media (pointer: coarse) {
+    .ms-cell {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .ms-cell.flagged::after {
+        font-size: 15px;
+    }
+
+    .ms-cell.mine-content {
+        font-size: 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .ms-cell.hidden:active,
+    .ms-reset-btn:active {
+        transform: none;
     }
 }
