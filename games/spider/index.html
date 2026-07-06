@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蜘蛛纸牌 - Spider Solitaire</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="../../nuo534202.jpg" type="image/jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="nav-bar" id="navbar">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo">
+                <img src="../../nuo534202.jpg" alt="" class="nav-avatar">
+                <span class="nav-logo-text">nuo534202</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-menu" id="navMenu">
+                <a href="../../blog/index.html" class="nav-link">博客</a>
+                <a href="../../repository/index.html" class="nav-link">代码仓库</a>
+                <a href="../../games/index.html" class="nav-link active">游戏合集</a>
+                <a href="../../food.html" class="nav-link">美食推荐</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header" style="padding-bottom: var(--space-lg);">
+        <div class="section-container">
+            <div class="page-header-content">
+                <h1 class="page-title">蜘蛛纸牌</h1>
+                <p class="page-subtitle">Spider Solitaire</p>
+                <div class="page-header-line"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sp-game-section">
+        <div class="section-container">
+            <!-- Difficulty Selector -->
+            <div class="sp-difficulty-bar" role="tablist" aria-label="难度">
+                <button class="sp-diff-btn active" data-suits="1" role="tab" aria-selected="true">1 花色</button>
+                <button class="sp-diff-btn" data-suits="2" role="tab" aria-selected="false">2 花色</button>
+                <button class="sp-diff-btn" data-suits="4" role="tab" aria-selected="false">4 花色</button>
+            </div>
+
+            <!-- Status Bar -->
+            <div class="sp-status-bar" role="status" aria-live="polite">
+                <div class="sp-status-item" title="用时">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    <span class="sp-status-value" id="sp-timer">000</span>
+                </div>
+                <div class="sp-status-item" title="步数">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="9 11 12 14 22 4"/>
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                    </svg>
+                    <span class="sp-status-value" id="sp-moves">000</span>
+                </div>
+                <div class="sp-status-item sp-status-foundations" title="已完成序列">
+                    <span class="sp-status-label">完成</span>
+                    <span class="sp-status-value"><span id="sp-foundations">0</span>/8</span>
+                </div>
+                <button class="sp-icon-btn" id="sp-undo" title="撤销" aria-label="撤销">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="1 4 1 10 7 10"/>
+                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                    </svg>
+                </button>
+                <button class="sp-icon-btn" id="sp-new-game" title="新游戏" aria-label="新游戏">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="23 4 23 10 17 10"/>
+                        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Foundations + Stock Row -->
+            <div class="sp-top-row">
+                <div class="sp-foundations" id="sp-foundations-row" aria-label="完成区">
+                    <!-- 8 foundation slots rendered by JS -->
+                </div>
+                <button class="sp-stock" id="sp-stock" title="发牌" aria-label="发牌">
+                    <span class="sp-stock-badge" id="sp-stock-badge" aria-hidden="true">
+                        <span class="sp-stock-badge-count" id="sp-stock-count">5</span>
+                        <svg class="sp-stock-badge-empty" width="16" height="16" viewBox="0 0 24 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="2" y="2" width="20" height="28" rx="4"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+
+            <!-- Tableau -->
+            <div class="sp-tableau-wrap">
+                <div class="sp-tableau" id="sp-tableau" role="grid" aria-label="牌桌">
+                    <!-- 10 columns rendered by JS -->
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="sp-controls">
+                <a href="../index.html" class="sp-ctrl-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="19" y1="12" x2="5" y2="12"/>
+                        <polyline points="12 19 5 12 12 5"/>
+                    </svg>
+                    <span>返回游戏列表</span>
+                </a>
+                <button class="sp-ctrl-btn" id="sp-help-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    <span>帮助</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Help Modal -->
+    <div class="sp-modal" id="sp-help-modal" role="dialog" aria-modal="true" aria-labelledby="sp-help-title">
+        <div class="sp-modal-content">
+            <button class="sp-modal-close" id="sp-help-close" aria-label="关闭">&times;</button>
+            <h3 class="sp-modal-title" id="sp-help-title">游戏帮助</h3>
+
+            <div class="sp-help-section">
+                <h4>🎯 游戏目标</h4>
+                <p>把所有 104 张牌按同花色从 K 到 A 组成 8 个完整序列，移入完成区即获胜。</p>
+            </div>
+
+            <div class="sp-help-section">
+                <h4>📖 基本操作</h4>
+                <ul>
+                    <li><strong>点击一张牌</strong>选中它和下方能一起移动的牌组</li>
+                    <li><strong>再点击目标列</strong>即可移动；点击同一组可取消选择</li>
+                    <li><strong>点击发牌堆</strong>给每列发一张新牌（所有列必须非空）</li>
+                    <li>再次点击已选中的牌可取消选择</li>
+                </ul>
+            </div>
+
+            <div class="sp-help-section">
+                <h4>🃏 移动规则</h4>
+                <ul>
+                    <li>同花色降序连续的牌可作为一组一起移动</li>
+                    <li>单张牌可放到比它大 1 点的任意花色牌上</li>
+                    <li>空列可放入任意单张牌或同花色降序牌组</li>
+                    <li>翻开的牌下若还有暗牌，会自动翻开</li>
+                </ul>
+            </div>
+
+            <div class="sp-help-section">
+                <h4>🏆 难度说明</h4>
+                <ul>
+                    <li><strong>1 花色</strong> — 全部黑桃，适合入门</li>
+                    <li><strong>2 花色</strong> — 黑桃 + 红心，进阶挑战</li>
+                    <li><strong>4 花色</strong> — 四种花色，大师难度</li>
+                </ul>
+            </div>
+
+            <div class="sp-help-section">
+                <h4>💡 提示</h4>
+                <ul>
+                    <li>优先翻开发暗牌，露出更多可用牌</li>
+                    <li>尽早凑出同花色降序长串，方便整体移动</li>
+                    <li>发牌前尽量清空短列，避免被卡住</li>
+                    <li>随时按 <kbd>U</kbd> 撤销、<kbd>N</kbd> 新局</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Modal -->
+    <div class="sp-modal" id="sp-result-modal" role="dialog" aria-modal="true" aria-labelledby="sp-result-title">
+        <div class="sp-modal-content sp-modal-result">
+            <button class="sp-modal-close" id="sp-result-close" aria-label="关闭">&times;</button>
+            <div class="sp-result-icon" id="sp-result-icon">🎉</div>
+            <h3 class="sp-modal-title" id="sp-result-title">恭喜过关！</h3>
+            <p class="sp-result-text" id="sp-result-text">用时 000 秒 · 步数 000</p>
+            <button class="btn-primary" id="sp-result-retry">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                </svg>
+                <span>再来一局</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="sp-toast" id="sp-toast" role="status" aria-live="polite"></div>
+
+    <footer class="site-footer" style="padding-top: var(--space-lg);">
+        <div class="section-container">
+            <div class="footer-content">
+                <p class="footer-desc">Made with <code class="inline-code">❤️</code> and <code class="inline-code">Cards</code></p>
+                <p class="footer-copy">nuo534202 &copy; <span id="year"></span> All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

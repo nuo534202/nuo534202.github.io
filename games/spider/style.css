@@ -1,0 +1,992 @@
+/* ============================================
+   Spider Solitaire Game Styles
+   Design-system compliant (DESIGN.md)
+   Signature: cards as monospaced tokens
+   ============================================ */
+
+/* Game Section */
+.sp-game-section {
+    padding: var(--space-lg) 0 var(--space-2xl);
+    background: var(--canvas-soft);
+}
+
+/* Difficulty Bar — mirrors .ms-difficulty-bar */
+.sp-difficulty-bar {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+    flex-wrap: wrap;
+}
+
+.sp-diff-btn {
+    padding: 8px 20px;
+    min-height: 40px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--mute);
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+@media (pointer: coarse) {
+    .sp-diff-btn {
+        min-height: 44px;
+        padding: 10px 22px;
+    }
+}
+
+.sp-diff-btn:hover {
+    border-color: var(--link);
+    color: var(--link);
+    background: var(--accent-blue-soft);
+}
+
+.sp-diff-btn.active {
+    background: linear-gradient(135deg, var(--link) 0%, var(--accent-violet-icon) 100%);
+    color: white;
+    border-color: transparent;
+}
+
+/* Status Bar — pill-shaped, mirrors minesweeper */
+.sp-status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    max-width: 720px;
+    margin: 0 auto var(--space-md);
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--canvas);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--hairline);
+    box-shadow: var(--shadow-level-2);
+    flex-wrap: wrap;
+}
+
+.sp-status-item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--link);
+    font-family: var(--font-mono);
+}
+
+.sp-status-label {
+    font-size: 11px;
+    color: var(--mute);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sp-status-value {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    min-width: 28px;
+    text-align: center;
+}
+
+.sp-status-foundations .sp-status-value {
+    color: var(--accent-violet-icon);
+}
+
+.sp-icon-btn {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--canvas);
+    color: var(--ink);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    line-height: 1;
+}
+
+@media (pointer: coarse) {
+    .sp-icon-btn {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+.sp-icon-btn:hover {
+    border-color: var(--link);
+    color: var(--link);
+    background: var(--accent-blue-soft);
+    transform: scale(1.05);
+}
+
+.sp-icon-btn:active {
+    transform: scale(0.95);
+}
+
+.sp-icon-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Top row: foundations + stock */
+.sp-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    max-width: 1000px;
+    margin: 0 auto var(--space-md);
+    flex-wrap: wrap;
+}
+
+.sp-foundations {
+    display: flex;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+}
+
+.sp-foundation {
+    position: relative;
+    width: 52px;
+    height: 72px;
+    border-radius: var(--radius-sm);
+    border: 1px dashed var(--hairline-strong);
+    background: var(--canvas-soft-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--mute);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    transition: all var(--transition-base);
+    overflow: hidden;
+}
+
+.sp-foundation.filled {
+    border-style: solid;
+    border-color: transparent;
+    background: linear-gradient(180deg, #1f1f1f 0%, var(--ink) 100%);
+    color: var(--on-primary);
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.12),
+        0 4px 8px -2px rgba(0, 0, 0, 0.10),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+/* Top color band — encodes which suit was collected */
+.sp-foundation-band {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--card-color, var(--ink));
+}
+
+.sp-foundation.suit-s .sp-foundation-band { background: #d4d4d4; }      /* Spades — light grey on ink */
+.sp-foundation.suit-h .sp-foundation-band { background: #D32F2F; }       /* Hearts — poker red */
+.sp-foundation.suit-d .sp-foundation-band { background: #D32F2F; }       /* Diamonds — poker red */
+.sp-foundation.suit-c .sp-foundation-band { background: #d4d4d4; }      /* Clubs — light grey on ink */
+
+.sp-foundation-suit {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.92);
+    font-family: var(--font-mono);
+}
+
+.sp-foundation-rank {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 0.5px;
+}
+
+/* Foundation completion sweep — the only place the brand gradient appears */
+.sp-foundation.completing {
+    animation: foundationSweep 0.7s ease-out;
+}
+
+@keyframes foundationSweep {
+    0% {
+        box-shadow: 0 0 0 0 rgba(121, 40, 202, 0);
+        transform: scale(1);
+    }
+    40% {
+        box-shadow:
+            0 0 0 4px rgba(121, 40, 202, 0.25),
+            0 8px 24px -4px rgba(235, 54, 127, 0.35);
+        transform: scale(1.08);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(121, 40, 202, 0);
+        transform: scale(1);
+    }
+}
+
+/* Stock deal button — clickable deck of face-down cards */
+.sp-stock {
+    position: relative;
+    width: 54px;
+    height: 76px;
+    border-radius: var(--radius-sm);
+    border: none;
+    background: linear-gradient(160deg, #235c90 0%, #163f67 100%);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.18s ease;
+    box-shadow:
+        /* stepped underlayers */
+        1px 1px 0 0 #1a4b78,
+        2px 2px 0 0 #1a4b78,
+        3px 3px 0 0 #16406a,
+        4px 4px 0 0 #16406a,
+        /* depth shadow */
+        0 6px 10px -2px rgba(0, 0, 0, 0.22),
+        0 2px 4px rgba(0, 0, 0, 0.14),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.10);
+    z-index: 1;
+}
+
+/* Ornate card-back face */
+.sp-stock::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border-radius: 4px;
+    background:
+        radial-gradient(circle at center, transparent 0%, transparent 55%, rgba(255, 255, 255, 0.10) 56%, rgba(255, 255, 255, 0.10) 60%, transparent 61%),
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 25%, transparent 40%),
+        radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.10) 0%, transparent 14%),
+        radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.10) 0%, transparent 14%),
+        radial-gradient(circle at 15% 85%, rgba(255, 255, 255, 0.10) 0%, transparent 14%),
+        radial-gradient(circle at 85% 85%, rgba(255, 255, 255, 0.10) 0%, transparent 14%),
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.04) 0px, rgba(255, 255, 255, 0.04) 1px, transparent 1px, transparent 7px),
+        repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.04) 0px, rgba(255, 255, 255, 0.04) 1px, transparent 1px, transparent 7px),
+        linear-gradient(160deg, #235c90 0%, #163f67 100%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.sp-stock:hover:not(:disabled) {
+    transform: translateY(-5px) scale(1.04);
+    box-shadow:
+        1px 1px 0 0 #1a4b78,
+        2px 2px 0 0 #1a4b78,
+        3px 3px 0 0 #16406a,
+        4px 4px 0 0 #16406a,
+        0 12px 20px -4px rgba(0, 0, 0, 0.28),
+        0 4px 8px rgba(0, 0, 0, 0.16),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.10);
+}
+
+.sp-stock:active:not(:disabled) {
+    transform: translateY(-1px) scale(0.96);
+    box-shadow:
+        1px 1px 0 0 #1a4b78,
+        2px 2px 0 0 #1a4b78,
+        3px 3px 0 0 #16406a,
+        0 3px 6px rgba(0, 0, 0, 0.18),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.10);
+}
+
+.sp-stock:disabled {
+    cursor: not-allowed;
+    filter: grayscale(0.8) brightness(0.9);
+    opacity: 0.55;
+    box-shadow:
+        1px 1px 0 0 #1a4b78,
+        2px 2px 0 0 #1a4b78,
+        0 2px 4px rgba(0, 0, 0, 0.10);
+}
+
+/* Circular count badge — larger, high-contrast, always readable */
+.sp-stock-badge {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    min-width: 28px;
+    height: 28px;
+    padding: 0 6px;
+    border-radius: 9999px;
+    background: rgba(0, 0, 0, 0.85);
+    border: 2px solid #ffffff;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', var(--font-sans);
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.sp-stock-badge.low {
+    background: #F44336;
+}
+
+.sp-stock-badge.empty {
+    background: #ffffff;
+    color: #607d8b;
+    border-color: #cfd8dc;
+}
+
+.sp-stock-badge-empty {
+    display: none;
+    width: 16px;
+    height: 16px;
+}
+
+.sp-stock-badge.empty .sp-stock-badge-count {
+    display: none;
+}
+
+.sp-stock-badge.empty .sp-stock-badge-empty {
+    display: block;
+}
+
+.sp-stock-count {
+    display: none;
+}
+
+/* Tableau wrap — allow horizontal scroll on small screens */
+.sp-tableau-wrap {
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: var(--space-xs) var(--space-xs) var(--space-md);
+    -webkit-overflow-scrolling: touch;
+}
+
+.sp-tableau {
+    display: grid;
+    grid-template-columns: repeat(10, var(--card-w, 52px));
+    gap: var(--space-xs);
+    justify-content: center;
+    min-width: min-content;
+    margin: 0 auto;
+}
+
+/* Column */
+.sp-col {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 120px;
+    padding-bottom: var(--space-lg);
+}
+
+/* Empty column drop target */
+.sp-col.empty::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--card-w, 52px);
+    height: var(--card-h, 72px);
+    border-radius: var(--radius-sm);
+    border: 1px dashed var(--hairline-strong);
+    background: var(--canvas-soft-2);
+}
+
+.sp-col.drop-target::before {
+    border-color: var(--link);
+    background: var(--accent-blue-soft);
+}
+
+.sp-col.drop-target {
+    animation: colPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes colPulse {
+    0%, 100% { background: transparent; }
+    50% { background: rgba(0, 112, 243, 0.04); }
+}
+
+/* ============================================
+   The Card — signature element
+   Monospaced token treatment: rank + suit glyph
+   Enhanced: paper texture, suit color band, dual-corner rank
+   ============================================ */
+.sp-card {
+    --card-w: 52px;
+    --card-h: 72px;
+    width: var(--card-w);
+    height: var(--card-h);
+    border-radius: var(--radius-sm);
+    box-shadow:
+        0 1px 1px rgba(0, 0, 0, 0.04),
+        0 1px 2px rgba(0, 0, 0, 0.06),
+        inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow var(--transition-fast);
+    /* Overlap: each card after first shows only top region */
+    margin-top: -50px;
+    font-family: var(--font-mono);
+    overflow: hidden;
+}
+
+.sp-card:first-child {
+    margin-top: 0;
+}
+
+/* Face-down: classic blue ornate card-back inspired by solitaire.online */
+.sp-card.face-down {
+    background: linear-gradient(160deg, #235c90 0%, #163f67 100%);
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.14),
+        0 2px 4px rgba(0, 0, 0, 0.10),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.10);
+    cursor: default;
+}
+
+.sp-card.face-down::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 4px;
+    background:
+        /* outer ring */
+        radial-gradient(circle at center, transparent 0%, transparent 55%, rgba(255, 255, 255, 0.10) 56%, rgba(255, 255, 255, 0.10) 60%, transparent 61%),
+        /* central medallion */
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 25%, transparent 40%),
+        /* corner rosettes */
+        radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.10) 0%, transparent 14%),
+        radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.10) 0%, transparent 14%),
+        radial-gradient(circle at 15% 85%, rgba(255, 255, 255, 0.10) 0%, transparent 14%),
+        radial-gradient(circle at 85% 85%, rgba(255, 255, 255, 0.10) 0%, transparent 14%),
+        /* fine diamond lattice */
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.04) 0px, rgba(255, 255, 255, 0.04) 1px, transparent 1px, transparent 7px),
+        repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.04) 0px, rgba(255, 255, 255, 0.04) 1px, transparent 1px, transparent 7px),
+        /* base blue */
+        linear-gradient(160deg, #235c90 0%, #163f67 100%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Overlap for face-down is smaller */
+.sp-card.face-down + .sp-card {
+    margin-top: -60px;
+}
+
+.sp-card.face-down + .sp-card.face-down {
+    margin-top: -64px;
+}
+
+/* Face-up card content: rank in corner, suit large in body */
+.sp-card.face-up {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 6px 4px;
+}
+
+/* Top suit color band — 3px strip encoding the suit at a glance */
+.sp-card.face-up::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--card-color, var(--ink));
+    opacity: 0.92;
+}
+
+/* Bottom-right inverted rank — traditional card corner echo.
+   Hidden on small screens to avoid crowding. */
+.sp-card.face-up::after {
+    content: attr(data-rank-label);
+    position: absolute;
+    bottom: 4px;
+    right: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--card-color, var(--ink));
+    opacity: 0.45;
+    transform: rotate(180deg);
+    pointer-events: none;
+}
+
+.sp-card-rank {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--card-color, var(--ink));
+    align-self: flex-start;
+    z-index: 1;
+}
+
+.sp-card-suit {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--card-color, var(--ink));
+    opacity: 0.95;
+    pointer-events: none;
+}
+
+/* Suit colors — standard poker palette (Pantone 186C ≈ #D32F2F, Pantone Black 6 ≈ #212121) */
+.sp-card.suit-s { --card-color: #212121; }   /* Spades — black */
+.sp-card.suit-h { --card-color: #D32F2F; }   /* Hearts — red */
+.sp-card.suit-d { --card-color: #D32F2F; }   /* Diamonds — red */
+.sp-card.suit-c { --card-color: #212121; }   /* Clubs — black */
+
+/* Selected state — lifted + link-tinted border */
+.sp-card.selected {
+    transform: translateY(-4px);
+    box-shadow:
+        0 4px 12px -2px rgba(0, 112, 243, 0.25),
+        inset 0 0 0 2px var(--link);
+    z-index: 10;
+}
+
+/* Movable hover cue */
+.sp-card.face-up.movable:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 3px 8px -2px rgba(0, 0, 0, 0.12),
+        inset 0 0 0 1px var(--hairline-strong);
+}
+
+.sp-card.selected.movable:hover {
+    transform: translateY(-6px);
+}
+
+.sp-card:active {
+    transform: scale(0.98);
+}
+
+/* Drag ghost */
+.sp-card.dragging {
+    opacity: 0.4;
+}
+
+/* Just-placed flash */
+.sp-card.placed {
+    animation: cardPlaced 0.3s ease-out;
+}
+
+@keyframes cardPlaced {
+    0% { box-shadow: 0 0 0 0 rgba(0, 112, 243, 0); }
+    50% { box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.18), inset 0 0 0 1px var(--hairline); }
+    100% { box-shadow: 0 1px 1px rgba(0, 0, 0, 0.06), inset 0 0 0 1px var(--hairline); }
+}
+
+/* Controls — mirrors .ms-controls */
+.sp-controls {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.sp-ctrl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 8px 16px;
+    min-height: 40px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--mute);
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-decoration: none;
+}
+
+@media (pointer: coarse) {
+    .sp-ctrl-btn {
+        min-height: 44px;
+        padding: 10px 18px;
+    }
+}
+
+.sp-ctrl-btn:hover {
+    border-color: var(--link);
+    color: var(--link);
+    background: var(--accent-blue-soft);
+}
+
+/* Modal — mirrors .ms-modal */
+.sp-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+    padding: var(--space-md);
+}
+
+.sp-modal.show {
+    display: flex;
+}
+
+.sp-modal-content {
+    background: var(--canvas);
+    border-radius: var(--radius-xl);
+    padding: var(--space-2xl);
+    text-align: left;
+    position: relative;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: var(--shadow-level-5);
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.sp-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    color: var(--mute);
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+@media (pointer: coarse) {
+    .sp-modal-close {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+.sp-modal-close:hover {
+    color: var(--ink);
+    background: var(--canvas-soft);
+}
+
+.sp-modal-title {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    font-size: 24px;
+    color: var(--ink);
+    font-weight: 600;
+    letter-spacing: -0.6px;
+}
+
+.sp-help-section {
+    margin-bottom: var(--space-lg);
+}
+
+.sp-help-section h4 {
+    font-size: 16px;
+    color: var(--link);
+    margin-bottom: var(--space-xs);
+    font-weight: 600;
+}
+
+.sp-help-section p {
+    font-size: 14px;
+    color: var(--body);
+    line-height: 1.6;
+}
+
+.sp-help-section ul {
+    font-size: 14px;
+    color: var(--body);
+    line-height: 1.6;
+    padding-left: 20px;
+}
+
+.sp-help-section li {
+    margin-bottom: 4px;
+}
+
+.sp-help-section kbd {
+    display: inline-block;
+    background: var(--canvas);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    border: 1px solid var(--hairline);
+    box-shadow: 0 1px 0 var(--hairline);
+}
+
+.sp-modal-result {
+    text-align: center;
+}
+
+.sp-result-icon {
+    font-size: 56px;
+    margin-bottom: var(--space-md);
+    line-height: 1;
+}
+
+.sp-result-text {
+    font-size: 16px;
+    color: var(--mute);
+    margin-bottom: var(--space-lg);
+    font-family: var(--font-mono);
+}
+
+/* Toast — short feedback for invalid moves */
+.sp-toast {
+    position: fixed;
+    left: 50%;
+    bottom: var(--space-3xl);
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--on-primary);
+    padding: 10px 18px;
+    border-radius: var(--radius-pill);
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: var(--shadow-level-4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 1100;
+    max-width: 90vw;
+}
+
+.sp-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 900px) {
+    .sp-tableau {
+        grid-template-columns: repeat(10, 44px);
+        gap: 6px;
+    }
+
+    .sp-card {
+        --card-w: 44px;
+        --card-h: 62px;
+    }
+
+    .sp-card.face-down + .sp-card {
+        margin-top: -52px;
+    }
+
+    .sp-card.face-down + .sp-card.face-down {
+        margin-top: -56px;
+    }
+
+    .sp-card-rank {
+        font-size: 12px;
+    }
+
+    .sp-card-suit {
+        font-size: 18px;
+    }
+
+    .sp-card.face-up::after {
+        font-size: 10px;
+    }
+
+    .sp-foundation,
+    .sp-stock {
+        width: 44px;
+        height: 62px;
+    }
+
+    .sp-foundation-suit {
+        font-size: 20px;
+    }
+
+    .sp-stock-count {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 600px) {
+    .sp-status-bar {
+        gap: var(--space-sm);
+        padding: var(--space-xs) var(--space-md);
+    }
+
+    .sp-status-value {
+        font-size: 14px;
+    }
+
+    .sp-top-row {
+        justify-content: center;
+        gap: var(--space-sm);
+    }
+
+    .sp-foundations {
+        justify-content: center;
+    }
+
+    .sp-tableau {
+        grid-template-columns: repeat(10, 38px);
+        gap: 4px;
+    }
+
+    .sp-card {
+        --card-w: 38px;
+        --card-h: 54px;
+    }
+
+    .sp-card.face-down + .sp-card {
+        margin-top: -44px;
+    }
+
+    .sp-card.face-down + .sp-card.face-down {
+        margin-top: -48px;
+    }
+
+    .sp-card-rank {
+        font-size: 11px;
+    }
+
+    .sp-card-suit {
+        font-size: 16px;
+    }
+
+    /* Hide bottom-right rank echo on small screens to avoid crowding */
+    .sp-card.face-up::after {
+        display: none;
+    }
+
+    .sp-foundation,
+    .sp-stock {
+        width: 38px;
+        height: 54px;
+    }
+
+    .sp-foundation-suit {
+        font-size: 16px;
+    }
+
+    .sp-foundation-rank {
+        font-size: 9px;
+        top: 4px;
+        right: 4px;
+    }
+
+    .sp-stock-count {
+        font-size: 15px;
+    }
+
+    .sp-stock-label {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 420px) {
+    .sp-tableau {
+        grid-template-columns: repeat(10, 32px);
+        gap: 3px;
+    }
+
+    .sp-card {
+        --card-w: 32px;
+        --card-h: 46px;
+    }
+
+    .sp-card.face-down + .sp-card {
+        margin-top: -36px;
+    }
+
+    .sp-card.face-down + .sp-card.face-down {
+        margin-top: -40px;
+    }
+
+    .sp-card-rank {
+        font-size: 10px;
+    }
+
+    .sp-card-suit {
+        font-size: 13px;
+    }
+
+    .sp-foundation,
+    .sp-stock {
+        width: 32px;
+        height: 46px;
+    }
+
+    .sp-foundation-suit {
+        font-size: 14px;
+    }
+
+    .sp-foundation-rank {
+        display: none;
+    }
+
+    .sp-stock-count {
+        font-size: 13px;
+    }
+}
+
+/* Touch targets: increase tap area on coarse pointers */
+@media (pointer: coarse) {
+    .sp-card {
+        cursor: pointer;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .sp-card:active,
+    .sp-icon-btn:active,
+    .sp-stock:active {
+        transform: none;
+    }
+
+    .sp-card.selected {
+        transform: none;
+    }
+}
