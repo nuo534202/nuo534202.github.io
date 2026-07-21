@@ -147,96 +147,17 @@
         </div>
     </section>
 
-    <!-- Featured Post -->
-    <section class="featured-section">
+    <!-- AI Frontier Daily -->
+    <section class="ai-news-section">
         <div class="section-container">
             <div class="section-header">
-                <h2 class="section-title">精选文章</h2>
+                <span class="page-eyebrow">Daily Digest</span>
+                <h2 class="section-title">AI 前沿日报</h2>
+                <p class="section-desc">每日精选 AI 行业重要新闻、模型发布与深度分析</p>
             </div>
-            <a href="/aigc_final_review.html" class="featured-card" target="_blank" rel="noopener noreferrer">
-                <div class="featured-card-content">
-                    <h3>人工智能生成内容 (AIGC) 期末复习资料</h3>
-                    <p>覆盖 Transformer、MoE、VAE、GAN、Diffusion Model 等核心知识点梳理与高频考点精讲</p>
-                    <div class="featured-card-meta">
-                        <span class="featured-tag">期末复习</span>
-                        <span class="featured-date">2026-06-03</span>
-                    </div>
-                </div>
-                <div class="featured-card-arrow">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"/>
-                        <polyline points="12 5 19 12 12 19"/>
-                    </svg>
-                </div>
-            </a>
-            <a href="/se_final_review.html" class="featured-card" target="_blank" rel="noopener noreferrer">
-                <div class="featured-card-content">
-                    <h3>软件工程期末复习资料</h3>
-                    <p>覆盖全部 16 个 Lecture 的核心知识点梳理与高频考点精讲</p>
-                    <div class="featured-card-meta">
-                        <span class="featured-tag">期末复习</span>
-                        <span class="featured-date">2026-06-03</span>
-                    </div>
-                </div>
-                <div class="featured-card-arrow">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"/>
-                        <polyline points="12 5 19 12 12 19"/>
-                    </svg>
-                </div>
-            </a>
-            <a href="/lanqiao2025_provincial_cpp.html" class="featured-card" target="_blank" rel="noopener noreferrer">
-                <div class="featured-card-content">
-                    <h3>2025 蓝桥杯省赛 C++ 题解</h3>
-                    <p>题目分析、思路与代码全收录</p>
-                    <div class="featured-card-meta">
-                        <span class="featured-tag">蓝桥杯</span>
-                        <span class="featured-date">2025-04-13</span>
-                    </div>
-                </div>
-                <div class="featured-card-arrow">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"/>
-                        <polyline points="12 5 19 12 12 19"/>
-                    </svg>
-                </div>
-            </a>
-            <a href="/docker_advanced_4.html" class="featured-card featured-card-latest" target="_blank" rel="noopener noreferrer">
-                <div class="featured-card-badge">
-                    <span class="featured-dot"></span>
-                    <span>Latest</span>
-                </div>
-                <div class="featured-card-content">
-                    <h3>进阶 4 —— Docker Compose 容器编排</h3>
-                    <p>多容器应用定义与一键编排部署</p>
-                    <div class="featured-card-meta">
-                        <span class="featured-tag">Docker</span>
-                        <span class="featured-date">2026-07-06</span>
-                    </div>
-                </div>
-                <div class="featured-card-arrow">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"/>
-                        <polyline points="12 5 19 12 12 19"/>
-                    </svg>
-                </div>
-            </a>
-            <a href="/leetcode_1_10.html" class="featured-card" target="_blank" rel="noopener noreferrer">
-                <div class="featured-card-content">
-                    <h3>LeetCode 1-10 个人题解</h3>
-                    <p>1-10 的思路分析与完整代码</p>
-                    <div class="featured-card-meta">
-                        <span class="featured-tag">LeetCode</span>
-                        <span class="featured-date">2025-05-20</span>
-                    </div>
-                </div>
-                <div class="featured-card-arrow">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"/>
-                        <polyline points="12 5 19 12 12 19"/>
-                    </svg>
-                </div>
-            </a>
+            <div class="ai-news-list" id="aiNewsList" aria-live="polite">
+                <div class="ai-news-loading">正在加载日报…</div>
+            </div>
         </div>
     </section>
 
@@ -290,9 +211,108 @@
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        document.querySelectorAll('.category-card, .featured-card').forEach(el => {
+        document.querySelectorAll('.category-card, .featured-card, .ai-news-card').forEach(el => {
             observer.observe(el);
         });
+
+        // AI News: render reports in-memory, newest first
+        (function renderAiNews() {
+            const container = document.getElementById('aiNewsList');
+            if (!container) return;
+
+            // Each report: { date: 'YYYY-MM-DD', url, title, tag?, highlights: [string,...] }
+            const AI_NEWS_REPORTS = [
+                {
+                    date: '2026-07-21',
+                    url: '/2026-07-21-ai_news.html',
+                    title: '2026-07-21 AI 新闻汇总',
+                    tag: 'AI 日报',
+                    highlights: [
+                        'Cursor Agent Swarm 用 4 小时从零重建 SQLite 引擎',
+                        'Moonshot AI 发布 Kimi Work 桌面级 AI 智能体',
+                        'OpenAI 披露长期自主模型失控事件',
+                        '美团开源 LongCat-2.0 万亿参数 MoE 模型',
+                        'Stratechery 长文分析「中国模型的恐惧」'
+                    ]
+                },
+                {
+                    date: '2026-07-20',
+                    url: '/2026-07-20-ai_news.html',
+                    title: '2026-07-20 AI 新闻汇总',
+                    tag: 'AI 日报',
+                    highlights: [
+                        'Hugging Face 遭全自主 AI Agent 入侵',
+                        'Claude Fable 找到 85 年悬案 Jacobian 反例',
+                        'GPT-5.6 以 $25 成本发现 WordPress 预认证 RCE',
+                        'Qwen 3.8 对垒 Kimi K3，K3 算力告急暂停新用户',
+                        'Claude Code 底层引擎迁移至 Rust 版 Bun'
+                    ]
+                },
+                {
+                    date: '2026-07-19',
+                    url: '/2026-07-19-ai_news.html',
+                    title: '2026-07-19 AI 新闻汇总',
+                    tag: 'AI 日报',
+                    highlights: [
+                        'GPT-5.6 Sol 用 148 分钟关闭 30 年凸优化难题',
+                        'Moonshot AI 发布 Kimi K3：迄今最大开源权重模型',
+                        'AI Coding 赛道三强齐发：GPT-5.6 / Grok 4.5 / Muse Spark 1.1',
+                        'Fable 5 vs GPT-5.6 Sol NP-Hard 问题实战对比',
+                        'AI Coding 工具集中安全加固，AsyncAPI 供应链攻击敲响警钟'
+                    ]
+                }
+            ];
+
+            const ARROW_SVG = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+
+            function escapeHtml(s) {
+                return String(s).replace(/[&<>"']/g, (c) => ({
+                    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+                }[c]));
+            }
+
+            function parseDate(d) {
+                const t = Date.parse(d);
+                return Number.isNaN(t) ? 0 : t;
+            }
+
+            function renderCard(report) {
+                const parts = report.date.split('-');
+                const day = parts[2] || '';
+                const monthLabel = parts[0] + '-' + (parts[1] || '');
+
+                const highlights = (report.highlights || []).map((h) =>
+                    '<li>' + escapeHtml(h) + '</li>'
+                ).join('');
+
+                const count = (report.highlights || []).length;
+                const countText = count > 0 ? (count + ' 条要点') : '查看详情';
+                const tag = escapeHtml(report.tag || 'AI 日报');
+
+                return (
+                    '<a class="ai-news-card" href="' + escapeHtml(report.url) + '" target="_blank" rel="noopener noreferrer">' +
+                        '<div class="ai-news-card-date" aria-hidden="true">' +
+                            '<span class="ai-news-card-date-day">' + escapeHtml(day.replace(/^0/, '')) + '</span>' +
+                            '<span class="ai-news-card-date-month">' + escapeHtml(monthLabel) + '</span>' +
+                        '</div>' +
+                        '<div class="ai-news-card-content">' +
+                            '<h3 class="ai-news-card-title">' + escapeHtml(report.title || report.date) + '</h3>' +
+                            (highlights ? '<ul class="ai-news-card-highlights">' + highlights + '</ul>' : '') +
+                            '<div class="ai-news-card-meta">' +
+                                '<span class="ai-news-tag">' + tag + '</span>' +
+                                '<span class="ai-news-card-count">' + countText + '</span>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="ai-news-card-arrow">' + ARROW_SVG + '</div>' +
+                    '</a>'
+                );
+            }
+
+            // Sort newest-first regardless of declaration order in the array above
+            const reports = AI_NEWS_REPORTS.slice().sort((a, b) => parseDate(b.date) - parseDate(a.date));
+            container.innerHTML = reports.map(renderCard).join('');
+            container.querySelectorAll('.ai-news-card').forEach((el) => observer.observe(el));
+        })();
     </script>
 </body>
 </html>
