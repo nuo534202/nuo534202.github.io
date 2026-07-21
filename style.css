@@ -2017,6 +2017,12 @@ img {
     box-shadow: inset 0 0 0 1px var(--hairline);
 }
 
+/* Single tag placed directly under .repo-card-header: push to the right of the header (right-aligned "top-right" position),
+   matching the blog column-card layout (.repo-card-tags uses margin-left: auto at the container level). */
+.repo-card-header > .repo-card-lang {
+    margin-left: auto;
+}
+
 .repo-card-tags {
     margin-left: auto;
     display: flex;
