@@ -156,6 +156,7 @@
                 <p class="section-desc">每日精选 AI 行业重要新闻、模型发布与深度分析</p>
             </div>
             <div class="ai-news-list" id="aiNewsList" aria-live="polite"></div>
+            <nav class="ai-news-pagination" id="aiNewsPagination" aria-label="AI 日报分页"></nav>
         </div>
     </section>
 
@@ -214,13 +215,27 @@
             observer.observe(el);
         });
 
-        // AI News: read data from window.AI_NEWS_DATA (loaded by assets/ai_news.js),
-        // render newest first. No fetch — works on both file:// and http(s)://.
+        // AI News: paginated render. Data lives in window.AI_NEWS_DATA (loaded by
+        // ai_news.js via <script src>, so it works on both file:// and http(s)://).
+        // Only the current page's PAGE_SIZE cards are rendered to the DOM; switching
+        // pages shows a loading indicator (simulated async) for responsive UX.
         (function renderAiNews() {
             const container = document.getElementById('aiNewsList');
+            const paginationEl = document.getElementById('aiNewsPagination');
             if (!container) return;
 
+            const PAGE_SIZE = 6;
             const ARROW_SVG = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+            const PREV_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>';
+            const NEXT_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+
+            const data = window.AI_NEWS_DATA;
+            const reports = Array.isArray(data && data.reports) ? data.reports.slice() : [];
+            // Sort newest-first once; pagination slices this sorted array.
+            reports.sort((a, b) => parseDate(b.date) - parseDate(a.date));
+
+            const totalPages = Math.max(1, Math.ceil(reports.length / PAGE_SIZE));
+            let currentPage = 1;
 
             function escapeHtml(s) {
                 return String(s).replace(/[&<>"']/g, (c) => ({
@@ -265,17 +280,100 @@
                 );
             }
 
-            const data = window.AI_NEWS_DATA;
-            const reports = Array.isArray(data && data.reports) ? data.reports : [];
-
-            if (reports.length === 0) {
-                container.innerHTML = '<div class="ai-news-empty">暂无日报，敬请期待。</div>';
-                return;
+            function showLoading() {
+                container.innerHTML = '<div class="ai-news-loading"><span class="ai-news-spinner"></span><span>正在加载日报…</span></div>';
             }
 
-            reports.sort((a, b) => parseDate(b.date) - parseDate(a.date));
-            container.innerHTML = reports.map(renderCard).join('');
-            container.querySelectorAll('.ai-news-card').forEach((el) => el.classList.add('animate-in'));
+            // Build the page-number button list, inserting ellipses when totalPages is large.
+            function buildPageItems(page) {
+                const items = [];
+                const windowSize = 1; // pages on each side of current
+                const last = totalPages;
+
+                if (last <= 7) {
+                    for (let i = 1; i <= last; i++) items.push(i);
+                    return items;
+                }
+
+                items.push(1);
+                const rangeStart = Math.max(2, page - windowSize);
+                const rangeEnd = Math.min(last - 1, page + windowSize);
+
+                if (rangeStart > 2) items.push('…');
+                for (let i = rangeStart; i <= rangeEnd; i++) items.push(i);
+                if (rangeEnd < last - 1) items.push('…');
+                items.push(last);
+                return items;
+            }
+
+            function renderPagination() {
+                if (!paginationEl) return;
+                if (totalPages <= 1 || reports.length === 0) {
+                    paginationEl.innerHTML = '';
+                    return;
+                }
+
+                const info = '<span class="ai-news-page-info">第 ' + currentPage + ' / ' + totalPages + ' 页，共 ' + reports.length + ' 篇日报</span>';
+                const prevDisabled = currentPage <= 1;
+                const nextDisabled = currentPage >= totalPages;
+
+                let html = info;
+                html += '<button class="ai-news-page-btn ai-news-page-arrow" data-page="' + (currentPage - 1) + '"' + (prevDisabled ? ' disabled' : '') + ' aria-label="上一页">' + PREV_SVG + '</button>';
+
+                buildPageItems(currentPage).forEach((item) => {
+                    if (item === '…') {
+                        html += '<span class="ai-news-page-ellipsis">…</span>';
+                    } else {
+                        const active = item === currentPage ? ' active' : '';
+                        html += '<button class="ai-news-page-btn' + active + '" data-page="' + item + '"' + (active ? ' aria-current="page"' : '') + '>' + item + '</button>';
+                    }
+                });
+
+                html += '<button class="ai-news-page-btn ai-news-page-arrow" data-page="' + (currentPage + 1) + '"' + (nextDisabled ? ' disabled' : '') + ' aria-label="下一页">' + NEXT_SVG + '</button>';
+                paginationEl.innerHTML = html;
+            }
+
+            function renderCurrentPage() {
+                if (reports.length === 0) {
+                    container.innerHTML = '<div class="ai-news-empty">暂无日报，敬请期待。</div>';
+                    if (paginationEl) paginationEl.innerHTML = '';
+                    return;
+                }
+                const start = (currentPage - 1) * PAGE_SIZE;
+                const pageReports = reports.slice(start, start + PAGE_SIZE);
+                container.innerHTML = pageReports.map(renderCard).join('');
+                // Reveal immediately (no IntersectionObserver dependency for async-rendered cards).
+                container.querySelectorAll('.ai-news-card').forEach((el) => el.classList.add('animate-in'));
+                renderPagination();
+            }
+
+            function goToPage(page) {
+                const target = Math.max(1, Math.min(totalPages, page));
+                if (target === currentPage && container.querySelector('.ai-news-card')) return;
+                currentPage = target;
+                // Simulate async load: show spinner, then render after a short delay so the
+                // loading indicator is visible and the switch feels non-blocking.
+                showLoading();
+                window.setTimeout(renderCurrentPage, 180);
+            }
+
+            // Event delegation for pagination clicks.
+            if (paginationEl) {
+                paginationEl.addEventListener('click', (e) => {
+                    const btn = e.target.closest('.ai-news-page-btn');
+                    if (!btn || btn.disabled) return;
+                    const page = parseInt(btn.getAttribute('data-page'), 10);
+                    if (Number.isNaN(page)) return;
+                    goToPage(page);
+                    // Scroll the list into view so the user sees the new page, not the footer.
+                    const top = container.getBoundingClientRect().top + window.scrollY - 80;
+                    window.scrollTo({ top: top, behavior: 'smooth' });
+                });
+            }
+
+            // Initial load: page 1 with a brief loading indicator for consistent UX.
+            showLoading();
+            window.setTimeout(renderCurrentPage, 180);
         })();
     </script>
 </body>

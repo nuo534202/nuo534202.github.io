@@ -1718,6 +1718,127 @@ img {
     }
 }
 
+/* AI News Pagination */
+.ai-news-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    max-width: 1100px;
+    margin: var(--space-2xl) auto 0;
+}
+
+.ai-news-page-btn {
+    min-width: 38px;
+    height: 38px;
+    padding: 0 var(--space-sm);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--ink);
+    background: var(--canvas);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-level-1);
+    cursor: pointer;
+    transition: background var(--transition-base), color var(--transition-base),
+                border-color var(--transition-base), transform var(--transition-base),
+                box-shadow var(--transition-base);
+}
+
+.ai-news-page-btn:hover:not(:disabled):not(.active) {
+    background: var(--accent-blue-soft);
+    border-color: var(--accent-blue-icon);
+    color: var(--accent-blue-icon);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-level-2);
+}
+
+.ai-news-page-btn.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--canvas);
+    cursor: default;
+    box-shadow: var(--shadow-level-2);
+}
+
+.ai-news-page-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.ai-news-page-btn.ai-news-page-arrow svg {
+    width: 16px;
+    height: 16px;
+}
+
+.ai-news-page-ellipsis {
+    min-width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--mute);
+    font-size: 14px;
+    user-select: none;
+}
+
+.ai-news-page-info {
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    line-height: 18px;
+    color: var(--mute);
+    margin-bottom: var(--space-xs);
+}
+
+.ai-news-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    grid-column: 1 / -1;
+    min-height: 200px;
+}
+
+.ai-news-spinner {
+    width: 28px;
+    height: 28px;
+    border: 3px solid var(--line);
+    border-top-color: var(--accent-blue-icon);
+    border-radius: 50%;
+    animation: ai-news-spin 0.7s linear infinite;
+}
+
+@keyframes ai-news-spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 767px) {
+    .ai-news-pagination {
+        gap: var(--space-xxs);
+    }
+
+    .ai-news-page-btn {
+        min-width: 34px;
+        height: 34px;
+        padding: 0 var(--space-xs);
+        font-size: 13px;
+    }
+
+    .ai-news-page-ellipsis {
+        min-width: 34px;
+        height: 34px;
+    }
+}
+
 /* ============================================
    Games Section
    ============================================ */
