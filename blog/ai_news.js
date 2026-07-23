@@ -3,6 +3,19 @@
 window.AI_NEWS_DATA = {
   "reports": [
     {
+      "date": "2026-07-23",
+      "url": "/2026-07-23-ai_news.html",
+      "title": "2026-07-23 AI 新闻汇总",
+      "tag": "AI 日报",
+      "highlights": [
+        "白宫正式指控 Moonshot AI 蒸馏 Anthropic Fable 开发 Kimi K3，财政部威胁制裁",
+        "微软测试 Kimi K3 接入 Copilot，年省最高 6 亿美元，AI 编程工具经济学面临重构",
+        "Claude Code 桌面版集成 iOS 模拟器：AI 编程工具向全栈闭环演进",
+        "Claude Cowork 新增「录制技能」：屏幕录制 + 语音讲解直接生成可复用 Agent Skill",
+        "DeepSeek Coding Agent 实现目标编排闭环，PaperBench 达 84.8% 超越 Claude Code"
+      ]
+    },
+    {
       "date": "2026-07-22",
       "url": "/2026-07-22-ai_news.html",
       "title": "2026-07-22 AI 新闻汇总",
