@@ -3,6 +3,19 @@
 window.AI_NEWS_DATA = {
   "reports": [
     {
+      "date": "2026-07-24",
+      "url": "/2026-07-24-ai_news.html",
+      "title": "2026-07-24 AI 新闻汇总",
+      "tag": "AI 日报",
+      "highlights": [
+        "Anthropic 与 AMD 达成战略合作：Claude 一个周末完成 ROCm 全适配，CUDA 护城河遭遇 AI 反向冲击",
+        "DeepSeek V4 旧版 API 今日截止：deepseek-chat 与 deepseek-reasoner 正式退役，开发者面临「静默降级」陷阱",
+        "Anthropic 托管智能体平台（CMA）六项重大更新：单会话技能上限从 20 飙至 500",
+        "Coding Agent 失效根因不是模型而是上下文：多项研究共识指向「上下文工程」",
+        "腾讯云发布 CodeBuddy NPC：云端智能体直接交付成果，首轮 Token 消耗降超 90%"
+      ]
+    },
+    {
       "date": "2026-07-23",
       "url": "/2026-07-23-ai_news.html",
       "title": "2026-07-23 AI 新闻汇总",
