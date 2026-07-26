@@ -3,6 +3,32 @@
 window.AI_NEWS_DATA = {
   "reports": [
     {
+      "date": "2026-07-26",
+      "url": "/2026-07-26-ai_news.html",
+      "title": "2026-07-26 AI 新闻汇总",
+      "tag": "AI 日报",
+      "highlights": [
+        "Kimi K3 智能体自主发现 Redis 零日漏洞：32 个 Agent 在 90 分钟内挖出 19 个漏洞并构建 RCE 利用链",
+        "xAI 发布 Grok Build Workflows：单条指令最多调度 1024 个并行 Agent，内置独立质疑者验证",
+        "OpenAI 三线齐崩：API、ChatGPT、Codex 同时宕机 111 分钟，连续 17 天无完全正常日",
+        "阿里巴巴开源 open-code-review：确定性工程与 LLM 混合架构，token 消耗仅为通用 Agent 的 1/9",
+        "OpenAI 发布 Presence 企业级 Agent 平台：与 Anthropic CMA 正面交锋，Codex 驱动持续改进闭环"
+      ]
+    },
+    {
+      "date": "2026-07-25",
+      "url": "/2026-07-25-ai_news.html",
+      "title": "2026-07-25 AI 新闻汇总",
+      "tag": "AI 日报",
+      "highlights": [
+        "Anthropic 发布 Claude Opus 5：以 Opus 4.8 的价格逼近旗舰 Fable 5，安全拦截频率降低 85%",
+        "Claude Code 系统提示词可删除 80% 以上：Anthropic 工程实践指向「强模型少规则」范式转移",
+        "Pillar Security「沙箱逃逸周」：Cursor、Codex CLI 等 AI 编程工具曝架构性安全缺陷",
+        "上海交大与字节跳动提出 SWE-Pruner Pro：读取骨干模型内部表示按行剪枝，最多节省 39% token",
+        "Agent Skills 成为 AI 编程新范式，北京印发国内首个省级智能体专项扶持政策"
+      ]
+    },
+    {
       "date": "2026-07-24",
       "url": "/2026-07-24-ai_news.html",
       "title": "2026-07-24 AI 新闻汇总",
