@@ -3,6 +3,19 @@
 window.AI_NEWS_DATA = {
   "reports": [
     {
+      "date": "2026-07-27",
+      "url": "/2026-07-27-ai_news.html",
+      "title": "2026-07-27 AI 新闻汇总",
+      "tag": "AI 日报",
+      "highlights": [
+        "Kimi K3 开源权重今日发布：2.8T 参数模型开放下载，幻觉率却攀升至约 51%",
+        "MCP 2026-07-28 无状态规范明日冻结：会话机制彻底移除，协议迎最大修订",
+        "三星与微软斥巨资投资 Mistral AI：欧洲「主权 AI」获芯片与云双线加持",
+        "Google 开源 Always-On Memory Agent：用 LLM 持续整合替代向量数据库，记忆写入 SQLite",
+        "OpenAI 为 Codex 上线实时语音与 Appshots：编程 Agent 可读取活动窗口画面"
+      ]
+    },
+    {
       "date": "2026-07-26",
       "url": "/2026-07-26-ai_news.html",
       "title": "2026-07-26 AI 新闻汇总",
