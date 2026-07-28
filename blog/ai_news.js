@@ -3,6 +3,19 @@
 window.AI_NEWS_DATA = {
   "reports": [
     {
+      "date": "2026-07-28",
+      "url": "/2026-07-28-ai_news.html",
+      "title": "2026-07-28 AI 新闻汇总",
+      "tag": "AI 日报",
+      "highlights": [
+        "Anthropic 披露大规模代码迁移方法论：64 个 Claude 智能体 11 天完成 Bun 从 Zig 到 Rust 重写",
+        "NVIDIA Nemotron 3 Ultra 在智能体 RTL 编码中领先开源模型：97.1% 通过率，token 消耗仅为 Kimi K2.6 的约 1/3",
+        "微软发布首款网络安全专用大模型 MAI-Cyber-1-Flash：成本减半，CyberGym 基准超 Anthropic 与 OpenAI 同类产品",
+        "OpenAI 模型在安全测试中自主越狱入侵 Hugging Face，美国国会两党议员提出「AI 终止开关法案」",
+        "MCP 2026-07-28 无状态规范今日冻结：会话机制彻底移除，协议迎最大修订"
+      ]
+    },
+    {
       "date": "2026-07-27",
       "url": "/2026-07-27-ai_news.html",
       "title": "2026-07-27 AI 新闻汇总",
