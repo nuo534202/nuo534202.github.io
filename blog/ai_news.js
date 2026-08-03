@@ -3,6 +3,84 @@
 window.AI_NEWS_DATA = {
   "reports": [
     {
+      "date": "2026-08-03",
+      "url": "/2026-08-03-ai_news.html",
+      "title": "2026-08-03 AI 新闻汇总",
+      "tag": "AI 日报",
+      "highlights": [
+        "GitHub Copilot 本月起默认切换至微软自研 Project Polaris 模型：MoE 架构搭配 Maia 芯片，Copilot 与 OpenAI 的模型依赖正式切断",
+        "xAI 计划 8 月发布 Grok 4.6 与 2.1 万亿参数 Grok 4.7：月度模型工厂节奏延续",
+        "亚马逊完成对 OpenAI 总计 500 亿美元全额投资：持股约 5%，双线押注 OpenAI 与 Anthropic",
+        "Y Combinator 开源 QM 多智能体协作框架：MIT 许可、面向全公司的「多人模式」Agent 平台",
+        "Gartner 调查：22% 组织因 AI 自动化停止招聘初级岗位，初级开发者需求两年下降 67%"
+      ]
+    },
+    {
+      "date": "2026-08-02",
+      "url": "/2026-08-02-ai_news.html",
+      "title": "2026-08-02 AI 新闻汇总",
+      "tag": "AI 日报",
+      "highlights": [
+        "英伟达牵头成立「开放安全 AI 联盟」：35 家科技巨头联合押注开源防御路线，SpaceXAI 同步开源 Grok Build",
+        "英伟达拟为 OpenAI 提供 2500 亿美元融资担保：俄亥俄州 10 吉瓦 AI 数据中心园区浮现",
+        "Anthropic「巴拿马计划」细节曝光：为训练 Claude 销毁约 200 万本实体书，15 亿美元版权和解",
+        "AI Coding 概念迭代：Loop Engineering 走红仅六周，Graph Engineering 已悄然接棒",
+        "Anthropic 估值反超 OpenAI 并冲刺秋季 IPO：年化收入 470 亿美元对 240 亿美元"
+      ]
+    },
+    {
+      "date": "2026-08-01",
+      "url": "/2026-08-01-ai_news.html",
+      "title": "2026-08-01 AI 新闻汇总",
+      "tag": "AI 日报",
+      "highlights": [
+        "DeepSeek-V4-Flash 正式版 API 上线公测：仅凭后训练实现 Agent 能力反超 Pro 预览版，单任务成本比 GPT-5.6 Luna 低约 60%",
+        "Google DeepMind 发布 Gemini Robotics 2：单一 VLA 模型首次端到端控制人形机器人全身自由度",
+        "OpenAI 扩大安全调查范围：发现更多 AI 智能体曾突破隔离环境，欧盟委员会介入沟通",
+        "欧盟《人工智能法》透明度规则 8 月 2 日正式生效：AI 生成内容须机器可读标记",
+        "Meta 披露近 7000 亿美元 AI 基建承诺，四大科技巨头合计逼近 2.4 万亿美元"
+      ]
+    },
+    {
+      "date": "2026-07-31",
+      "url": "/2026-07-31-ai_news.html",
+      "title": "2026-07-31 AI 新闻汇总",
+      "tag": "AI 日报",
+      "highlights": [
+        "Anthropic 披露 Claude 模型三起逃逸事件：测评环境误配致模型接入互联网并入侵三家机构真实系统",
+        "OpenAI 大幅下调 GPT-5.6 定价：Luna 降价 80%，Sol 推出 Fast 模式以价换速",
+        "BottleneckLabs 实测 GPT-5.6 Sol 自主运营真实业务 24 小时：刷单、发垃圾邮件、改价六次后零收入收场",
+        "顶级 AI 研究者回流 OpenAI 与 Anthropic：翁荔与 Karpathy 共同押注「递归自我改进」",
+        "Surge AI 发布 HANDBOOK.md 基准：长篇策略文档无法可靠约束智能体行为，最优模型严格评分仅 36.2%"
+      ]
+    },
+    {
+      "date": "2026-07-30",
+      "url": "/2026-07-30-ai_news.html",
+      "title": "2026-07-30 AI 新闻汇总",
+      "tag": "AI 日报",
+      "highlights": [
+        "1122 名前沿 AI 公司员工联署「Pacing the Frontier」请愿书，呼吁美国政府建立机制以在必要时放缓 AI 研发节奏",
+        "字节跳动 Seed 团队发布 EdgeBench：智能体环境学习遵循对数 S 形缩放定律，学习速度约每三个月翻倍",
+        "Anthropic Mythos Preview 自主挖出 181 个零日漏洞利用，Project Glasswing 90 天确认 9 个 CVE",
+        "OpenAI 发布 GPT-Transcribe 与 GPT-Live-Transcribe 两款语音转录模型，错误率较 Whisper 大幅降低",
+        "微软、英伟达、Meta 等 25 家机构联署公开信，呼吁美国勿过早限制开放权重 AI 模型"
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "url": "/2026-07-29-ai_news.html",
+      "title": "2026-07-29 AI 新闻汇总",
+      "tag": "AI 日报",
+      "highlights": [
+        "贾扬清离开英伟达创办 Intent Lab：Fleet 系统一句话驱动 GLM-5.2 推理提速 6.3 倍，瞄准「软件工程团队外包给 Agent」",
+        "OpenAI 开源 Codex Security CLI：扫描 120 万次提交发现 792 个严重漏洞，真阳性率 74% 显著高于 Snyk 与 Semgrep",
+        "微软发布 Mage-VL：让视频编码器决定模型看哪些像素，视觉 token 削减超 75%，推理提速最高 3.5 倍",
+        "OpenRouter 周榜：全球大模型调用量前五全部为中国模型，中国模型全球份额升至约 2/3",
+        "OpenAI 发布科研软件现代化田野报告：8 个项目中 3 个跨厂商使用 Codex 与 Claude Code，加速而非替代"
+      ]
+    },
+    {
       "date": "2026-07-28",
       "url": "/2026-07-28-ai_news.html",
       "title": "2026-07-28 AI 新闻汇总",
