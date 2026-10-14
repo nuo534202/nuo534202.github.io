@@ -1486,6 +1486,8 @@ img {
 .ai-news-section {
     padding: var(--space-4xl) 0;
     background: var(--canvas-soft-2);
+    /* keep the section heading visible when jumped to via #ai-news */
+    scroll-margin-top: calc(64px + var(--space-lg));
 }
 
 .ai-news-list {
@@ -2738,7 +2740,8 @@ img {
     max-width: 95% !important;
     width: 1400px !important;
     padding: 40px 60px !important;
-    margin: 3rem auto;
+    /* top margin clears the 64px fixed .nav-bar */
+    margin: calc(64px + var(--space-2xl)) auto var(--space-3xl);
     text-align: left;
 }
 
@@ -3098,5 +3101,50 @@ img {
     .container.blog-container.post-page-container {
         max-width: 95% !important;
         width: auto !important;
+    }
+}
+
+/* ============================================
+   Post Page — narrow-screen refinements
+   Kept last so these !important rules win over
+   the 1200px / 1400px blocks above.
+   ============================================ */
+@media (max-width: 1023px) {
+    .container.blog-container.post-page-container {
+        max-width: calc(100% - 2rem) !important;
+        width: auto !important;
+        padding: 32px 24px !important;
+    }
+
+    .post-page-container .post-content {
+        padding: 1.75rem 1.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .container.blog-container.post-page-container {
+        max-width: calc(100% - 1.5rem) !important;
+        width: auto !important;
+        padding: 24px 16px !important;
+        margin: calc(64px + var(--space-lg)) auto var(--space-2xl);
+        border-radius: 14px;
+    }
+
+    .post-page-container .post-content {
+        padding: 1.25rem 1rem;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container.blog-container.post-page-container {
+        max-width: calc(100% - 1rem) !important;
+        width: auto !important;
+        padding: 18px 12px !important;
+        border-radius: 12px;
+    }
+
+    .post-page-container .post-content {
+        padding: 1rem 0.75rem;
     }
 }
