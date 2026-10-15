@@ -2736,13 +2736,24 @@ img {
     text-align: left;
 }
 
-.container.blog-container.post-page-container {
-    max-width: 95% !important;
-    width: 1400px !important;
-    padding: 40px 60px !important;
+/* Post page wrapper — deliberately NOT a card (no background, radius or
+   shadow). The page title and its divider sit directly on the page
+   background; the only box is .post-content inside. */
+.post-page-container {
+    width: 95%;
+    max-width: 1400px;
     /* top margin clears the 64px fixed .nav-bar */
     margin: calc(64px + var(--space-2xl)) auto var(--space-3xl);
     text-align: left;
+}
+
+.post-page-container h1 {
+    font-size: clamp(26px, 4.5vw, 36px);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -1.4px;
+    color: var(--ink);
+    margin: 0 0 var(--space-md);
 }
 
 .repo-container {
@@ -3090,30 +3101,15 @@ img {
         max-width: 95%;
         width: auto;
     }
-
-    .container.blog-container.post-page-container {
-        max-width: 95% !important;
-        width: auto !important;
-    }
-}
-
-@media (max-width: 1400px) {
-    .container.blog-container.post-page-container {
-        max-width: 95% !important;
-        width: auto !important;
-    }
 }
 
 /* ============================================
    Post Page — narrow-screen refinements
-   Kept last so these !important rules win over
-   the 1200px / 1400px blocks above.
    ============================================ */
 @media (max-width: 1023px) {
-    .container.blog-container.post-page-container {
-        max-width: calc(100% - 2rem) !important;
-        width: auto !important;
-        padding: 32px 24px !important;
+    .post-page-container {
+        width: calc(100% - 2rem);
+        margin: calc(64px + var(--space-xl)) auto var(--space-3xl);
     }
 
     .post-page-container .post-content {
@@ -3122,12 +3118,9 @@ img {
 }
 
 @media (max-width: 767px) {
-    .container.blog-container.post-page-container {
-        max-width: calc(100% - 1.5rem) !important;
-        width: auto !important;
-        padding: 24px 16px !important;
+    .post-page-container {
+        width: calc(100% - 2rem);
         margin: calc(64px + var(--space-lg)) auto var(--space-2xl);
-        border-radius: 14px;
     }
 
     .post-page-container .post-content {
@@ -3137,11 +3130,8 @@ img {
 }
 
 @media (max-width: 480px) {
-    .container.blog-container.post-page-container {
-        max-width: calc(100% - 1rem) !important;
-        width: auto !important;
-        padding: 18px 12px !important;
-        border-radius: 12px;
+    .post-page-container {
+        width: calc(100% - 1.5rem);
     }
 
     .post-page-container .post-content {
