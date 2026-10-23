@@ -188,6 +188,7 @@ img {
     .game-card,
     .page-header-btn,
     .repo-card,
+    .city-block,
     .food-card {
         opacity: 1 !important;
         transform: none !important;
@@ -2222,156 +2223,264 @@ img {
 }
 
 /* ============================================
-   Food Page Styles (Preserved)
+   Food Page
    ============================================ */
-.food-container {
-    max-width: 950px;
-    width: 90%;
-    margin: 0 auto;
-    text-align: left;
-}
-
-.food-container h1,
-.food-container .subtitle {
-    text-align: center;
-}
-
 .food-section {
-    margin-bottom: 25px;
-}
-
-.city-header {
-    cursor: pointer;
-    user-select: none;
-}
-
-.city-header .section-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 1.25rem;
-    font-weight: 600;
-    line-height: 28px;
-    letter-spacing: -0.5px;
-    padding: 12px 16px;
+    padding: var(--space-4xl) 0;
     background: var(--canvas);
-    border-radius: var(--radius-md);
-    box-shadow: inset 0 0 0 1px var(--hairline);
-    transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-.city-header:hover .section-title {
-    background: var(--canvas-soft-2);
-    box-shadow: inset 0 0 0 1px var(--hairline-strong);
-}
-
-.city-icon {
-    margin-right: 10px;
-}
-
-.toggle-icon {
-    font-size: 1rem;
-    transition: transform 0.3s ease;
-}
-
-.city-content {
-    margin-top: 15px;
-    transition: all 0.3s ease;
-}
-
-.food-list {
+/* City groups — each city is a soft panel, restaurants are paper cards inside */
+.city-list {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: var(--space-lg);
 }
 
-.food-card {
-    display: flex;
-    align-items: flex-start;
-    background: var(--canvas);
-    padding: 24px;
+.city-block {
+    background: var(--canvas-soft);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-level-2);
-    transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(16px);
 }
 
-.food-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-level-4);
+.city-block.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.food-icon {
-    font-size: 2.5rem;
-    margin-right: 20px;
+.city-block:nth-child(2).animate-in { transition-delay: 0.06s; }
+.city-block:nth-child(3).animate-in { transition-delay: 0.12s; }
+.city-block:nth-child(4).animate-in { transition-delay: 0.18s; }
+
+/* City header — real button so collapse works with keyboard and screen readers */
+.city-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg) var(--space-xl);
+    background: none;
+    border: 0;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.city-header:hover {
     background: var(--canvas-soft-2);
+}
+
+.city-header:focus-visible {
+    outline: 2px solid var(--link);
+    outline-offset: -2px;
+}
+
+.city-titles {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.city-name {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: -0.96px;
     color: var(--ink);
-    width: 70px;
-    height: 70px;
+}
+
+.city-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0.08em;
+    color: var(--mute);
+    text-transform: uppercase;
+}
+
+.city-count::before {
+    content: "·";
+    margin-right: var(--space-xs);
+    color: var(--hairline-strong);
+}
+
+.city-toggle {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--radius-lg);
-    flex-shrink: 0;
-    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+    border-radius: var(--radius-full);
+    background: var(--canvas);
+    color: var(--body);
+    box-shadow: inset 0 0 0 1px var(--hairline);
+    transition: color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.food-card:nth-child(4n+1) .food-icon {
+.city-header:hover .city-toggle {
+    color: var(--ink);
+    box-shadow: inset 0 0 0 1px var(--hairline-strong);
+}
+
+.city-toggle svg {
+    transition: transform var(--transition-base);
+}
+
+.city-block:not(.is-collapsed) .city-toggle svg {
+    transform: rotate(180deg);
+}
+
+.city-content {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows var(--transition-base);
+}
+
+.city-block.is-collapsed .city-content {
+    grid-template-rows: 0fr;
+}
+
+.city-content-inner {
+    overflow: hidden;
+    min-height: 0;
+}
+
+.food-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-xl) var(--space-xl);
+    border-top: 1px solid var(--hairline);
+}
+
+/* Restaurant entry */
+.food-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-xl);
+    background: var(--canvas);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-level-2);
+}
+
+.food-card-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.food-card-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--canvas-soft-2);
+    color: var(--ink);
+    border-radius: var(--radius-md);
+}
+
+.city-block:nth-child(4n+1) .food-card-icon {
     background: var(--accent-blue-soft);
     color: var(--accent-blue-icon);
 }
 
-.food-card:nth-child(4n+2) .food-icon {
+.city-block:nth-child(4n+2) .food-card-icon {
     background: var(--accent-violet-soft);
     color: var(--accent-violet-icon);
 }
 
-.food-card:nth-child(4n+3) .food-icon {
+.city-block:nth-child(4n+3) .food-card-icon {
     background: var(--accent-cyan-soft);
     color: var(--accent-cyan-icon);
 }
 
-.food-card:nth-child(4n+4) .food-icon {
+.city-block:nth-child(4n+4) .food-card-icon {
     background: var(--accent-pink-soft);
     color: var(--accent-pink-icon);
 }
 
-.food-card:hover .food-icon {
-    transform: scale(1.05);
-    background: var(--ink);
-    color: var(--on-primary);
-}
-
-.food-content {
-    flex: 1;
-}
-
 .restaurant-name {
-    font-size: 1.25rem;
-    color: var(--ink);
-    margin-bottom: 12px;
+    flex: 1;
+    min-width: 0;
+    font-size: 18px;
     font-weight: 600;
-    letter-spacing: -0.375px;
+    line-height: 28px;
+    letter-spacing: -0.45px;
+    color: var(--ink);
 }
 
-.restaurant-info {
+.food-card-district {
+    flex-shrink: 0;
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 16px;
+    color: var(--body);
+    background: var(--canvas-soft);
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    box-shadow: inset 0 0 0 1px var(--hairline);
+}
+
+.food-address {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.info-item {
-    font-size: 0.95rem;
+    align-items: flex-start;
+    gap: var(--space-xs);
+    font-size: 14px;
+    line-height: 20px;
     color: var(--body);
-    margin: 0;
 }
 
-.info-label {
-    font-weight: 600;
-    color: var(--ink);
+.food-address svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--mute);
 }
 
-.info-value {
+/* Personal review, set off as a field note */
+.food-note {
+    margin-top: var(--space-xxs);
+    padding-left: var(--space-md);
+    border-left: 2px solid var(--hairline);
+}
+
+.food-note-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0.08em;
+    color: var(--mute);
+    margin-bottom: var(--space-xxs);
+}
+
+.food-note-text {
+    font-size: 15px;
+    line-height: 26px;
     color: var(--body);
+}
+
+.food-disclaimer {
+    margin-top: var(--space-lg);
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--mute);
 }
 
 /* ============================================
@@ -2959,20 +3068,37 @@ img {
         font-size: 11px;
     }
 
-    .food-card {
+    .city-header {
+        padding: var(--space-md) var(--space-lg);
+        gap: var(--space-sm);
+    }
+
+    .city-titles {
         flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 20px;
+        align-items: flex-start;
+        gap: 2px;
     }
 
-    .food-icon {
-        margin-right: 0;
-        margin-bottom: 15px;
+    .food-list {
+        grid-template-columns: 1fr;
+        padding: var(--space-md) var(--space-lg) var(--space-lg);
     }
 
-    .restaurant-info {
-        text-align: left;
+    .food-card {
+        padding: var(--space-lg);
+    }
+
+    .food-card-head {
+        align-items: flex-start;
+    }
+
+    .food-card-district {
+        margin-top: 4px;
+    }
+
+    .food-note-text {
+        font-size: 14px;
+        line-height: 24px;
     }
 
     .post-content {

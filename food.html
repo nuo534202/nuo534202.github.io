@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>美食推荐 - nuo534202</title>
+    <title>美食地图 - nuo534202</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="nuo534202.jpg" type="image/jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,7 @@
                 <a href="blog/index.html" class="nav-link">博客</a>
                 <a href="repository/index.html" class="nav-link">项目&仓库</a>
                 <a href="games/index.html" class="nav-link">游戏合集</a>
-                <a href="food.html" class="nav-link active">美食推荐</a>
+                <a href="food.html" class="nav-link active">美食地图</a>
             </div>
         </div>
     </nav>
@@ -36,130 +36,205 @@
     <section class="page-header">
         <div class="section-container">
             <div class="page-header-content">
-                <h1 class="page-title">美食推荐</h1>
-                <p class="page-subtitle">Food Recommendations</p>
+                <h1 class="page-title">美食地图</h1>
+                <p class="page-subtitle">Food Notes</p>
                 <div class="page-header-line"></div>
             </div>
         </div>
     </section>
 
     <!-- Food Content -->
-    <section class="food-section" style="padding: var(--space-3xl) 0; background: var(--canvas-soft);">
+    <section class="food-section">
         <div class="section-container">
-            <div class="food-section">
-                <div class="city-header" onclick="toggleCity('foshan')">
-                    <h2 class="section-title">
-                        <span class="city-icon">🏙️</span>
-                        佛山市
-                        <span class="toggle-icon" id="toggle-foshan">▼</span>
-                    </h2>
-                </div>
-                <div class="city-content" id="content-foshan">
-                    <div class="food-list">
-                        <div class="food-card">
-                            <div class="food-icon">🍜</div>
-                            <div class="food-content">
-                                <h3 class="restaurant-name">兴华里茶记（禅城祖庙店）</h3>
-                                <div class="restaurant-info">
-                                    <p class="info-item">
-                                        <span class="info-label">📍 地址：</span>
-                                        <span class="info-value">禅城区祖庙街道福宁路 102 号 5 号铺</span>
+
+            <div class="city-list">
+                <!-- 佛山市 -->
+                <div class="city-block">
+                    <button class="city-header" type="button" aria-expanded="true" aria-controls="content-foshan">
+                        <span class="city-titles">
+                            <span class="city-name">佛山市</span>
+                            <span class="city-meta">
+                                <span class="city-pinyin">FOSHAN</span>
+                                <span class="city-count">1 家</span>
+                            </span>
+                        </span>
+                        <span class="city-toggle" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m6 9 6 6 6-6"/>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="city-content" id="content-foshan">
+                        <div class="city-content-inner">
+                            <div class="food-list">
+                                <article class="food-card">
+                                    <div class="food-card-head">
+                                        <span class="food-card-icon" aria-hidden="true">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M6 2v2"/>
+                                                <path d="M10 2v2"/>
+                                                <path d="M14 2v2"/>
+                                                <path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/>
+                                            </svg>
+                                        </span>
+                                        <h3 class="restaurant-name">兴华里茶记（禅城祖庙店）</h3>
+                                        <span class="food-card-district">禅城</span>
+                                    </div>
+                                    <p class="food-address">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                                            <circle cx="12" cy="10" r="3"/>
+                                        </svg>
+                                        <span>禅城区祖庙街道福宁路 102 号 5 号铺</span>
                                     </p>
-                                    <p class="info-item">
-                                        <span class="info-label">⭐ 评价：</span>
-                                        <span class="info-value">餐厅在老旧城区里面，排队的人比较多，茶餐厅常见菜品做的都还挺不错。</span>
-                                    </p>
-                                </div>
+                                    <div class="food-note">
+                                        <span class="food-note-label">评价</span>
+                                        <p class="food-note-text">餐厅在老旧城区里面，排队的人比较多，茶餐厅常见菜品做的都还挺不错。</p>
+                                    </div>
+                                </article>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="food-section">
-                <div class="city-header" onclick="toggleCity('guangzhou')">
-                    <h2 class="section-title">
-                        <span class="city-icon">🏙️</span>
-                        广州市
-                        <span class="toggle-icon" id="toggle-guangzhou">▼</span>
-                    </h2>
-                </div>
-                <div class="city-content" id="content-guangzhou">
-                    <div class="food-list">
-                        <div class="food-card">
-                            <div class="food-icon">🍗</div>
-                            <div class="food-content">
-                                <h3 class="restaurant-name">铭少·食鸡专门店（农讲所店）</h3>
-                                <div class="restaurant-info">
-                                    <p class="info-item">
-                                        <span class="info-label">📍 地址：</span>
-                                        <span class="info-value">广州市越秀区仓边路 33 号（富豪酒店 2 楼）</span>
+                <!-- 广州市 -->
+                <div class="city-block">
+                    <button class="city-header" type="button" aria-expanded="true" aria-controls="content-guangzhou">
+                        <span class="city-titles">
+                            <span class="city-name">广州市</span>
+                            <span class="city-meta">
+                                <span class="city-pinyin">GUANGZHOU</span>
+                                <span class="city-count">1 家</span>
+                            </span>
+                        </span>
+                        <span class="city-toggle" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m6 9 6 6 6-6"/>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="city-content" id="content-guangzhou">
+                        <div class="city-content-inner">
+                            <div class="food-list">
+                                <article class="food-card">
+                                    <div class="food-card-head">
+                                        <span class="food-card-icon" aria-hidden="true">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+                                            </svg>
+                                        </span>
+                                        <h3 class="restaurant-name">铭少·食鸡专门店（农讲所店）</h3>
+                                        <span class="food-card-district">越秀</span>
+                                    </div>
+                                    <p class="food-address">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                                            <circle cx="12" cy="10" r="3"/>
+                                        </svg>
+                                        <span>广州市越秀区仓边路 33 号（富豪酒店 2 楼）</span>
                                     </p>
-                                    <p class="info-item">
-                                        <span class="info-label">⭐ 评价：</span>
-                                        <span class="info-value">烧鸡味道很不错，皮很脆，美团的套餐比较划算，套餐内的其他菜品也挺好吃。去的人很多，经常需要排队，餐厅很多本地人去吃。</span>
-                                    </p>
-                                </div>
+                                    <div class="food-note">
+                                        <span class="food-note-label">评价</span>
+                                        <p class="food-note-text">烧鸡味道很不错，皮很脆，美团的套餐比较划算，套餐内的其他菜品也挺好吃。去的人很多，经常需要排队，餐厅很多本地人去吃。</p>
+                                    </div>
+                                </article>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="food-section">
-                <div class="city-header" onclick="toggleCity('shenzhen')">
-                    <h2 class="section-title">
-                        <span class="city-icon">🏙️</span>
-                        深圳市
-                        <span class="toggle-icon" id="toggle-shenzhen">▼</span>
-                    </h2>
-                </div>
-                <div class="city-content" id="content-shenzhen">
-                    <div class="food-list">
-                        <div class="food-card">
-                            <div class="food-icon">🥟</div>
-                            <div class="food-content">
-                                <h3 class="restaurant-name">山水肠粉</h3>
-                                <div class="restaurant-info">
-                                    <p class="info-item">
-                                        <span class="info-label">📍 地址：</span>
-                                        <span class="info-value">深圳市盐田区海景二路沙头角保税区 31 栋</span>
+                <!-- 深圳市 -->
+                <div class="city-block">
+                    <button class="city-header" type="button" aria-expanded="true" aria-controls="content-shenzhen">
+                        <span class="city-titles">
+                            <span class="city-name">深圳市</span>
+                            <span class="city-meta">
+                                <span class="city-pinyin">SHENZHEN</span>
+                                <span class="city-count">1 家</span>
+                            </span>
+                        </span>
+                        <span class="city-toggle" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m6 9 6 6 6-6"/>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="city-content" id="content-shenzhen">
+                        <div class="city-content-inner">
+                            <div class="food-list">
+                                <article class="food-card">
+                                    <div class="food-card-head">
+                                        <span class="food-card-icon" aria-hidden="true">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+                                                <path d="M7 2v20"/>
+                                                <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>
+                                            </svg>
+                                        </span>
+                                        <h3 class="restaurant-name">山水肠粉</h3>
+                                        <span class="food-card-district">盐田</span>
+                                    </div>
+                                    <p class="food-address">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                                            <circle cx="12" cy="10" r="3"/>
+                                        </svg>
+                                        <span>深圳市盐田区海景二路沙头角保税区 31 栋</span>
                                     </p>
-                                    <p class="info-item">
-                                        <span class="info-label">⭐ 评价：</span>
-                                        <span class="info-value">肠粉皮很薄，口感不错，份量略小，一个人可能要大概吃 3 - 4 份</span>
-                                    </p>
-                                </div>
+                                    <div class="food-note">
+                                        <span class="food-note-label">评价</span>
+                                        <p class="food-note-text">肠粉皮很薄，口感不错，份量略小，一个人可能要大概吃 3 - 4 份</p>
+                                    </div>
+                                </article>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="food-section">
-                <div class="city-header" onclick="toggleCity('zhuhai')">
-                    <h2 class="section-title">
-                        <span class="city-icon">🏙️</span>
-                        珠海市
-                        <span class="toggle-icon" id="toggle-zhuhai">▼</span>
-                    </h2>
-                </div>
-                <div class="city-content" id="content-zhuhai">
-                    <div class="food-list">
-                        <div class="food-card">
-                            <div class="food-icon">🍜</div>
-                            <div class="food-content">
-                                <h3 class="restaurant-name">渔记茶餐厅（渔村店）</h3>
-                                <div class="restaurant-info">
-                                    <p class="info-item">
-                                        <span class="info-label">📍 地址：</span>
-                                        <span class="info-value">珠海市香洲区唐家湾镇唐家湾后环渔村三街 4 号</span>
+                <!-- 珠海市 -->
+                <div class="city-block">
+                    <button class="city-header" type="button" aria-expanded="true" aria-controls="content-zhuhai">
+                        <span class="city-titles">
+                            <span class="city-name">珠海市</span>
+                            <span class="city-meta">
+                                <span class="city-pinyin">ZHUHAI</span>
+                                <span class="city-count">1 家</span>
+                            </span>
+                        </span>
+                        <span class="city-toggle" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m6 9 6 6 6-6"/>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="city-content" id="content-zhuhai">
+                        <div class="city-content-inner">
+                            <div class="food-list">
+                                <article class="food-card">
+                                    <div class="food-card-head">
+                                        <span class="food-card-icon" aria-hidden="true">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6s-7.56-2.53-8.5-6Z"/>
+                                                <path d="M18 12v.5"/>
+                                                <path d="M16 17.93a9.77 9.77 0 0 1 0-11.86"/>
+                                                <path d="M7 10.67C7 8 5.58 5.97 2.73 5.5c-1 1.5-1 5 .23 6.5-1.24 1.5-1.24 5-.23 6.5C5.58 18.03 7 16 7 13.33"/>
+                                            </svg>
+                                        </span>
+                                        <h3 class="restaurant-name">渔记茶餐厅（渔村店）</h3>
+                                        <span class="food-card-district">香洲</span>
+                                    </div>
+                                    <p class="food-address">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                                            <circle cx="12" cy="10" r="3"/>
+                                        </svg>
+                                        <span>珠海市香洲区唐家湾镇唐家湾后环渔村三街 4 号</span>
                                     </p>
-                                    <p class="info-item">
-                                        <span class="info-label">⭐ 评价：</span>
-                                        <span class="info-value">店铺的感觉有点像比较老旧的港式茶餐厅风格，味道很不错，但用餐环境相对一般，不买团购价格偏贵，停车不方便</span>
-                                    </p>
-                                </div>
+                                    <div class="food-note">
+                                        <span class="food-note-label">评价</span>
+                                        <p class="food-note-text">店铺的感觉有点像比较老旧的港式茶餐厅风格，味道很不错，但用餐环境相对一般，不买团购价格偏贵，停车不方便</p>
+                                    </div>
+                                </article>
                             </div>
                         </div>
                     </div>
@@ -178,8 +253,8 @@
                 </svg>
                 <span>返回首页</span>
             </a>
+            <p class="food-disclaimer">所有餐厅推荐仅根据个人喜好</p>
         </div>
-        <p class="disclaimer" style="text-align: center; color: var(--mute); font-size: 0.9rem; margin-top: 20px; font-style: italic;">所有餐厅推荐仅根据个人喜好</p>
     </section>
 
     <!-- Footer -->
@@ -211,18 +286,34 @@
             }
         });
 
-        function toggleCity(cityId) {
-            const content = document.getElementById('content-' + cityId);
-            const toggleIcon = document.getElementById('toggle-' + cityId);
-            
-            if (content.style.display === 'none') {
-                content.style.display = 'block';
-                toggleIcon.textContent = '▼';
-            } else {
-                content.style.display = 'none';
-                toggleIcon.textContent = '▶';
-            }
-        }
+        // Collapse / expand a city group. aria-expanded stays in sync for screen readers.
+        document.querySelectorAll('.city-header').forEach((header) => {
+            header.addEventListener('click', () => {
+                const block = header.closest('.city-block');
+                const collapsed = block.classList.toggle('is-collapsed');
+                header.setAttribute('aria-expanded', String(!collapsed));
+            });
+        });
+
+        // Restaurant counts are derived from the cards so they never drift out of date.
+        document.querySelectorAll('.city-block').forEach((block) => {
+            const countEl = block.querySelector('.city-count');
+            if (!countEl) return;
+            const count = block.querySelectorAll('.food-card').length;
+            countEl.textContent = count + ' 家';
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.city-block').forEach(el => {
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>
