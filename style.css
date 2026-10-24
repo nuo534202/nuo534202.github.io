@@ -2847,10 +2847,12 @@ img {
 
 /* Post page wrapper — deliberately NOT a card (no background, radius or
    shadow). The page title and its divider sit directly on the page
-   background; the only box is .post-content inside. */
+   background; the only box is .post-content inside.
+   max-width caps the reading measure on desktop; narrow viewports already
+   fall below it, so the mobile layout is left untouched. */
 .post-page-container {
     width: 95%;
-    max-width: 1400px;
+    max-width: 860px;
     /* top margin clears the 64px fixed .nav-bar */
     margin: calc(64px + var(--space-2xl)) auto var(--space-3xl);
     text-align: left;
