@@ -2,6 +2,7 @@
 layout: post
 title: "软件工程期末测试题"
 tags: [期末复习]
+permalink: /misc/se_test_questions.html
 ---
 > This practice test covers all 16 lectures of the course. It is designed to verify your understanding of the key concepts.
 >

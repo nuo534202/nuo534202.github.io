@@ -2,6 +2,7 @@
 layout: post
 title: "软件工程 (Software Engineering) 期末复习资料"
 tags: [期末复习]
+permalink: /misc/se_final_review.html
 ---
 > 本资料覆盖全部 16 个 Lecture，包含每讲的核心知识点全面梳理、易错点深度分析和高频考点精讲。
 >

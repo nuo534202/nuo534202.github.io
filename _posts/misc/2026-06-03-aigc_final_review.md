@@ -2,6 +2,7 @@
 layout: post
 title: "人工智能生成内容 (AIGC) 期末复习资料"
 tags: [期末复习]
+permalink: /misc/aigc_final_review.html
 ---
 > 基于 Final Review 所有重点范围，逐页对照课件整理。面向零基础小白，概念优先、公式辅助。
 
