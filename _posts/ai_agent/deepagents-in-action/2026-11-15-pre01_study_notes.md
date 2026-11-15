@@ -1,6 +1,6 @@
 ---
 layout: post
-title: LeetCode 11-20 个人题解
+title: Deepagents-In-Action Pre01 学习笔记
 tags: [DeepAgents-In-Action]
 permalink: /ai_agent/pre01_study_notes.html
 ---
