@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HKU MSc CS - nuo534202</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="../nuo534202.jpg" type="image/jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar" id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <img src="../nuo534202.jpg" alt="" class="nav-avatar">
+                <span class="nav-logo-text">nuo534202</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-menu" id="navMenu">
+                <a href="../blog/index.html" class="nav-link active">博客</a>
+                <a href="../repository/index.html" class="nav-link">项目&仓库</a>
+                <a href="../games/index.html" class="nav-link">游戏合集</a>
+                <a href="../food.html" class="nav-link">美食地图</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="section-container">
+            <div class="page-header-content">
+                <span class="page-eyebrow">HKU MSc CS</span>
+                <h1 class="page-title">港大 MSc CS 笔试</h1>
+                <p class="page-subtitle">Admission Test Notes & Practice</p>
+                <div class="page-header-line"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tag Filter -->
+    <section class="categories-section" style="padding-bottom: 0;">
+        <div class="section-container">
+            <div class="tech-tags" id="tag-filter" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 24px;">
+                <span class="tag tag-active" data-tag="all" onclick="filterByTag('all')" style="cursor: pointer;">All</span>
+                <span class="tag" data-tag="考点总览" onclick="filterByTag('考点总览')" style="cursor: pointer;">考点总览</span>
+                <span class="tag" data-tag="编程" onclick="filterByTag('编程')" style="cursor: pointer;">编程</span>
+                <span class="tag" data-tag="数学" onclick="filterByTag('数学')" style="cursor: pointer;">数学</span>
+                <span class="tag" data-tag="计算机基础" onclick="filterByTag('计算机基础')" style="cursor: pointer;">计算机基础</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Post List -->
+    <section class="featured-section">
+        <div class="section-container">
+            <div class="repos-list" id="post-list">
+                <a href="/hku_cs/hku_msc_cs_exam_guide.html" class="repo-card post-card" data-tags="考点总览" target="_blank" rel="noopener noreferrer">
+                    <div class="repo-card-header">
+                        <div class="repo-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                            </svg>
+                        </div>
+                        <span class="repo-card-lang">考点总览</span>
+                    </div>
+                    <div class="repo-card-content">
+                        <h3>HKU MSc CS · V2 考点覆盖对照与使用说明</h3>
+                        <p>132 组笔试题型逐章映射，V2 使用顺序、篇幅配比与复习路线速览</p>
+                    </div>
+                    <div class="repo-card-footer">
+                        <span class="repo-card-link">
+                            <span>阅读全文</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+                <a href="/hku_cs/chapter01_programming_basics.html" class="repo-card post-card" data-tags="编程" target="_blank" rel="noopener noreferrer">
+                    <div class="repo-card-header">
+                        <div class="repo-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <span class="repo-card-lang">编程</span>
+                    </div>
+                    <div class="repo-card-content">
+                        <h3>Chapter 01｜程序设计基础</h3>
+                        <p>手写 Python 基础代码、读懂 C/Python 输出，覆盖进制、数位、数组、字符串与时间转换</p>
+                    </div>
+                    <div class="repo-card-footer">
+                        <span class="repo-card-link">
+                            <span>阅读全文</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+                <a href="/hku_cs/chapter02_data_structures.html" class="repo-card post-card" data-tags="编程" target="_blank" rel="noopener noreferrer">
+                    <div class="repo-card-header">
+                        <div class="repo-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <span class="repo-card-lang">编程</span>
+                    </div>
+                    <div class="repo-card-content">
+                        <h3>Chapter 02｜数据结构</h3>
+                        <p>数组、字符串、栈、队列、树与图的结构辨析和操作复杂度速查</p>
+                    </div>
+                    <div class="repo-card-footer">
+                        <span class="repo-card-link">
+                            <span>阅读全文</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+                <a href="/hku_cs/chapter03_algorithms_complexity.html" class="repo-card post-card" data-tags="编程" target="_blank" rel="noopener noreferrer">
+                    <div class="repo-card-header">
+                        <div class="repo-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </div>
+                        <span class="repo-card-lang">编程</span>
+                    </div>
+                    <div class="repo-card-content">
+                        <h3>Chapter 03｜算法设计与复杂度</h3>
+                        <p>复杂度分析、排序查找、贪心、双指针、回溯与图算法，兼顾手写代码</p>
+                    </div>
+                    <div class="repo-card-footer">
+                        <span class="repo-card-link">
+                            <span>阅读全文</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+                <a href="/hku_cs/chapter04_discrete_math.html" class="repo-card post-card" data-tags="数学" target="_blank" rel="noopener noreferrer">
+                    <div class="repo-card-header">
+                        <div class="repo-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="19" y1="5" x2="5" y2="19"/>
+                                <circle cx="6.5" cy="6.5" r="2.5"/>
+                                <circle cx="17.5" cy="17.5" r="2.5"/>
+                            </svg>
+                        </div>
+                        <span class="repo-card-lang">数学</span>
+                    </div>
+                    <div class="repo-card-content">
+                        <h3>Chapter 04｜离散数学、逻辑与组合数学</h3>
+                        <p>命题逻辑、集合、数学归纳法、排列组合与图论概念判断</p>
+                    </div>
+                    <div class="repo-card-footer">
+                        <span class="repo-card-link">
+                            <span>阅读全文</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+                <a href="/hku_cs/chapter05_calculus.html" class="repo-card post-card" data-tags="数学" target="_blank" rel="noopener noreferrer">
+                    <div class="repo-card-header">
+                        <div class="repo-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="19" y1="5" x2="5" y2="19"/>
+                                <circle cx="6.5" cy="6.5" r="2.5"/>
+                                <circle cx="17.5" cy="17.5" r="2.5"/>
+                            </svg>
+                        </div>
+                        <span class="repo-card-lang">数学</span>
+                    </div>
+                    <div class="repo-card-content">
+                        <h3>Chapter 05｜高等数学与微积分</h3>
+                        <p>求导、积分、极值与面积计算，覆盖笔试常见计算题型</p>
+                    </div>
+                    <div class="repo-card-footer">
+                        <span class="repo-card-link">
+                            <span>阅读全文</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+                <a href="/hku_cs/chapter06_probability.html" class="repo-card post-card" data-tags="数学" target="_blank" rel="noopener noreferrer">
+                    <div class="repo-card-header">
+                        <div class="repo-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="19" y1="5" x2="5" y2="19"/>
+                                <circle cx="6.5" cy="6.5" r="2.5"/>
+                                <circle cx="17.5" cy="17.5" r="2.5"/>
+                            </svg>
+                        </div>
+                        <span class="repo-card-lang">数学</span>
+                    </div>
+                    <div class="repo-card-content">
+                        <h3>Chapter 06｜概率论</h3>
+                        <p>条件概率、贝叶斯公式、期望与常见概率模型题型拆解</p>
+                    </div>
+                    <div class="repo-card-footer">
+                        <span class="repo-card-link">
+                            <span>阅读全文</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+                <a href="/hku_cs/chapter07_statistics.html" class="repo-card post-card" data-tags="数学" target="_blank" rel="noopener noreferrer">
+                    <div class="repo-card-header">
+                        <div class="repo-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="19" y1="5" x2="5" y2="19"/>
+                                <circle cx="6.5" cy="6.5" r="2.5"/>
+                                <circle cx="17.5" cy="17.5" r="2.5"/>
+                            </svg>
+                        </div>
+                        <span class="repo-card-lang">数学</span>
+                    </div>
+                    <div class="repo-card-content">
+                        <h3>Chapter 07｜数理统计</h3>
+                        <p>均值、中位数、标准差、协方差与相关系数的计算与解释</p>
+                    </div>
+                    <div class="repo-card-footer">
+                        <span class="repo-card-link">
+                            <span>阅读全文</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+                <a href="/hku_cs/chapter08_linear_algebra.html" class="repo-card post-card" data-tags="数学" target="_blank" rel="noopener noreferrer">
+                    <div class="repo-card-header">
+                        <div class="repo-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="19" y1="5" x2="5" y2="19"/>
+                                <circle cx="6.5" cy="6.5" r="2.5"/>
+                                <circle cx="17.5" cy="17.5" r="2.5"/>
+                            </svg>
+                        </div>
+                        <span class="repo-card-lang">数学</span>
+                    </div>
+                    <div class="repo-card-content">
+                        <h3>Chapter 08｜线性代数</h3>
+                        <p>矩阵运算、行列式、秩与线性方程组求解速记</p>
+                    </div>
+                    <div class="repo-card-footer">
+                        <span class="repo-card-link">
+                            <span>阅读全文</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+                <a href="/hku_cs/chapter09_oop.html" class="repo-card post-card" data-tags="计算机基础" target="_blank" rel="noopener noreferrer">
+                    <div class="repo-card-header">
+                        <div class="repo-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
+                                <rect x="9" y="9" width="6" height="6"/>
+                                <line x1="9" y1="1" x2="9" y2="4"/>
+                                <line x1="15" y1="1" x2="15" y2="4"/>
+                                <line x1="9" y1="20" x2="9" y2="23"/>
+                                <line x1="15" y1="20" x2="15" y2="23"/>
+                                <line x1="20" y1="9" x2="23" y2="9"/>
+                                <line x1="20" y1="14" x2="23" y2="14"/>
+                                <line x1="1" y1="9" x2="4" y2="9"/>
+                                <line x1="1" y1="14" x2="4" y2="14"/>
+                            </svg>
+                        </div>
+                        <span class="repo-card-lang">计算机基础</span>
+                    </div>
+                    <div class="repo-card-content">
+                        <h3>Chapter 09｜面向对象程序设计</h3>
+                        <p>Java / OOP 概念题速记：封装、继承、多态、关键字与内存语义</p>
+                    </div>
+                    <div class="repo-card-footer">
+                        <span class="repo-card-link">
+                            <span>阅读全文</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+                <a href="/hku_cs/chapter10_database_sql.html" class="repo-card post-card" data-tags="计算机基础" target="_blank" rel="noopener noreferrer">
+                    <div class="repo-card-header">
+                        <div class="repo-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
+                                <rect x="9" y="9" width="6" height="6"/>
+                                <line x1="9" y1="1" x2="9" y2="4"/>
+                                <line x1="15" y1="1" x2="15" y2="4"/>
+                                <line x1="9" y1="20" x2="9" y2="23"/>
+                                <line x1="15" y1="20" x2="15" y2="23"/>
+                                <line x1="20" y1="9" x2="23" y2="9"/>
+                                <line x1="20" y1="14" x2="23" y2="14"/>
+                                <line x1="1" y1="9" x2="4" y2="9"/>
+                                <line x1="1" y1="14" x2="4" y2="14"/>
+                            </svg>
+                        </div>
+                        <span class="repo-card-lang">计算机基础</span>
+                    </div>
+                    <div class="repo-card-content">
+                        <h3>Chapter 10｜数据库与 SQL</h3>
+                        <p>关系模型、键与约束、范式，以及 SELECT / DISTINCT / JOIN 查询</p>
+                    </div>
+                    <div class="repo-card-footer">
+                        <span class="repo-card-link">
+                            <span>阅读全文</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+                <a href="/hku_cs/chapter11_memory_management.html" class="repo-card post-card" data-tags="计算机基础" target="_blank" rel="noopener noreferrer">
+                    <div class="repo-card-header">
+                        <div class="repo-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
+                                <rect x="9" y="9" width="6" height="6"/>
+                                <line x1="9" y1="1" x2="9" y2="4"/>
+                                <line x1="15" y1="1" x2="15" y2="4"/>
+                                <line x1="9" y1="20" x2="9" y2="23"/>
+                                <line x1="15" y1="20" x2="15" y2="23"/>
+                                <line x1="20" y1="9" x2="23" y2="9"/>
+                                <line x1="20" y1="14" x2="23" y2="14"/>
+                                <line x1="1" y1="9" x2="4" y2="9"/>
+                                <line x1="1" y1="14" x2="4" y2="14"/>
+                            </svg>
+                        </div>
+                        <span class="repo-card-lang">计算机基础</span>
+                    </div>
+                    <div class="repo-card-content">
+                        <h3>Chapter 11｜计算机内存管理</h3>
+                        <p>栈与堆、内存分配、内存泄漏与垃圾回收机制</p>
+                    </div>
+                    <div class="repo-card-footer">
+                        <span class="repo-card-link">
+                            <span>阅读全文</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+                <a href="/hku_cs/chapter12_sequences_finance.html" class="repo-card post-card" data-tags="数学" target="_blank" rel="noopener noreferrer">
+                    <div class="repo-card-header">
+                        <div class="repo-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="19" y1="5" x2="5" y2="19"/>
+                                <circle cx="6.5" cy="6.5" r="2.5"/>
+                                <circle cx="17.5" cy="17.5" r="2.5"/>
+                            </svg>
+                        </div>
+                        <span class="repo-card-lang">数学</span>
+                    </div>
+                    <div class="repo-card-content">
+                        <h3>Chapter 12｜数列、财务计算与综合数学应用</h3>
+                        <p>等差等比数列、增长率、单利复利与分阶段取款等综合应用</p>
+                    </div>
+                    <div class="repo-card-footer">
+                        <span class="repo-card-link">
+                            <span>阅读全文</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Blog -->
+    <section class="back-section">
+        <div class="section-container">
+            <a href="index.html" class="btn-secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"/>
+                    <polyline points="12 19 5 12 12 5"/>
+                </svg>
+                <span>返回博客</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="section-container">
+            <div class="footer-content">
+                <p class="footer-desc">Made with <code class="inline-code">❤️</code> and <code class="inline-code">Ambition</code></p>
+                <p class="footer-copy">nuo534202 &copy; <span id="year"></span> All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        function filterByTag(tag) {
+            const cards = document.querySelectorAll('.post-card');
+            cards.forEach(card => {
+                const tags = card.getAttribute('data-tags');
+                if (tag === 'all' || (tags && tags.includes(tag))) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            document.querySelectorAll('#tag-filter .tag').forEach(t => t.classList.remove('tag-active'));
+            document.querySelector(`#tag-filter .tag[data-tag="${tag}"]`).classList.add('tag-active');
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.post-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
